@@ -29,6 +29,8 @@ int main(int argc, char** argv){
   std::vector<int> offsets;
   std::vector<int> scores;
 
+  initConversionTable();
+
   if(parseQuery(query, QUERY_PATH) == -1){
     std::cerr << "Error: Failed to parse query file. Ensure query file is in the correct format and that the query path is valid" << std::endl;
   };
