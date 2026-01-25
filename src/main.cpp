@@ -24,11 +24,10 @@ int main(int argc, char** argv){
     std::cerr << "Error: db_size must be between 1 and 500,000" << std::endl;
   }
 
-  std::vector<int> query;
-  std::vector<int> db;
+  std::vector<unsigned char> query;
+  std::vector<unsigned char> db;
   std::vector<int> offsets;
   std::vector<int> scores;
-
   initConversionTable();
 
   if(parseQuery(query, QUERY_PATH) == -1){
@@ -53,7 +52,7 @@ int main(int argc, char** argv){
   scores_file << "scores" << std::endl;
 
   for (auto score: scores){
-    scores_file << scores + std::endl;
+    scores_file << scores << std::endl;
   }
   scores_file.close();
   return 0;

@@ -39,22 +39,21 @@ int parseQuery(std::vector<int> query, std::string query_path){
   std::ifstream query_file(query_path);
 
   // Read query sequence into string
-  std::stringstream query_string;
+  std::string query_string;
   std::string line;
   while(std::getline(query_file, line)){
-    if(line.size() > 0 && line[0] != '>'){
+    if(line.length() > 0 && line[0] != '>'){
       // Only process line if not empty and not description
-      query_string << line;
+      query_string += line;
     }
   }
 
-  // Convert query string into vector of ints
-  for (auto amino : query_string.str()){
-
+  // Convert query string into vector of unsigned chars
+  for (int i = 0; i < query_string.length(); i++){
+    query.push_back(amino_to_uchar[query_string[i]]);
   }
-
-  // Loop through each letter and convert to int -> std::vector<int>
+  return 0;
 }
-int parseDB(std::vector<int> db, std::vector<int> offsets, std::string db_path, int db_size){
+int parseDB(std::vector<unsigned char> db, std::vector<int> offsets, std::string db_path, int db_size){
 
 }
