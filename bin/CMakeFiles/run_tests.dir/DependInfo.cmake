@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alex/Code/protein-align/src/parse.cpp" "CMakeFiles/run_tests.dir/src/parse.cpp.o" "gcc" "CMakeFiles/run_tests.dir/src/parse.cpp.o.d"
+  "/home/alex/Code/protein-align/src/sw_cpu.cpp" "CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o" "gcc" "CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o.d"
+  "/home/alex/Code/protein-align/test/test_cpu.cpp" "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o" "gcc" "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o.d"
   "/home/alex/Code/protein-align/test/test_main.cpp" "CMakeFiles/run_tests.dir/test/test_main.cpp.o" "gcc" "CMakeFiles/run_tests.dir/test/test_main.cpp.o.d"
   "/home/alex/Code/protein-align/test/test_parser.cpp" "CMakeFiles/run_tests.dir/test/test_parser.cpp.o" "gcc" "CMakeFiles/run_tests.dir/test/test_parser.cpp.o.d"
   )

@@ -153,6 +153,54 @@ src/parse.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.s
 .PHONY : src/parse.cpp.s
 
+src/sw_cpu.o: src/sw_cpu.cpp.o
+.PHONY : src/sw_cpu.o
+
+# target to build an object file
+src/sw_cpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o
+.PHONY : src/sw_cpu.cpp.o
+
+src/sw_cpu.i: src/sw_cpu.cpp.i
+.PHONY : src/sw_cpu.i
+
+# target to preprocess a source file
+src/sw_cpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.i
+.PHONY : src/sw_cpu.cpp.i
+
+src/sw_cpu.s: src/sw_cpu.cpp.s
+.PHONY : src/sw_cpu.s
+
+# target to generate assembly for a file
+src/sw_cpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.s
+.PHONY : src/sw_cpu.cpp.s
+
+test/test_cpu.o: test/test_cpu.cpp.o
+.PHONY : test/test_cpu.o
+
+# target to build an object file
+test/test_cpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.o
+.PHONY : test/test_cpu.cpp.o
+
+test/test_cpu.i: test/test_cpu.cpp.i
+.PHONY : test/test_cpu.i
+
+# target to preprocess a source file
+test/test_cpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.i
+.PHONY : test/test_cpu.cpp.i
+
+test/test_cpu.s: test/test_cpu.cpp.s
+.PHONY : test/test_cpu.s
+
+# target to generate assembly for a file
+test/test_cpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.s
+.PHONY : test/test_cpu.cpp.s
+
 test/test_main.o: test/test_main.cpp.o
 .PHONY : test/test_main.o
 
@@ -213,6 +261,12 @@ help:
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"
+	@echo "... src/sw_cpu.o"
+	@echo "... src/sw_cpu.i"
+	@echo "... src/sw_cpu.s"
+	@echo "... test/test_cpu.o"
+	@echo "... test/test_cpu.i"
+	@echo "... test/test_cpu.s"
 	@echo "... test/test_main.o"
 	@echo "... test/test_main.i"
 	@echo "... test/test_main.s"

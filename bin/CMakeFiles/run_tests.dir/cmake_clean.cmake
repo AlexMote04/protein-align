@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/run_tests.dir/src/parse.cpp.o"
   "CMakeFiles/run_tests.dir/src/parse.cpp.o.d"
+  "CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o"
+  "CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o.d"
+  "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o"
+  "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o.d"
   "CMakeFiles/run_tests.dir/test/test_main.cpp.o"
   "CMakeFiles/run_tests.dir/test/test_main.cpp.o.d"
   "CMakeFiles/run_tests.dir/test/test_parser.cpp.o"
