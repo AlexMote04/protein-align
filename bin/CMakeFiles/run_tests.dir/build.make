@@ -111,10 +111,24 @@ CMakeFiles/run_tests.dir/test/test_cpu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/test/test_cpu.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/test/test_cpu.cpp -o CMakeFiles/run_tests.dir/test/test_cpu.cpp.s
 
+CMakeFiles/run_tests.dir/test/test_gpu.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/test/test_gpu.cpp.o: /home/alex/Code/protein-align/test/test_gpu.cpp
+CMakeFiles/run_tests.dir/test/test_gpu.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/run_tests.dir/test/test_gpu.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/test/test_gpu.cpp.o -MF CMakeFiles/run_tests.dir/test/test_gpu.cpp.o.d -o CMakeFiles/run_tests.dir/test/test_gpu.cpp.o -c /home/alex/Code/protein-align/test/test_gpu.cpp
+
+CMakeFiles/run_tests.dir/test/test_gpu.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/test/test_gpu.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/test/test_gpu.cpp > CMakeFiles/run_tests.dir/test/test_gpu.cpp.i
+
+CMakeFiles/run_tests.dir/test/test_gpu.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/test/test_gpu.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/test/test_gpu.cpp -o CMakeFiles/run_tests.dir/test/test_gpu.cpp.s
+
 CMakeFiles/run_tests.dir/src/parse.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/parse.cpp
 CMakeFiles/run_tests.dir/src/parse.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/run_tests.dir/src/parse.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/run_tests.dir/src/parse.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/src/parse.cpp.o -MF CMakeFiles/run_tests.dir/src/parse.cpp.o.d -o CMakeFiles/run_tests.dir/src/parse.cpp.o -c /home/alex/Code/protein-align/src/parse.cpp
 
 CMakeFiles/run_tests.dir/src/parse.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/run_tests.dir/src/parse.cpp.s: cmake_force
 CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o: /home/alex/Code/protein-align/src/sw_cpu.cpp
 CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o -MF CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o.d -o CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o -c /home/alex/Code/protein-align/src/sw_cpu.cpp
 
 CMakeFiles/run_tests.dir/src/sw_cpu.cpp.i: cmake_force
@@ -139,13 +153,30 @@ CMakeFiles/run_tests.dir/src/sw_cpu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/src/sw_cpu.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/sw_cpu.cpp -o CMakeFiles/run_tests.dir/src/sw_cpu.cpp.s
 
+CMakeFiles/run_tests.dir/src/sw_gpu.cu.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/src/sw_gpu.cu.o: CMakeFiles/run_tests.dir/includes_CUDA.rsp
+CMakeFiles/run_tests.dir/src/sw_gpu.cu.o: /home/alex/Code/protein-align/src/sw_gpu.cu
+CMakeFiles/run_tests.dir/src/sw_gpu.cu.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CUDA object CMakeFiles/run_tests.dir/src/sw_gpu.cu.o"
+	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/run_tests.dir/src/sw_gpu.cu.o -MF CMakeFiles/run_tests.dir/src/sw_gpu.cu.o.d -x cu -c /home/alex/Code/protein-align/src/sw_gpu.cu -o CMakeFiles/run_tests.dir/src/sw_gpu.cu.o
+
+CMakeFiles/run_tests.dir/src/sw_gpu.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/run_tests.dir/src/sw_gpu.cu.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/run_tests.dir/src/sw_gpu.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/run_tests.dir/src/sw_gpu.cu.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
+
 # Object files for target run_tests
 run_tests_OBJECTS = \
 "CMakeFiles/run_tests.dir/test/test_main.cpp.o" \
 "CMakeFiles/run_tests.dir/test/test_parser.cpp.o" \
 "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o" \
+"CMakeFiles/run_tests.dir/test/test_gpu.cpp.o" \
 "CMakeFiles/run_tests.dir/src/parse.cpp.o" \
-"CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o"
+"CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o" \
+"CMakeFiles/run_tests.dir/src/sw_gpu.cu.o"
 
 # External object files for target run_tests
 run_tests_EXTERNAL_OBJECTS =
@@ -153,11 +184,13 @@ run_tests_EXTERNAL_OBJECTS =
 run_tests: CMakeFiles/run_tests.dir/test/test_main.cpp.o
 run_tests: CMakeFiles/run_tests.dir/test/test_parser.cpp.o
 run_tests: CMakeFiles/run_tests.dir/test/test_cpu.cpp.o
+run_tests: CMakeFiles/run_tests.dir/test/test_gpu.cpp.o
 run_tests: CMakeFiles/run_tests.dir/src/parse.cpp.o
 run_tests: CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o
+run_tests: CMakeFiles/run_tests.dir/src/sw_gpu.cu.o
 run_tests: CMakeFiles/run_tests.dir/build.make
 run_tests: CMakeFiles/run_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable run_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/run_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

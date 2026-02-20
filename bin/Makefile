@@ -177,6 +177,30 @@ src/sw_cpu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.s
 .PHONY : src/sw_cpu.cpp.s
 
+src/sw_gpu.o: src/sw_gpu.cu.o
+.PHONY : src/sw_gpu.o
+
+# target to build an object file
+src/sw_gpu.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_gpu.cu.o
+.PHONY : src/sw_gpu.cu.o
+
+src/sw_gpu.i: src/sw_gpu.cu.i
+.PHONY : src/sw_gpu.i
+
+# target to preprocess a source file
+src/sw_gpu.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_gpu.cu.i
+.PHONY : src/sw_gpu.cu.i
+
+src/sw_gpu.s: src/sw_gpu.cu.s
+.PHONY : src/sw_gpu.s
+
+# target to generate assembly for a file
+src/sw_gpu.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_gpu.cu.s
+.PHONY : src/sw_gpu.cu.s
+
 test/test_cpu.o: test/test_cpu.cpp.o
 .PHONY : test/test_cpu.o
 
@@ -200,6 +224,30 @@ test/test_cpu.s: test/test_cpu.cpp.s
 test/test_cpu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.s
 .PHONY : test/test_cpu.cpp.s
+
+test/test_gpu.o: test/test_gpu.cpp.o
+.PHONY : test/test_gpu.o
+
+# target to build an object file
+test/test_gpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_gpu.cpp.o
+.PHONY : test/test_gpu.cpp.o
+
+test/test_gpu.i: test/test_gpu.cpp.i
+.PHONY : test/test_gpu.i
+
+# target to preprocess a source file
+test/test_gpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_gpu.cpp.i
+.PHONY : test/test_gpu.cpp.i
+
+test/test_gpu.s: test/test_gpu.cpp.s
+.PHONY : test/test_gpu.s
+
+# target to generate assembly for a file
+test/test_gpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_gpu.cpp.s
+.PHONY : test/test_gpu.cpp.s
 
 test/test_main.o: test/test_main.cpp.o
 .PHONY : test/test_main.o
@@ -264,9 +312,15 @@ help:
 	@echo "... src/sw_cpu.o"
 	@echo "... src/sw_cpu.i"
 	@echo "... src/sw_cpu.s"
+	@echo "... src/sw_gpu.o"
+	@echo "... src/sw_gpu.i"
+	@echo "... src/sw_gpu.s"
 	@echo "... test/test_cpu.o"
 	@echo "... test/test_cpu.i"
 	@echo "... test/test_cpu.s"
+	@echo "... test/test_gpu.o"
+	@echo "... test/test_gpu.i"
+	@echo "... test/test_gpu.s"
 	@echo "... test/test_main.o"
 	@echo "... test/test_main.i"
 	@echo "... test/test_main.s"

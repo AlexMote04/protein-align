@@ -3,8 +3,12 @@ file(REMOVE_RECURSE
   "CMakeFiles/run_tests.dir/src/parse.cpp.o.d"
   "CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o"
   "CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o.d"
+  "CMakeFiles/run_tests.dir/src/sw_gpu.cu.o"
+  "CMakeFiles/run_tests.dir/src/sw_gpu.cu.o.d"
   "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o"
   "CMakeFiles/run_tests.dir/test/test_cpu.cpp.o.d"
+  "CMakeFiles/run_tests.dir/test/test_gpu.cpp.o"
+  "CMakeFiles/run_tests.dir/test/test_gpu.cpp.o.d"
   "CMakeFiles/run_tests.dir/test/test_main.cpp.o"
   "CMakeFiles/run_tests.dir/test/test_main.cpp.o.d"
   "CMakeFiles/run_tests.dir/test/test_parser.cpp.o"
@@ -14,6 +18,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang CUDA CXX)
   include(CMakeFiles/run_tests.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

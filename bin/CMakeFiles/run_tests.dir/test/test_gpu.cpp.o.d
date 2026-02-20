@@ -1,5 +1,5 @@
-CMakeFiles/run_tests.dir/test/test_cpu.cpp.o: \
- /home/alex/Code/protein-align/test/test_cpu.cpp \
+CMakeFiles/run_tests.dir/test/test_gpu.cpp.o: \
+ /home/alex/Code/protein-align/test/test_gpu.cpp \
  /usr/include/stdc-predef.h \
  /home/alex/Code/protein-align/include/catch.hpp \
  /usr/include/c++/13/iosfwd /usr/include/c++/13/bits/requires_hosted.h \
@@ -196,6 +196,6 @@ CMakeFiles/run_tests.dir/test/test_cpu.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
- /home/alex/Code/protein-align/include/sw_cpu.h \
- /home/alex/Code/protein-align/include/blosum62.h \
- /home/alex/Code/protein-align/include/params.h
+ /home/alex/Code/protein-align/include/sw_gpu.cuh \
+ /home/alex/Code/protein-align/include/params.h \
+ /home/alex/Code/protein-align/include/blosum62.h
