@@ -7,7 +7,7 @@ CUDA_DEFINES =
 
 CUDA_INCLUDES = --options-file CMakeFiles/run_tests.dir/includes_CUDA.rsp
 
-CUDA_FLAGS = -std=c++14
+CUDA_FLAGS = -std=c++14 -arch=native
 
 CXX_DEFINES = 
 
