@@ -7,8 +7,8 @@
 #include <iostream>
 #include <stdexcept>
 
-const int MAX_DB_LENGTH = 2977;
+const int MAX_NUM_SEQS = 100000;
 
 void initConversionTable();
-int parseQuery(std::vector<unsigned char> &query, std::string query_path);
-int parseDB(std::vector<unsigned char> &db, std::vector<int> &offsets, std::string db_path, int db_size);
+void parseQuery(std::vector<unsigned char> &query_seq, std::string query_path);
+void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offsets, std::string db_path, int num_seqs);

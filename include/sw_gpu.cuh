@@ -5,4 +5,4 @@
 #include <vector>
 #include <cstdint>
 
-int swGPU(std::vector<int> &scores, const std::vector<unsigned char> &query, const std::vector<unsigned char> &db, const std::vector<int> &offsets);
+int swGPU(std::vector<int> &scores, const std::vector<unsigned char> &query_seq, const std::vector<unsigned char> &db_residues, const std::vector<int> &db_offsets);

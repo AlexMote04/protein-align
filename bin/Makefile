@@ -166,6 +166,33 @@ src/benchmark.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/benchmark.cpp.s
 .PHONY : src/benchmark.cpp.s
 
+src/nw/nw_cpu.o: src/nw/nw_cpu.cpp.o
+.PHONY : src/nw/nw_cpu.o
+
+# target to build an object file
+src/nw/nw_cpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/nw/nw_cpu.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_cpu.cpp.o
+.PHONY : src/nw/nw_cpu.cpp.o
+
+src/nw/nw_cpu.i: src/nw/nw_cpu.cpp.i
+.PHONY : src/nw/nw_cpu.i
+
+# target to preprocess a source file
+src/nw/nw_cpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/nw/nw_cpu.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_cpu.cpp.i
+.PHONY : src/nw/nw_cpu.cpp.i
+
+src/nw/nw_cpu.s: src/nw/nw_cpu.cpp.s
+.PHONY : src/nw/nw_cpu.s
+
+# target to generate assembly for a file
+src/nw/nw_cpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/nw/nw_cpu.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_cpu.cpp.s
+.PHONY : src/nw/nw_cpu.cpp.s
+
 src/parse.o: src/parse.cpp.o
 .PHONY : src/parse.o
 
@@ -193,107 +220,59 @@ src/parse.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.s
 .PHONY : src/parse.cpp.s
 
-src/sw_cpu.o: src/sw_cpu.cpp.o
-.PHONY : src/sw_cpu.o
+src/sw/sw_cpu.o: src/sw/sw_cpu.cpp.o
+.PHONY : src/sw/sw_cpu.o
 
 # target to build an object file
-src/sw_cpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw_cpu.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.o
-.PHONY : src/sw_cpu.cpp.o
+src/sw/sw_cpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw/sw_cpu.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_cpu.cpp.o
+.PHONY : src/sw/sw_cpu.cpp.o
 
-src/sw_cpu.i: src/sw_cpu.cpp.i
-.PHONY : src/sw_cpu.i
+src/sw/sw_cpu.i: src/sw/sw_cpu.cpp.i
+.PHONY : src/sw/sw_cpu.i
 
 # target to preprocess a source file
-src/sw_cpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw_cpu.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.i
-.PHONY : src/sw_cpu.cpp.i
+src/sw/sw_cpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw/sw_cpu.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_cpu.cpp.i
+.PHONY : src/sw/sw_cpu.cpp.i
 
-src/sw_cpu.s: src/sw_cpu.cpp.s
-.PHONY : src/sw_cpu.s
+src/sw/sw_cpu.s: src/sw/sw_cpu.cpp.s
+.PHONY : src/sw/sw_cpu.s
 
 # target to generate assembly for a file
-src/sw_cpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw_cpu.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_cpu.cpp.s
-.PHONY : src/sw_cpu.cpp.s
+src/sw/sw_cpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw/sw_cpu.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_cpu.cpp.s
+.PHONY : src/sw/sw_cpu.cpp.s
 
-src/sw_gpu.o: src/sw_gpu.cu.o
-.PHONY : src/sw_gpu.o
+src/sw/sw_optimised.o: src/sw/sw_optimised.cu.o
+.PHONY : src/sw/sw_optimised.o
 
 # target to build an object file
-src/sw_gpu.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw_gpu.cu.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_gpu.cu.o
-.PHONY : src/sw_gpu.cu.o
+src/sw/sw_optimised.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw/sw_optimised.cu.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_optimised.cu.o
+.PHONY : src/sw/sw_optimised.cu.o
 
-src/sw_gpu.i: src/sw_gpu.cu.i
-.PHONY : src/sw_gpu.i
-
-# target to preprocess a source file
-src/sw_gpu.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw_gpu.cu.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_gpu.cu.i
-.PHONY : src/sw_gpu.cu.i
-
-src/sw_gpu.s: src/sw_gpu.cu.s
-.PHONY : src/sw_gpu.s
-
-# target to generate assembly for a file
-src/sw_gpu.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw_gpu.cu.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw_gpu.cu.s
-.PHONY : src/sw_gpu.cu.s
-
-test/test_cpu.o: test/test_cpu.cpp.o
-.PHONY : test/test_cpu.o
-
-# target to build an object file
-test/test_cpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.o
-.PHONY : test/test_cpu.cpp.o
-
-test/test_cpu.i: test/test_cpu.cpp.i
-.PHONY : test/test_cpu.i
+src/sw/sw_optimised.i: src/sw/sw_optimised.cu.i
+.PHONY : src/sw/sw_optimised.i
 
 # target to preprocess a source file
-test/test_cpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.i
-.PHONY : test/test_cpu.cpp.i
+src/sw/sw_optimised.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw/sw_optimised.cu.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_optimised.cu.i
+.PHONY : src/sw/sw_optimised.cu.i
 
-test/test_cpu.s: test/test_cpu.cpp.s
-.PHONY : test/test_cpu.s
-
-# target to generate assembly for a file
-test/test_cpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_cpu.cpp.s
-.PHONY : test/test_cpu.cpp.s
-
-test/test_gpu.o: test/test_gpu.cpp.o
-.PHONY : test/test_gpu.o
-
-# target to build an object file
-test/test_gpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_gpu.cpp.o
-.PHONY : test/test_gpu.cpp.o
-
-test/test_gpu.i: test/test_gpu.cpp.i
-.PHONY : test/test_gpu.i
-
-# target to preprocess a source file
-test/test_gpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_gpu.cpp.i
-.PHONY : test/test_gpu.cpp.i
-
-test/test_gpu.s: test/test_gpu.cpp.s
-.PHONY : test/test_gpu.s
+src/sw/sw_optimised.s: src/sw/sw_optimised.cu.s
+.PHONY : src/sw/sw_optimised.s
 
 # target to generate assembly for a file
-test/test_gpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_gpu.cpp.s
-.PHONY : test/test_gpu.cpp.s
+src/sw/sw_optimised.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/sw/sw_optimised.cu.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_optimised.cu.s
+.PHONY : src/sw/sw_optimised.cu.s
 
 test/test_main.o: test/test_main.cpp.o
 .PHONY : test/test_main.o
@@ -319,6 +298,30 @@ test/test_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.s
 .PHONY : test/test_main.cpp.s
 
+test/test_nw.o: test/test_nw.cpp.o
+.PHONY : test/test_nw.o
+
+# target to build an object file
+test/test_nw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_nw.cpp.o
+.PHONY : test/test_nw.cpp.o
+
+test/test_nw.i: test/test_nw.cpp.i
+.PHONY : test/test_nw.i
+
+# target to preprocess a source file
+test/test_nw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_nw.cpp.i
+.PHONY : test/test_nw.cpp.i
+
+test/test_nw.s: test/test_nw.cpp.s
+.PHONY : test/test_nw.s
+
+# target to generate assembly for a file
+test/test_nw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_nw.cpp.s
+.PHONY : test/test_nw.cpp.s
+
 test/test_parser.o: test/test_parser.cpp.o
 .PHONY : test/test_parser.o
 
@@ -343,6 +346,30 @@ test/test_parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parser.cpp.s
 .PHONY : test/test_parser.cpp.s
 
+test/test_sw.o: test/test_sw.cpp.o
+.PHONY : test/test_sw.o
+
+# target to build an object file
+test/test_sw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_sw.cpp.o
+.PHONY : test/test_sw.cpp.o
+
+test/test_sw.i: test/test_sw.cpp.i
+.PHONY : test/test_sw.i
+
+# target to preprocess a source file
+test/test_sw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_sw.cpp.i
+.PHONY : test/test_sw.cpp.i
+
+test/test_sw.s: test/test_sw.cpp.s
+.PHONY : test/test_sw.s
+
+# target to generate assembly for a file
+test/test_sw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_sw.cpp.s
+.PHONY : test/test_sw.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -356,27 +383,30 @@ help:
 	@echo "... src/benchmark.o"
 	@echo "... src/benchmark.i"
 	@echo "... src/benchmark.s"
+	@echo "... src/nw/nw_cpu.o"
+	@echo "... src/nw/nw_cpu.i"
+	@echo "... src/nw/nw_cpu.s"
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"
-	@echo "... src/sw_cpu.o"
-	@echo "... src/sw_cpu.i"
-	@echo "... src/sw_cpu.s"
-	@echo "... src/sw_gpu.o"
-	@echo "... src/sw_gpu.i"
-	@echo "... src/sw_gpu.s"
-	@echo "... test/test_cpu.o"
-	@echo "... test/test_cpu.i"
-	@echo "... test/test_cpu.s"
-	@echo "... test/test_gpu.o"
-	@echo "... test/test_gpu.i"
-	@echo "... test/test_gpu.s"
+	@echo "... src/sw/sw_cpu.o"
+	@echo "... src/sw/sw_cpu.i"
+	@echo "... src/sw/sw_cpu.s"
+	@echo "... src/sw/sw_optimised.o"
+	@echo "... src/sw/sw_optimised.i"
+	@echo "... src/sw/sw_optimised.s"
 	@echo "... test/test_main.o"
 	@echo "... test/test_main.i"
 	@echo "... test/test_main.s"
+	@echo "... test/test_nw.o"
+	@echo "... test/test_nw.i"
+	@echo "... test/test_nw.s"
 	@echo "... test/test_parser.o"
 	@echo "... test/test_parser.i"
 	@echo "... test/test_parser.s"
+	@echo "... test/test_sw.o"
+	@echo "... test/test_sw.i"
+	@echo "... test/test_sw.s"
 .PHONY : help
 
 

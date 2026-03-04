@@ -2,17 +2,21 @@
 
 unsigned char amino_to_uchar[128];
 
-struct TableInitializer {
-    TableInitializer() {
-        initConversionTable();
-    }
+struct TableInitializer
+{
+  TableInitializer()
+  {
+    initConversionTable();
+  }
 };
 
 static TableInitializer auto_init;
 
-void initConversionTable(){
+void initConversionTable()
+{
   // Initialize everything to unknown (24)
-  for(int i = 0; i < 128; i++){
+  for (int i = 0; i < 128; i++)
+  {
     amino_to_uchar[i] = 22;
   }
 
@@ -45,92 +49,110 @@ void initConversionTable(){
   amino_to_uchar['*'] = 23;
 }
 
-int parseQuery(std::vector<unsigned char> &query, std::string query_path){
+void parseQuery(std::vector<unsigned char> &query_seq, std::string query_path)
+{
   // Open query file
   std::ifstream file(query_path);
-  if(!file) throw std::runtime_error("Could not open file: " + query_path);
+  if (!file)
+    throw std::runtime_error("Could not open file: " + query_path);
 
   // Read query sequence into string
-  std::string query_string;
   std::string line;
 
   // Parse header line
-  if(!std::getline(file, line) || line.empty() || line[0] != '>'){
+  if (!std::getline(file, line) || line.empty() || line[0] != '>')
     throw std::runtime_error("Invalid FASTA: Missing header line");
-  }
 
-  while(std::getline(file, line)){
-    if(line.empty()) continue;
-    
+  while (std::getline(file, line))
+  {
+    if (line.empty())
+      continue;
+
     // Clean up potential Windows charriage returns
-    if(line.back() == '\r') line.pop_back();
+    if (line.back() == '\r')
+      line.pop_back();
 
-    // Map string to unsigned chars and add to vector
-    for(unsigned char c : line){
-      if (c < 128) {
-        query.push_back(amino_to_uchar[c]);
-      } else {
-        query.push_back(22); // Defult to unknown for weird characters
+    // Convert characters to amino acid codes
+    for (unsigned char c : line)
+    {
+      if (c < 128)
+      {
+        query_seq.push_back(amino_to_uchar[c]);
+      }
+      else
+      {
+        query_seq.push_back(22); // Defult to unknown for weird characters
       }
     }
   }
 
-  if(query.empty()){
+  if (query_seq.empty())
     throw std::runtime_error("Invalid query file: No query sequence found");
-  }
-
-  // Convert query string into vector of unsigned chars
-  return 0;
 }
 
-int parseDB(std::vector<unsigned char> &db, std::vector<int> &offsets, std::string db_path, int db_size){
-  if(db_size < 1 || db_size > MAX_DB_LENGTH) throw std::runtime_error("db_size must be between 1 and " + MAX_DB_LENGTH);
+void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offsets, std::string db_path, int num_seqs)
+{
+  if (num_seqs < 1 || num_seqs > MAX_NUM_SEQS)
+    throw std::runtime_error("db_size must be between 1 and " + MAX_NUM_SEQS);
 
   // Open database file
   std::ifstream file(db_path);
-  if(!file) throw std::runtime_error("Could not open file: " + db_path);
+  if (!file)
+    throw std::runtime_error("Could not open file: " + db_path);
 
   // Read sequence into string
   std::string line;
   int offset = 0;
 
   // Parse header line
-  if(!std::getline(file, line) || line.empty() || line[0] != '>'){
+  if (!std::getline(file, line) || line.empty() || line[0] != '>')
     throw std::runtime_error("Invalid FASTA: Missing header line");
-  }
 
   // First header seen, so start of sequence
-  offsets.push_back(offset);
+  db_offsets.push_back(offset);
   bool in_seq = false;
 
-  while(std::getline(file, line)){
-    if(line.empty()) continue;
+  while (std::getline(file, line))
+  {
+    if (line.empty())
+      continue;
 
-    if(line[0] == '>'){
-      if(!in_seq) throw std::runtime_error("Invalid Fasta: Header with no sequence");
+    if (line[0] == '>')
+    {
+      if (!in_seq)
+        throw std::runtime_error("Invalid Fasta: Header with no sequence");
 
       // Check if correct number of sequences have been parsed
-      if(offsets.size() == db_size) return 0; 
+      if (db_offsets.size() == num_seqs)
+        break;
 
       // Header means start of sequence
       in_seq = false;
-      offsets.push_back(offset);
-    } else {
+      db_offsets.push_back(offset);
+    }
+    else
+    {
       in_seq = true;
       // Map sequence to NCBI numbers
-      for (unsigned char c : line){
-        if (c < 128){
-          db.push_back(amino_to_uchar[c]);
-        } else {
-          db.push_back(24);
+      for (unsigned char c : line)
+      {
+        if (c < 128)
+        {
+          db_residues.push_back(amino_to_uchar[c]);
         }
-        offset++; // Keep track for current offset  
+        else
+        {
+          db_residues.push_back(24);
+        }
+        offset++; // Keep track for current offset
       }
     }
   }
 
-  if(db.empty()) throw std::runtime_error("Invalid database file: No sequences found");
-  if(offsets.size() < db_size) throw std::runtime_error("Tried parsing " + std::to_string(db_size) + " sequences but only found " + std::to_string(offsets.size()) + " in database file");
-  
-  return 0;
+  db_offsets.push_back(offset); // Add extra offset (useful for calculating final sequence length)
+
+  if (db_residues.empty())
+    throw std::runtime_error("Invalid database file: No sequences found");
+  if ((db_offsets.size() - 1) < num_seqs)
+    throw std::runtime_error("Tried parsing " + std::to_string(num_seqs) + " sequences but only found " + std::to_string(db_offsets.size() - 1) + " in database file");
 }
