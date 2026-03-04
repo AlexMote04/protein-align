@@ -11,13 +11,13 @@
 #include "sw_gpu.cuh"
 
 const std::string QUERY_PATH = "../data/input/query";
-const std::string DB_PATH = "../data/input/uniprot_sprot_sorted";
+const std::string DB_PATH = "../data/input/uniprot_sprot_sorted.fasta";
 
 int main(int argc, char **argv)
 {
   if (argc != 2)
   {
-    std::cerr << "Usage: ./bin/benchmark <num_seqs>" << std::endl;
+    std::cerr << "Usage: ./bin/benchmark_sw <num_seqs>" << std::endl;
     return 1;
   }
 

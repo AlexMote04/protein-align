@@ -17,11 +17,11 @@ __constant__ int8_t cuda_blosum62[24 * 24];
     }                                                                                              \
   } while (0)
 
-__global__ void align(
+__global__ void align_sw(
     int *__restrict__ scores,
     const unsigned char *__restrict__ db_residues,
     const int *__restrict__ db_offsets,
-    int16_t *__restrict__ H, int16_t *__restrict__ E, int16_t *__restrict__ F,
+    int16_t *__restrict__ H, int16_t *__restrict__ F,
     const int NUM_ROWS,
     const int NUM_COLS_GLOBAL,
     const int NUM_RESIDUES)
@@ -35,7 +35,6 @@ __global__ void align(
 
     // Advance pointers to the start of this thread's alignment chunk
     H = H + db_offsets[gindex] + gindex;
-    E = E + db_offsets[gindex] + gindex;
     F = F + db_offsets[gindex] + gindex;
 
     // Set first row (Row 0)
@@ -44,10 +43,6 @@ __global__ void align(
       H[i] = 0;
       F[i] = -10000;
     }
-
-    // Set first column for Row 0
-    H[0] = 0;
-    E[0] = -10000;
 
     // Fill matrices
     for (int i = 1; i < NUM_ROWS; i++)
@@ -58,7 +53,6 @@ __global__ void align(
 
       // Initialize the first column for the CURRENT row
       H[curr_row * NUM_COLS_GLOBAL] = 0;
-      E[curr_row * NUM_COLS_GLOBAL] = -10000;
 
       int16_t h_left = 0;
       int16_t e_left = -10000;
@@ -90,7 +84,6 @@ __global__ void align(
 
         // Write the calculated values back to global memory for the next row to use
         H[index_curr] = h_curr;
-        E[index_curr] = e_curr;
         F[index_curr] = f_curr;
 
         // --- SHIFT REGISTERS FOR THE NEXT j ITERATION ---
@@ -122,7 +115,7 @@ int swGPU(std::vector<int> &scores, const std::vector<unsigned char> &query_seq,
   // Device copies
   int *d_scores, *d_db_offsets;
   unsigned char *d_db_residues;
-  int16_t *d_H, *d_E, *d_F;
+  int16_t *d_H, *d_F;
 
   const int NUM_COLS = NUM_RESIDUES + NUM_ALIGNMENTS;
   const int NUM_ROWS = query_seq.size() + 1;
@@ -147,14 +140,13 @@ int swGPU(std::vector<int> &scores, const std::vector<unsigned char> &query_seq,
   CUDA_CHECK(cudaMalloc((void **)&d_db_offsets, offsets_bytes));
   CUDA_CHECK(cudaMalloc((void **)&d_db_residues, db_residues_bytes));
   CUDA_CHECK(cudaMalloc((void **)&d_H, matrix_bytes));
-  CUDA_CHECK(cudaMalloc((void **)&d_E, matrix_bytes));
   CUDA_CHECK(cudaMalloc((void **)&d_F, matrix_bytes));
 
   // Copy arrays to device
   CUDA_CHECK(cudaMemcpy(d_db_offsets, db_offsets.data(), offsets_bytes, cudaMemcpyHostToDevice));
   CUDA_CHECK(cudaMemcpy(d_db_residues, db_residues.data(), db_residues_bytes, cudaMemcpyHostToDevice));
 
-  align<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_H, d_E, d_F, NUM_ROWS, NUM_COLS, NUM_RESIDUES);
+  align_sw<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_H, d_F, NUM_ROWS, NUM_COLS, NUM_RESIDUES);
 
   CUDA_CHECK(cudaGetLastError());      // Check for valid launch params
   CUDA_CHECK(cudaDeviceSynchronize()); // Check for execution errors (segfaults)
@@ -172,7 +164,6 @@ cleanup_success:
   cudaFree(d_db_offsets);
   cudaFree(d_db_residues);
   cudaFree(d_H);
-  cudaFree(d_E);
   cudaFree(d_F);
 
   return return_code;

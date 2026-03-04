@@ -11,8 +11,7 @@ int align_nw(const unsigned char *query_seq, const unsigned char *target_seq, co
   for (int j = 1; j < N; j++)
   {
     H[j] = -OPEN - (j - 1) * EXTEND;
-    E[j] = -OPEN - (j - 1) * EXTEND; // Track horizontal gap penalty
-    F[j] = -10000;                   // Vertical gap impossible here
+    F[j] = -10000; // Vertical gap impossible here
   }
 
   // Initialize first column (Vertical gaps)
@@ -20,8 +19,7 @@ int align_nw(const unsigned char *query_seq, const unsigned char *target_seq, co
   {
     int idx = i * N;
     H[idx] = -OPEN - (i - 1) * EXTEND;
-    E[idx] = -10000;                   // Horizontal gap impossible here
-    F[idx] = -OPEN - (i - 1) * EXTEND; // Track vertical gap penalty
+    E[idx] = -10000; // Horizontal gap impossible here
   }
 
   // Fill matrices

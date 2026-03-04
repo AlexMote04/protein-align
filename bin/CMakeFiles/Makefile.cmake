@@ -44,6 +44,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/benchmark.dir/DependInfo.cmake"
+  "CMakeFiles/benchmark_sw.dir/DependInfo.cmake"
+  "CMakeFiles/benchmark_nw.dir/DependInfo.cmake"
   "CMakeFiles/run_tests.dir/DependInfo.cmake"
   )

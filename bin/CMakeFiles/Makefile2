@@ -63,7 +63,8 @@ CMAKE_BINARY_DIR = /home/alex/Code/protein-align/bin
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/benchmark.dir/all
+all: CMakeFiles/benchmark_sw.dir/all
+all: CMakeFiles/benchmark_nw.dir/all
 all: CMakeFiles/run_tests.dir/all
 .PHONY : all
 
@@ -72,35 +73,62 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/benchmark.dir/clean
+clean: CMakeFiles/benchmark_sw.dir/clean
+clean: CMakeFiles/benchmark_nw.dir/clean
 clean: CMakeFiles/run_tests.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/benchmark.dir
+# Target rules for target CMakeFiles/benchmark_sw.dir
 
 # All Build rule for target.
-CMakeFiles/benchmark.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target benchmark"
-.PHONY : CMakeFiles/benchmark.dir/all
+CMakeFiles/benchmark_sw.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=8,9,10,11,12,13,14 "Built target benchmark_sw"
+.PHONY : CMakeFiles/benchmark_sw.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/benchmark.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/benchmark.dir/all
+CMakeFiles/benchmark_sw.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/benchmark_sw.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
-.PHONY : CMakeFiles/benchmark.dir/rule
+.PHONY : CMakeFiles/benchmark_sw.dir/rule
 
 # Convenience name for target.
-benchmark: CMakeFiles/benchmark.dir/rule
-.PHONY : benchmark
+benchmark_sw: CMakeFiles/benchmark_sw.dir/rule
+.PHONY : benchmark_sw
 
 # clean rule for target.
-CMakeFiles/benchmark.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/clean
-.PHONY : CMakeFiles/benchmark.dir/clean
+CMakeFiles/benchmark_sw.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/clean
+.PHONY : CMakeFiles/benchmark_sw.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/benchmark_nw.dir
+
+# All Build rule for target.
+CMakeFiles/benchmark_nw.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target benchmark_nw"
+.PHONY : CMakeFiles/benchmark_nw.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/benchmark_nw.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/benchmark_nw.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : CMakeFiles/benchmark_nw.dir/rule
+
+# Convenience name for target.
+benchmark_nw: CMakeFiles/benchmark_nw.dir/rule
+.PHONY : benchmark_nw
+
+# clean rule for target.
+CMakeFiles/benchmark_nw.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/clean
+.PHONY : CMakeFiles/benchmark_nw.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/run_tests.dir
@@ -109,12 +137,12 @@ CMakeFiles/benchmark.dir/clean:
 CMakeFiles/run_tests.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=7,8,9,10,11,12,13,14,15 "Built target run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=15,16,17,18,19,20,21,22,23,24 "Built target run_tests"
 .PHONY : CMakeFiles/run_tests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/run_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
 .PHONY : CMakeFiles/run_tests.dir/rule

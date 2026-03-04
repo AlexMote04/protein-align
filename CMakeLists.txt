@@ -14,10 +14,16 @@ set(SHARED_SOURCES
     src/sw/sw_cpu.cpp
     src/sw/sw_optimised.cu
     src/nw/nw_cpu.cpp
+    src/nw/nw_optimised.cu
 )
 
-add_executable(benchmark 
-    src/benchmark.cpp 
+add_executable(benchmark_sw 
+    src/benchmark_sw.cpp 
+    ${SHARED_SOURCES}
+)
+
+add_executable(benchmark_nw 
+    src/benchmark_nw.cpp 
     ${SHARED_SOURCES}
 )
 

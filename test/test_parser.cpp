@@ -139,7 +139,7 @@ TEST_CASE("database parsing correctness", "[database parser]")
   {
     std::vector<unsigned char> db_residues;
     std::vector<int> db_offsets;
-    parseDB(db_residues, db_offsets, "../data/input/uniprot_sprot", MAX_NUM_SEQS);
+    parseDB(db_residues, db_offsets, "../data/input/uniprot_sprot.fasta", MAX_NUM_SEQS);
     CHECK((db_offsets.size() - 1) == MAX_NUM_SEQS);
   }
 }
