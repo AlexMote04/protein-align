@@ -1,1 +1,1 @@
--I"/home/alex/Code/protein-align/include"
+-I"/home/alex/Code/protein-align/include" -I"/home/alex/Code/protein-align/bin/_deps/parasail-src"

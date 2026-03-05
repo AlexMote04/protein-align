@@ -63,60 +63,129 @@ CMAKE_BINARY_DIR = /home/alex/Code/protein-align/bin
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/benchmark_sw.dir/all
 all: CMakeFiles/benchmark_nw.dir/all
-all: CMakeFiles/run_tests.dir/all
+all: _deps/parasail-build/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: _deps/parasail-build/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/benchmark_sw.dir/clean
 clean: CMakeFiles/benchmark_nw.dir/clean
-clean: CMakeFiles/run_tests.dir/clean
+clean: _deps/parasail-build/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/benchmark_sw.dir
+# Directory level rules for directory _deps/parasail-build
 
-# All Build rule for target.
-CMakeFiles/benchmark_sw.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=8,9,10,11,12,13,14 "Built target benchmark_sw"
-.PHONY : CMakeFiles/benchmark_sw.dir/all
+# Recursive "all" directory target.
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_core.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_novec.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse2.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse41.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_avx2.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_altivec.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_neon.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/sais.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/ssw.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_aligner.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/parasail_stats.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/traceback.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_align.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_basic.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_gcups.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_isa.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_matrix.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_openmp.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_verify.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_verify_tables.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_verify_traces.dir/all
+_deps/parasail-build/all: _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/all
+.PHONY : _deps/parasail-build/all
 
-# Build rule for subdir invocation for target.
-CMakeFiles/benchmark_sw.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 7
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/benchmark_sw.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
-.PHONY : CMakeFiles/benchmark_sw.dir/rule
+# Recursive "preinstall" directory target.
+_deps/parasail-build/preinstall:
+.PHONY : _deps/parasail-build/preinstall
 
-# Convenience name for target.
-benchmark_sw: CMakeFiles/benchmark_sw.dir/rule
-.PHONY : benchmark_sw
-
-# clean rule for target.
-CMakeFiles/benchmark_sw.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/clean
-.PHONY : CMakeFiles/benchmark_sw.dir/clean
+# Recursive "clean" directory target.
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_core.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_novec.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse2.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse41.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_avx2.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_altivec.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_neon.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/sais.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/ssw.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_aligner.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/parasail_stats.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/traceback.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_align.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_basic.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_gcups.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_isa.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_matrix.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_openmp.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_verify.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_verify_tables.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_verify_traces.dir/clean
+_deps/parasail-build/clean: _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/clean
+.PHONY : _deps/parasail-build/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/benchmark_nw.dir
 
 # All Build rule for target.
-CMakeFiles/benchmark_nw.dir/all:
+CMakeFiles/benchmark_nw.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target benchmark_nw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target benchmark_nw"
 .PHONY : CMakeFiles/benchmark_nw.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/benchmark_nw.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/benchmark_nw.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
 .PHONY : CMakeFiles/benchmark_nw.dir/rule
@@ -131,30 +200,1122 @@ CMakeFiles/benchmark_nw.dir/clean:
 .PHONY : CMakeFiles/benchmark_nw.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/run_tests.dir
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_core.dir
 
 # All Build rule for target.
-CMakeFiles/run_tests.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=15,16,17,18,19,20,21,22,23,24 "Built target run_tests"
-.PHONY : CMakeFiles/run_tests.dir/all
+_deps/parasail-build/CMakeFiles/parasail_core.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_core.dir/build.make _deps/parasail-build/CMakeFiles/parasail_core.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_core.dir/build.make _deps/parasail-build/CMakeFiles/parasail_core.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=31,32,33 "Built target parasail_core"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_core.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/run_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 10
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
+_deps/parasail-build/CMakeFiles/parasail_core.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
-.PHONY : CMakeFiles/run_tests.dir/rule
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_core.dir/rule
 
 # Convenience name for target.
-run_tests: CMakeFiles/run_tests.dir/rule
-.PHONY : run_tests
+parasail_core: _deps/parasail-build/CMakeFiles/parasail_core.dir/rule
+.PHONY : parasail_core
 
 # clean rule for target.
-CMakeFiles/run_tests.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/clean
-.PHONY : CMakeFiles/run_tests.dir/clean
+_deps/parasail-build/CMakeFiles/parasail_core.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_core.dir/build.make _deps/parasail-build/CMakeFiles/parasail_core.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_core.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_novec.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=34,35 "Built target parasail_novec"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_novec.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_novec.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec.dir/rule
+
+# Convenience name for target.
+parasail_novec: _deps/parasail-build/CMakeFiles/parasail_novec.dir/rule
+.PHONY : parasail_novec
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_novec_table.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_table.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=37,38 "Built target parasail_novec_table"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_table.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/rule
+
+# Convenience name for target.
+parasail_novec_table: _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/rule
+.PHONY : parasail_novec_table
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_table.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=36 "Built target parasail_novec_rowcol"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/rule
+
+# Convenience name for target.
+parasail_novec_rowcol: _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/rule
+.PHONY : parasail_novec_rowcol
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=39 "Built target parasail_novec_trace"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/rule
+
+# Convenience name for target.
+parasail_novec_trace: _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/rule
+.PHONY : parasail_novec_trace
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse2.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=40,41,42,43,44,45,46,47 "Built target parasail_sse2"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2.dir/rule
+
+# Convenience name for target.
+parasail_sse2: _deps/parasail-build/CMakeFiles/parasail_sse2.dir/rule
+.PHONY : parasail_sse2
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=56,57,58,59,60,61,62,63 "Built target parasail_sse2_table"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/rule
+
+# Convenience name for target.
+parasail_sse2_table: _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/rule
+.PHONY : parasail_sse2_table
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=48,49,50,51,52,53,54,55 "Built target parasail_sse2_rowcol"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/rule
+
+# Convenience name for target.
+parasail_sse2_rowcol: _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/rule
+.PHONY : parasail_sse2_rowcol
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=64,65,66,67 "Built target parasail_sse2_trace"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/rule
+
+# Convenience name for target.
+parasail_sse2_trace: _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/rule
+.PHONY : parasail_sse2_trace
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse41.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=68,69,70,71,72,73,74,75,76 "Built target parasail_sse41"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 9
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse41.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41.dir/rule
+
+# Convenience name for target.
+parasail_sse41: _deps/parasail-build/CMakeFiles/parasail_sse41.dir/rule
+.PHONY : parasail_sse41
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=85,86,87,88,89,90,91,92 "Built target parasail_sse41_table"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/rule
+
+# Convenience name for target.
+parasail_sse41_table: _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/rule
+.PHONY : parasail_sse41_table
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=77,78,79,80,81,82,83,84 "Built target parasail_sse41_rowcol"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/rule
+
+# Convenience name for target.
+parasail_sse41_rowcol: _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/rule
+.PHONY : parasail_sse41_rowcol
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=93,94,95,96 "Built target parasail_sse41_trace"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/rule
+
+# Convenience name for target.
+parasail_sse41_trace: _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/rule
+.PHONY : parasail_sse41_trace
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_avx2.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10 "Built target parasail_avx2"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 9
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_avx2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2.dir/rule
+
+# Convenience name for target.
+parasail_avx2: _deps/parasail-build/CMakeFiles/parasail_avx2.dir/rule
+.PHONY : parasail_avx2
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=19,20,21,22,23,24,25,26 "Built target parasail_avx2_table"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/rule
+
+# Convenience name for target.
+parasail_avx2_table: _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/rule
+.PHONY : parasail_avx2_table
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=11,12,13,14,15,16,17,18 "Built target parasail_avx2_rowcol"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/rule
+
+# Convenience name for target.
+parasail_avx2_rowcol: _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/rule
+.PHONY : parasail_avx2_rowcol
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=27,28,29,30 "Built target parasail_avx2_trace"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/rule
+
+# Convenience name for target.
+parasail_avx2_trace: _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/rule
+.PHONY : parasail_avx2_trace
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_altivec.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_altivec"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_altivec.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec.dir/rule
+
+# Convenience name for target.
+parasail_altivec: _deps/parasail-build/CMakeFiles/parasail_altivec.dir/rule
+.PHONY : parasail_altivec
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_altivec_table"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/rule
+
+# Convenience name for target.
+parasail_altivec_table: _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/rule
+.PHONY : parasail_altivec_table
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_altivec_rowcol"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/rule
+
+# Convenience name for target.
+parasail_altivec_rowcol: _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/rule
+.PHONY : parasail_altivec_rowcol
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_altivec_trace"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/rule
+
+# Convenience name for target.
+parasail_altivec_trace: _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/rule
+.PHONY : parasail_altivec_trace
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_neon.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_neon"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_neon.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_neon.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon.dir/rule
+
+# Convenience name for target.
+parasail_neon: _deps/parasail-build/CMakeFiles/parasail_neon.dir/rule
+.PHONY : parasail_neon
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_neon_table.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_table.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_neon_table"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_table.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/rule
+
+# Convenience name for target.
+parasail_neon_table: _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/rule
+.PHONY : parasail_neon_table
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_table.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_neon_rowcol"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/rule
+
+# Convenience name for target.
+parasail_neon_rowcol: _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/rule
+.PHONY : parasail_neon_rowcol
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_neon_trace"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/rule
+
+# Convenience name for target.
+parasail_neon_trace: _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/rule
+.PHONY : parasail_neon_trace
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/sais.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/sais.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/sais.dir/build.make _deps/parasail-build/CMakeFiles/sais.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/sais.dir/build.make _deps/parasail-build/CMakeFiles/sais.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target sais"
+.PHONY : _deps/parasail-build/CMakeFiles/sais.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/sais.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/sais.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/sais.dir/rule
+
+# Convenience name for target.
+sais: _deps/parasail-build/CMakeFiles/sais.dir/rule
+.PHONY : sais
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/sais.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/sais.dir/build.make _deps/parasail-build/CMakeFiles/sais.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/sais.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/ssw.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/ssw.dir/all:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/ssw.dir/build.make _deps/parasail-build/CMakeFiles/ssw.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/ssw.dir/build.make _deps/parasail-build/CMakeFiles/ssw.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target ssw"
+.PHONY : _deps/parasail-build/CMakeFiles/ssw.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/ssw.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/ssw.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/ssw.dir/rule
+
+# Convenience name for target.
+ssw: _deps/parasail-build/CMakeFiles/ssw.dir/rule
+.PHONY : ssw
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/ssw.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/ssw.dir/build.make _deps/parasail-build/CMakeFiles/ssw.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/ssw.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_core.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail.dir/build.make _deps/parasail-build/CMakeFiles/parasail.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail.dir/build.make _deps/parasail-build/CMakeFiles/parasail.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=1 "Built target parasail"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail.dir/rule
+
+# Convenience name for target.
+parasail: _deps/parasail-build/CMakeFiles/parasail.dir/rule
+.PHONY : parasail
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail.dir/build.make _deps/parasail-build/CMakeFiles/parasail.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_aligner.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_aligner.dir/all: _deps/parasail-build/CMakeFiles/sais.dir/all
+_deps/parasail-build/CMakeFiles/parasail_aligner.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_aligner.dir/build.make _deps/parasail-build/CMakeFiles/parasail_aligner.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_aligner.dir/build.make _deps/parasail-build/CMakeFiles/parasail_aligner.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target parasail_aligner"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_aligner.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_aligner.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_aligner.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_aligner.dir/rule
+
+# Convenience name for target.
+parasail_aligner: _deps/parasail-build/CMakeFiles/parasail_aligner.dir/rule
+.PHONY : parasail_aligner
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_aligner.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_aligner.dir/build.make _deps/parasail-build/CMakeFiles/parasail_aligner.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_aligner.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/parasail_stats.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/parasail_stats.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_stats.dir/build.make _deps/parasail-build/CMakeFiles/parasail_stats.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_stats.dir/build.make _deps/parasail-build/CMakeFiles/parasail_stats.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=97 "Built target parasail_stats"
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_stats.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/parasail_stats.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 97
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/parasail_stats.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_stats.dir/rule
+
+# Convenience name for target.
+parasail_stats: _deps/parasail-build/CMakeFiles/parasail_stats.dir/rule
+.PHONY : parasail_stats
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/parasail_stats.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_stats.dir/build.make _deps/parasail-build/CMakeFiles/parasail_stats.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/parasail_stats.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/traceback.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/traceback.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/traceback.dir/build.make _deps/parasail-build/CMakeFiles/traceback.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/traceback.dir/build.make _deps/parasail-build/CMakeFiles/traceback.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=100 "Built target traceback"
+.PHONY : _deps/parasail-build/CMakeFiles/traceback.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/traceback.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 97
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/traceback.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/traceback.dir/rule
+
+# Convenience name for target.
+traceback: _deps/parasail-build/CMakeFiles/traceback.dir/rule
+.PHONY : traceback
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/traceback.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/traceback.dir/build.make _deps/parasail-build/CMakeFiles/traceback.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/traceback.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_align.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_align.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_align.dir/build.make _deps/parasail-build/CMakeFiles/test_align.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_align.dir/build.make _deps/parasail-build/CMakeFiles/test_align.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_align"
+.PHONY : _deps/parasail-build/CMakeFiles/test_align.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_align.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_align.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_align.dir/rule
+
+# Convenience name for target.
+test_align: _deps/parasail-build/CMakeFiles/test_align.dir/rule
+.PHONY : test_align
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_align.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_align.dir/build.make _deps/parasail-build/CMakeFiles/test_align.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_align.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_basic.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_basic.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_basic.dir/build.make _deps/parasail-build/CMakeFiles/test_basic.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_basic.dir/build.make _deps/parasail-build/CMakeFiles/test_basic.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_basic"
+.PHONY : _deps/parasail-build/CMakeFiles/test_basic.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_basic.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_basic.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_basic.dir/rule
+
+# Convenience name for target.
+test_basic: _deps/parasail-build/CMakeFiles/test_basic.dir/rule
+.PHONY : test_basic
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_basic.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_basic.dir/build.make _deps/parasail-build/CMakeFiles/test_basic.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_basic.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_gcups.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_gcups.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_gcups.dir/build.make _deps/parasail-build/CMakeFiles/test_gcups.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_gcups.dir/build.make _deps/parasail-build/CMakeFiles/test_gcups.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_gcups"
+.PHONY : _deps/parasail-build/CMakeFiles/test_gcups.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_gcups.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_gcups.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_gcups.dir/rule
+
+# Convenience name for target.
+test_gcups: _deps/parasail-build/CMakeFiles/test_gcups.dir/rule
+.PHONY : test_gcups
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_gcups.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_gcups.dir/build.make _deps/parasail-build/CMakeFiles/test_gcups.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_gcups.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_isa.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_isa.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_isa.dir/build.make _deps/parasail-build/CMakeFiles/test_isa.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_isa.dir/build.make _deps/parasail-build/CMakeFiles/test_isa.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=98 "Built target test_isa"
+.PHONY : _deps/parasail-build/CMakeFiles/test_isa.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_isa.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 97
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_isa.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_isa.dir/rule
+
+# Convenience name for target.
+test_isa: _deps/parasail-build/CMakeFiles/test_isa.dir/rule
+.PHONY : test_isa
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_isa.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_isa.dir/build.make _deps/parasail-build/CMakeFiles/test_isa.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_isa.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_matrix.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_matrix.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_matrix.dir/build.make _deps/parasail-build/CMakeFiles/test_matrix.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_matrix.dir/build.make _deps/parasail-build/CMakeFiles/test_matrix.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_matrix"
+.PHONY : _deps/parasail-build/CMakeFiles/test_matrix.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_matrix.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_matrix.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_matrix.dir/rule
+
+# Convenience name for target.
+test_matrix: _deps/parasail-build/CMakeFiles/test_matrix.dir/rule
+.PHONY : test_matrix
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_matrix.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_matrix.dir/build.make _deps/parasail-build/CMakeFiles/test_matrix.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_matrix.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_openmp.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_openmp.dir/all: _deps/parasail-build/CMakeFiles/ssw.dir/all
+_deps/parasail-build/CMakeFiles/test_openmp.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_openmp.dir/build.make _deps/parasail-build/CMakeFiles/test_openmp.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_openmp.dir/build.make _deps/parasail-build/CMakeFiles/test_openmp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_openmp"
+.PHONY : _deps/parasail-build/CMakeFiles/test_openmp.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_openmp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_openmp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_openmp.dir/rule
+
+# Convenience name for target.
+test_openmp: _deps/parasail-build/CMakeFiles/test_openmp.dir/rule
+.PHONY : test_openmp
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_openmp.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_openmp.dir/build.make _deps/parasail-build/CMakeFiles/test_openmp.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_openmp.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_verify.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_verify.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify.dir/build.make _deps/parasail-build/CMakeFiles/test_verify.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify.dir/build.make _deps/parasail-build/CMakeFiles/test_verify.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_verify"
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_verify.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_verify.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify.dir/rule
+
+# Convenience name for target.
+test_verify: _deps/parasail-build/CMakeFiles/test_verify.dir/rule
+.PHONY : test_verify
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_verify.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify.dir/build.make _deps/parasail-build/CMakeFiles/test_verify.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_verify_tables.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_tables.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_tables.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_tables.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_tables.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_tables.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_verify_tables"
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_tables.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_verify_tables.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_verify_tables.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_tables.dir/rule
+
+# Convenience name for target.
+test_verify_tables: _deps/parasail-build/CMakeFiles/test_verify_tables.dir/rule
+.PHONY : test_verify_tables
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_tables.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_tables.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_tables.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_tables.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_verify_rowcols"
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/rule
+
+# Convenience name for target.
+test_verify_rowcols: _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/rule
+.PHONY : test_verify_rowcols
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_verify_traces.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_traces.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_traces.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_traces.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_traces.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_traces.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num= "Built target test_verify_traces"
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_traces.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_verify_traces.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 96
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_verify_traces.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_traces.dir/rule
+
+# Convenience name for target.
+test_verify_traces: _deps/parasail-build/CMakeFiles/test_verify_traces.dir/rule
+.PHONY : test_verify_traces
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_traces.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_traces.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_traces.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_traces.dir/clean
+
+#=============================================================================
+# Target rules for target _deps/parasail-build/CMakeFiles/test_verify_cigars.dir
+
+# All Build rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_cigars.dir/all: _deps/parasail-build/CMakeFiles/parasail.dir/all
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/depend
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=99 "Built target test_verify_cigars"
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/all
+
+# Build rule for subdir invocation for target.
+_deps/parasail-build/CMakeFiles/test_verify_cigars.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 97
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alex/Code/protein-align/bin/CMakeFiles 0
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/rule
+
+# Convenience name for target.
+test_verify_cigars: _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/rule
+.PHONY : test_verify_cigars
+
+# clean rule for target.
+_deps/parasail-build/CMakeFiles/test_verify_cigars.dir/clean:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/clean
+.PHONY : _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -65,6 +65,26 @@ CMAKE_BINARY_DIR = /home/alex/Code/protein-align/bin
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool..."
+	/usr/bin/cpack --config ./CPackConfig.cmake
+.PHONY : package
+
+# Special rule for the target package
+package/fast: package
+.PHONY : package/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/alex/Code/protein-align/bin/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+.PHONY : package_source/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
@@ -84,6 +104,51 @@ rebuild_cache:
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -117,19 +182,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named benchmark_sw
-
-# Build rule for target.
-benchmark_sw: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 benchmark_sw
-.PHONY : benchmark_sw
-
-# fast build rule for target.
-benchmark_sw/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/build
-.PHONY : benchmark_sw/fast
-
-#=============================================================================
 # Target rules for targets named benchmark_nw
 
 # Build rule for target.
@@ -143,17 +195,550 @@ benchmark_nw/fast:
 .PHONY : benchmark_nw/fast
 
 #=============================================================================
-# Target rules for targets named run_tests
+# Target rules for targets named parasail_core
 
 # Build rule for target.
-run_tests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests
-.PHONY : run_tests
+parasail_core: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_core
+.PHONY : parasail_core
 
 # fast build rule for target.
-run_tests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-.PHONY : run_tests/fast
+parasail_core/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_core.dir/build.make _deps/parasail-build/CMakeFiles/parasail_core.dir/build
+.PHONY : parasail_core/fast
+
+#=============================================================================
+# Target rules for targets named parasail_novec
+
+# Build rule for target.
+parasail_novec: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_novec
+.PHONY : parasail_novec
+
+# fast build rule for target.
+parasail_novec/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec.dir/build
+.PHONY : parasail_novec/fast
+
+#=============================================================================
+# Target rules for targets named parasail_novec_table
+
+# Build rule for target.
+parasail_novec_table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_novec_table
+.PHONY : parasail_novec_table
+
+# fast build rule for target.
+parasail_novec_table/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/build
+.PHONY : parasail_novec_table/fast
+
+#=============================================================================
+# Target rules for targets named parasail_novec_rowcol
+
+# Build rule for target.
+parasail_novec_rowcol: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_novec_rowcol
+.PHONY : parasail_novec_rowcol
+
+# fast build rule for target.
+parasail_novec_rowcol/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/build
+.PHONY : parasail_novec_rowcol/fast
+
+#=============================================================================
+# Target rules for targets named parasail_novec_trace
+
+# Build rule for target.
+parasail_novec_trace: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_novec_trace
+.PHONY : parasail_novec_trace
+
+# fast build rule for target.
+parasail_novec_trace/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/build
+.PHONY : parasail_novec_trace/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse2
+
+# Build rule for target.
+parasail_sse2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse2
+.PHONY : parasail_sse2
+
+# fast build rule for target.
+parasail_sse2/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2.dir/build
+.PHONY : parasail_sse2/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse2_table
+
+# Build rule for target.
+parasail_sse2_table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse2_table
+.PHONY : parasail_sse2_table
+
+# fast build rule for target.
+parasail_sse2_table/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/build
+.PHONY : parasail_sse2_table/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse2_rowcol
+
+# Build rule for target.
+parasail_sse2_rowcol: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse2_rowcol
+.PHONY : parasail_sse2_rowcol
+
+# fast build rule for target.
+parasail_sse2_rowcol/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/build
+.PHONY : parasail_sse2_rowcol/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse2_trace
+
+# Build rule for target.
+parasail_sse2_trace: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse2_trace
+.PHONY : parasail_sse2_trace
+
+# fast build rule for target.
+parasail_sse2_trace/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/build
+.PHONY : parasail_sse2_trace/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse41
+
+# Build rule for target.
+parasail_sse41: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse41
+.PHONY : parasail_sse41
+
+# fast build rule for target.
+parasail_sse41/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41.dir/build
+.PHONY : parasail_sse41/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse41_table
+
+# Build rule for target.
+parasail_sse41_table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse41_table
+.PHONY : parasail_sse41_table
+
+# fast build rule for target.
+parasail_sse41_table/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/build
+.PHONY : parasail_sse41_table/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse41_rowcol
+
+# Build rule for target.
+parasail_sse41_rowcol: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse41_rowcol
+.PHONY : parasail_sse41_rowcol
+
+# fast build rule for target.
+parasail_sse41_rowcol/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/build
+.PHONY : parasail_sse41_rowcol/fast
+
+#=============================================================================
+# Target rules for targets named parasail_sse41_trace
+
+# Build rule for target.
+parasail_sse41_trace: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_sse41_trace
+.PHONY : parasail_sse41_trace
+
+# fast build rule for target.
+parasail_sse41_trace/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/build
+.PHONY : parasail_sse41_trace/fast
+
+#=============================================================================
+# Target rules for targets named parasail_avx2
+
+# Build rule for target.
+parasail_avx2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_avx2
+.PHONY : parasail_avx2
+
+# fast build rule for target.
+parasail_avx2/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2.dir/build
+.PHONY : parasail_avx2/fast
+
+#=============================================================================
+# Target rules for targets named parasail_avx2_table
+
+# Build rule for target.
+parasail_avx2_table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_avx2_table
+.PHONY : parasail_avx2_table
+
+# fast build rule for target.
+parasail_avx2_table/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/build
+.PHONY : parasail_avx2_table/fast
+
+#=============================================================================
+# Target rules for targets named parasail_avx2_rowcol
+
+# Build rule for target.
+parasail_avx2_rowcol: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_avx2_rowcol
+.PHONY : parasail_avx2_rowcol
+
+# fast build rule for target.
+parasail_avx2_rowcol/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/build
+.PHONY : parasail_avx2_rowcol/fast
+
+#=============================================================================
+# Target rules for targets named parasail_avx2_trace
+
+# Build rule for target.
+parasail_avx2_trace: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_avx2_trace
+.PHONY : parasail_avx2_trace
+
+# fast build rule for target.
+parasail_avx2_trace/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/build
+.PHONY : parasail_avx2_trace/fast
+
+#=============================================================================
+# Target rules for targets named parasail_altivec
+
+# Build rule for target.
+parasail_altivec: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_altivec
+.PHONY : parasail_altivec
+
+# fast build rule for target.
+parasail_altivec/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec.dir/build
+.PHONY : parasail_altivec/fast
+
+#=============================================================================
+# Target rules for targets named parasail_altivec_table
+
+# Build rule for target.
+parasail_altivec_table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_altivec_table
+.PHONY : parasail_altivec_table
+
+# fast build rule for target.
+parasail_altivec_table/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/build
+.PHONY : parasail_altivec_table/fast
+
+#=============================================================================
+# Target rules for targets named parasail_altivec_rowcol
+
+# Build rule for target.
+parasail_altivec_rowcol: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_altivec_rowcol
+.PHONY : parasail_altivec_rowcol
+
+# fast build rule for target.
+parasail_altivec_rowcol/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/build
+.PHONY : parasail_altivec_rowcol/fast
+
+#=============================================================================
+# Target rules for targets named parasail_altivec_trace
+
+# Build rule for target.
+parasail_altivec_trace: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_altivec_trace
+.PHONY : parasail_altivec_trace
+
+# fast build rule for target.
+parasail_altivec_trace/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/build
+.PHONY : parasail_altivec_trace/fast
+
+#=============================================================================
+# Target rules for targets named parasail_neon
+
+# Build rule for target.
+parasail_neon: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_neon
+.PHONY : parasail_neon
+
+# fast build rule for target.
+parasail_neon/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon.dir/build
+.PHONY : parasail_neon/fast
+
+#=============================================================================
+# Target rules for targets named parasail_neon_table
+
+# Build rule for target.
+parasail_neon_table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_neon_table
+.PHONY : parasail_neon_table
+
+# fast build rule for target.
+parasail_neon_table/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/build
+.PHONY : parasail_neon_table/fast
+
+#=============================================================================
+# Target rules for targets named parasail_neon_rowcol
+
+# Build rule for target.
+parasail_neon_rowcol: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_neon_rowcol
+.PHONY : parasail_neon_rowcol
+
+# fast build rule for target.
+parasail_neon_rowcol/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/build
+.PHONY : parasail_neon_rowcol/fast
+
+#=============================================================================
+# Target rules for targets named parasail_neon_trace
+
+# Build rule for target.
+parasail_neon_trace: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_neon_trace
+.PHONY : parasail_neon_trace
+
+# fast build rule for target.
+parasail_neon_trace/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/build.make _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/build
+.PHONY : parasail_neon_trace/fast
+
+#=============================================================================
+# Target rules for targets named sais
+
+# Build rule for target.
+sais: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sais
+.PHONY : sais
+
+# fast build rule for target.
+sais/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/sais.dir/build.make _deps/parasail-build/CMakeFiles/sais.dir/build
+.PHONY : sais/fast
+
+#=============================================================================
+# Target rules for targets named ssw
+
+# Build rule for target.
+ssw: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ssw
+.PHONY : ssw
+
+# fast build rule for target.
+ssw/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/ssw.dir/build.make _deps/parasail-build/CMakeFiles/ssw.dir/build
+.PHONY : ssw/fast
+
+#=============================================================================
+# Target rules for targets named parasail
+
+# Build rule for target.
+parasail: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail
+.PHONY : parasail
+
+# fast build rule for target.
+parasail/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail.dir/build.make _deps/parasail-build/CMakeFiles/parasail.dir/build
+.PHONY : parasail/fast
+
+#=============================================================================
+# Target rules for targets named parasail_aligner
+
+# Build rule for target.
+parasail_aligner: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_aligner
+.PHONY : parasail_aligner
+
+# fast build rule for target.
+parasail_aligner/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_aligner.dir/build.make _deps/parasail-build/CMakeFiles/parasail_aligner.dir/build
+.PHONY : parasail_aligner/fast
+
+#=============================================================================
+# Target rules for targets named parasail_stats
+
+# Build rule for target.
+parasail_stats: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parasail_stats
+.PHONY : parasail_stats
+
+# fast build rule for target.
+parasail_stats/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail_stats.dir/build.make _deps/parasail-build/CMakeFiles/parasail_stats.dir/build
+.PHONY : parasail_stats/fast
+
+#=============================================================================
+# Target rules for targets named traceback
+
+# Build rule for target.
+traceback: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 traceback
+.PHONY : traceback
+
+# fast build rule for target.
+traceback/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/traceback.dir/build.make _deps/parasail-build/CMakeFiles/traceback.dir/build
+.PHONY : traceback/fast
+
+#=============================================================================
+# Target rules for targets named test_align
+
+# Build rule for target.
+test_align: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_align
+.PHONY : test_align
+
+# fast build rule for target.
+test_align/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_align.dir/build.make _deps/parasail-build/CMakeFiles/test_align.dir/build
+.PHONY : test_align/fast
+
+#=============================================================================
+# Target rules for targets named test_basic
+
+# Build rule for target.
+test_basic: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_basic
+.PHONY : test_basic
+
+# fast build rule for target.
+test_basic/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_basic.dir/build.make _deps/parasail-build/CMakeFiles/test_basic.dir/build
+.PHONY : test_basic/fast
+
+#=============================================================================
+# Target rules for targets named test_gcups
+
+# Build rule for target.
+test_gcups: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_gcups
+.PHONY : test_gcups
+
+# fast build rule for target.
+test_gcups/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_gcups.dir/build.make _deps/parasail-build/CMakeFiles/test_gcups.dir/build
+.PHONY : test_gcups/fast
+
+#=============================================================================
+# Target rules for targets named test_isa
+
+# Build rule for target.
+test_isa: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_isa
+.PHONY : test_isa
+
+# fast build rule for target.
+test_isa/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_isa.dir/build.make _deps/parasail-build/CMakeFiles/test_isa.dir/build
+.PHONY : test_isa/fast
+
+#=============================================================================
+# Target rules for targets named test_matrix
+
+# Build rule for target.
+test_matrix: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_matrix
+.PHONY : test_matrix
+
+# fast build rule for target.
+test_matrix/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_matrix.dir/build.make _deps/parasail-build/CMakeFiles/test_matrix.dir/build
+.PHONY : test_matrix/fast
+
+#=============================================================================
+# Target rules for targets named test_openmp
+
+# Build rule for target.
+test_openmp: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_openmp
+.PHONY : test_openmp
+
+# fast build rule for target.
+test_openmp/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_openmp.dir/build.make _deps/parasail-build/CMakeFiles/test_openmp.dir/build
+.PHONY : test_openmp/fast
+
+#=============================================================================
+# Target rules for targets named test_verify
+
+# Build rule for target.
+test_verify: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_verify
+.PHONY : test_verify
+
+# fast build rule for target.
+test_verify/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify.dir/build.make _deps/parasail-build/CMakeFiles/test_verify.dir/build
+.PHONY : test_verify/fast
+
+#=============================================================================
+# Target rules for targets named test_verify_tables
+
+# Build rule for target.
+test_verify_tables: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_verify_tables
+.PHONY : test_verify_tables
+
+# fast build rule for target.
+test_verify_tables/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_tables.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_tables.dir/build
+.PHONY : test_verify_tables/fast
+
+#=============================================================================
+# Target rules for targets named test_verify_rowcols
+
+# Build rule for target.
+test_verify_rowcols: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_verify_rowcols
+.PHONY : test_verify_rowcols
+
+# fast build rule for target.
+test_verify_rowcols/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_rowcols.dir/build
+.PHONY : test_verify_rowcols/fast
+
+#=============================================================================
+# Target rules for targets named test_verify_traces
+
+# Build rule for target.
+test_verify_traces: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_verify_traces
+.PHONY : test_verify_traces
+
+# fast build rule for target.
+test_verify_traces/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_traces.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_traces.dir/build
+.PHONY : test_verify_traces/fast
+
+#=============================================================================
+# Target rules for targets named test_verify_cigars
+
+# Build rule for target.
+test_verify_cigars: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_verify_cigars
+.PHONY : test_verify_cigars
+
+# fast build rule for target.
+test_verify_cigars/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/build.make _deps/parasail-build/CMakeFiles/test_verify_cigars.dir/build
+.PHONY : test_verify_cigars/fast
 
 src/benchmark_nw.o: src/benchmark_nw.cpp.o
 .PHONY : src/benchmark_nw.o
@@ -179,38 +764,12 @@ src/benchmark_nw.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.s
 .PHONY : src/benchmark_nw.cpp.s
 
-src/benchmark_sw.o: src/benchmark_sw.cpp.o
-.PHONY : src/benchmark_sw.o
-
-# target to build an object file
-src/benchmark_sw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/benchmark_sw.cpp.o
-.PHONY : src/benchmark_sw.cpp.o
-
-src/benchmark_sw.i: src/benchmark_sw.cpp.i
-.PHONY : src/benchmark_sw.i
-
-# target to preprocess a source file
-src/benchmark_sw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/benchmark_sw.cpp.i
-.PHONY : src/benchmark_sw.cpp.i
-
-src/benchmark_sw.s: src/benchmark_sw.cpp.s
-.PHONY : src/benchmark_sw.s
-
-# target to generate assembly for a file
-src/benchmark_sw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/benchmark_sw.cpp.s
-.PHONY : src/benchmark_sw.cpp.s
-
 src/nw/nw_cpu.o: src/nw/nw_cpu.cpp.o
 .PHONY : src/nw/nw_cpu.o
 
 # target to build an object file
 src/nw/nw_cpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/nw/nw_cpu.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_cpu.cpp.o
 .PHONY : src/nw/nw_cpu.cpp.o
 
 src/nw/nw_cpu.i: src/nw/nw_cpu.cpp.i
@@ -218,9 +777,7 @@ src/nw/nw_cpu.i: src/nw/nw_cpu.cpp.i
 
 # target to preprocess a source file
 src/nw/nw_cpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/nw/nw_cpu.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_cpu.cpp.i
 .PHONY : src/nw/nw_cpu.cpp.i
 
 src/nw/nw_cpu.s: src/nw/nw_cpu.cpp.s
@@ -228,9 +785,7 @@ src/nw/nw_cpu.s: src/nw/nw_cpu.cpp.s
 
 # target to generate assembly for a file
 src/nw/nw_cpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/nw/nw_cpu.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_cpu.cpp.s
 .PHONY : src/nw/nw_cpu.cpp.s
 
 src/nw/nw_optimised.o: src/nw/nw_optimised.cu.o
@@ -238,9 +793,7 @@ src/nw/nw_optimised.o: src/nw/nw_optimised.cu.o
 
 # target to build an object file
 src/nw/nw_optimised.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/nw/nw_optimised.cu.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_optimised.cu.o
 .PHONY : src/nw/nw_optimised.cu.o
 
 src/nw/nw_optimised.i: src/nw/nw_optimised.cu.i
@@ -248,9 +801,7 @@ src/nw/nw_optimised.i: src/nw/nw_optimised.cu.i
 
 # target to preprocess a source file
 src/nw/nw_optimised.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/nw/nw_optimised.cu.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_optimised.cu.i
 .PHONY : src/nw/nw_optimised.cu.i
 
 src/nw/nw_optimised.s: src/nw/nw_optimised.cu.s
@@ -258,19 +809,39 @@ src/nw/nw_optimised.s: src/nw/nw_optimised.cu.s
 
 # target to generate assembly for a file
 src/nw/nw_optimised.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/nw/nw_optimised.cu.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/nw/nw_optimised.cu.s
 .PHONY : src/nw/nw_optimised.cu.s
+
+src/nw/nw_parasail.o: src/nw/nw_parasail.cpp.o
+.PHONY : src/nw/nw_parasail.o
+
+# target to build an object file
+src/nw/nw_parasail.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o
+.PHONY : src/nw/nw_parasail.cpp.o
+
+src/nw/nw_parasail.i: src/nw/nw_parasail.cpp.i
+.PHONY : src/nw/nw_parasail.i
+
+# target to preprocess a source file
+src/nw/nw_parasail.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.i
+.PHONY : src/nw/nw_parasail.cpp.i
+
+src/nw/nw_parasail.s: src/nw/nw_parasail.cpp.s
+.PHONY : src/nw/nw_parasail.s
+
+# target to generate assembly for a file
+src/nw/nw_parasail.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.s
+.PHONY : src/nw/nw_parasail.cpp.s
 
 src/parse.o: src/parse.cpp.o
 .PHONY : src/parse.o
 
 # target to build an object file
 src/parse.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/parse.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/parse.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.o
 .PHONY : src/parse.cpp.o
 
 src/parse.i: src/parse.cpp.i
@@ -278,9 +849,7 @@ src/parse.i: src/parse.cpp.i
 
 # target to preprocess a source file
 src/parse.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/parse.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/parse.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.i
 .PHONY : src/parse.cpp.i
 
 src/parse.s: src/parse.cpp.s
@@ -288,9 +857,7 @@ src/parse.s: src/parse.cpp.s
 
 # target to generate assembly for a file
 src/parse.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/parse.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/parse.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.s
 .PHONY : src/parse.cpp.s
 
 src/sw/sw_cpu.o: src/sw/sw_cpu.cpp.o
@@ -298,9 +865,7 @@ src/sw/sw_cpu.o: src/sw/sw_cpu.cpp.o
 
 # target to build an object file
 src/sw/sw_cpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/sw/sw_cpu.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_cpu.cpp.o
 .PHONY : src/sw/sw_cpu.cpp.o
 
 src/sw/sw_cpu.i: src/sw/sw_cpu.cpp.i
@@ -308,9 +873,7 @@ src/sw/sw_cpu.i: src/sw/sw_cpu.cpp.i
 
 # target to preprocess a source file
 src/sw/sw_cpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/sw/sw_cpu.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_cpu.cpp.i
 .PHONY : src/sw/sw_cpu.cpp.i
 
 src/sw/sw_cpu.s: src/sw/sw_cpu.cpp.s
@@ -318,9 +881,7 @@ src/sw/sw_cpu.s: src/sw/sw_cpu.cpp.s
 
 # target to generate assembly for a file
 src/sw/sw_cpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/sw/sw_cpu.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_cpu.cpp.s
 .PHONY : src/sw/sw_cpu.cpp.s
 
 src/sw/sw_optimised.o: src/sw/sw_optimised.cu.o
@@ -328,9 +889,7 @@ src/sw/sw_optimised.o: src/sw/sw_optimised.cu.o
 
 # target to build an object file
 src/sw/sw_optimised.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/sw/sw_optimised.cu.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_optimised.cu.o
 .PHONY : src/sw/sw_optimised.cu.o
 
 src/sw/sw_optimised.i: src/sw/sw_optimised.cu.i
@@ -338,9 +897,7 @@ src/sw/sw_optimised.i: src/sw/sw_optimised.cu.i
 
 # target to preprocess a source file
 src/sw/sw_optimised.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/sw/sw_optimised.cu.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_optimised.cu.i
 .PHONY : src/sw/sw_optimised.cu.i
 
 src/sw/sw_optimised.s: src/sw/sw_optimised.cu.s
@@ -348,106 +905,8 @@ src/sw/sw_optimised.s: src/sw/sw_optimised.cu.s
 
 # target to generate assembly for a file
 src/sw/sw_optimised.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_sw.dir/build.make CMakeFiles/benchmark_sw.dir/src/sw/sw_optimised.cu.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_nw.dir/build.make CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/sw/sw_optimised.cu.s
 .PHONY : src/sw/sw_optimised.cu.s
-
-test/test_main.o: test/test_main.cpp.o
-.PHONY : test/test_main.o
-
-# target to build an object file
-test/test_main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.o
-.PHONY : test/test_main.cpp.o
-
-test/test_main.i: test/test_main.cpp.i
-.PHONY : test/test_main.i
-
-# target to preprocess a source file
-test/test_main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.i
-.PHONY : test/test_main.cpp.i
-
-test/test_main.s: test/test_main.cpp.s
-.PHONY : test/test_main.s
-
-# target to generate assembly for a file
-test/test_main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.s
-.PHONY : test/test_main.cpp.s
-
-test/test_nw.o: test/test_nw.cpp.o
-.PHONY : test/test_nw.o
-
-# target to build an object file
-test/test_nw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_nw.cpp.o
-.PHONY : test/test_nw.cpp.o
-
-test/test_nw.i: test/test_nw.cpp.i
-.PHONY : test/test_nw.i
-
-# target to preprocess a source file
-test/test_nw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_nw.cpp.i
-.PHONY : test/test_nw.cpp.i
-
-test/test_nw.s: test/test_nw.cpp.s
-.PHONY : test/test_nw.s
-
-# target to generate assembly for a file
-test/test_nw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_nw.cpp.s
-.PHONY : test/test_nw.cpp.s
-
-test/test_parser.o: test/test_parser.cpp.o
-.PHONY : test/test_parser.o
-
-# target to build an object file
-test/test_parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parser.cpp.o
-.PHONY : test/test_parser.cpp.o
-
-test/test_parser.i: test/test_parser.cpp.i
-.PHONY : test/test_parser.i
-
-# target to preprocess a source file
-test/test_parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parser.cpp.i
-.PHONY : test/test_parser.cpp.i
-
-test/test_parser.s: test/test_parser.cpp.s
-.PHONY : test/test_parser.s
-
-# target to generate assembly for a file
-test/test_parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parser.cpp.s
-.PHONY : test/test_parser.cpp.s
-
-test/test_sw.o: test/test_sw.cpp.o
-.PHONY : test/test_sw.o
-
-# target to build an object file
-test/test_sw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_sw.cpp.o
-.PHONY : test/test_sw.cpp.o
-
-test/test_sw.i: test/test_sw.cpp.i
-.PHONY : test/test_sw.i
-
-# target to preprocess a source file
-test/test_sw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_sw.cpp.i
-.PHONY : test/test_sw.cpp.i
-
-test/test_sw.s: test/test_sw.cpp.s
-.PHONY : test/test_sw.s
-
-# target to generate assembly for a file
-test/test_sw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_sw.cpp.s
-.PHONY : test/test_sw.cpp.s
 
 # Help Target
 help:
@@ -456,22 +915,68 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
+	@echo "... package"
+	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... benchmark_nw"
-	@echo "... benchmark_sw"
-	@echo "... run_tests"
+	@echo "... parasail"
+	@echo "... parasail_aligner"
+	@echo "... parasail_altivec"
+	@echo "... parasail_altivec_rowcol"
+	@echo "... parasail_altivec_table"
+	@echo "... parasail_altivec_trace"
+	@echo "... parasail_avx2"
+	@echo "... parasail_avx2_rowcol"
+	@echo "... parasail_avx2_table"
+	@echo "... parasail_avx2_trace"
+	@echo "... parasail_core"
+	@echo "... parasail_neon"
+	@echo "... parasail_neon_rowcol"
+	@echo "... parasail_neon_table"
+	@echo "... parasail_neon_trace"
+	@echo "... parasail_novec"
+	@echo "... parasail_novec_rowcol"
+	@echo "... parasail_novec_table"
+	@echo "... parasail_novec_trace"
+	@echo "... parasail_sse2"
+	@echo "... parasail_sse2_rowcol"
+	@echo "... parasail_sse2_table"
+	@echo "... parasail_sse2_trace"
+	@echo "... parasail_sse41"
+	@echo "... parasail_sse41_rowcol"
+	@echo "... parasail_sse41_table"
+	@echo "... parasail_sse41_trace"
+	@echo "... parasail_stats"
+	@echo "... sais"
+	@echo "... ssw"
+	@echo "... test_align"
+	@echo "... test_basic"
+	@echo "... test_gcups"
+	@echo "... test_isa"
+	@echo "... test_matrix"
+	@echo "... test_openmp"
+	@echo "... test_verify"
+	@echo "... test_verify_cigars"
+	@echo "... test_verify_rowcols"
+	@echo "... test_verify_tables"
+	@echo "... test_verify_traces"
+	@echo "... traceback"
 	@echo "... src/benchmark_nw.o"
 	@echo "... src/benchmark_nw.i"
 	@echo "... src/benchmark_nw.s"
-	@echo "... src/benchmark_sw.o"
-	@echo "... src/benchmark_sw.i"
-	@echo "... src/benchmark_sw.s"
 	@echo "... src/nw/nw_cpu.o"
 	@echo "... src/nw/nw_cpu.i"
 	@echo "... src/nw/nw_cpu.s"
 	@echo "... src/nw/nw_optimised.o"
 	@echo "... src/nw/nw_optimised.i"
 	@echo "... src/nw/nw_optimised.s"
+	@echo "... src/nw/nw_parasail.o"
+	@echo "... src/nw/nw_parasail.i"
+	@echo "... src/nw/nw_parasail.s"
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"
@@ -481,18 +986,6 @@ help:
 	@echo "... src/sw/sw_optimised.o"
 	@echo "... src/sw/sw_optimised.i"
 	@echo "... src/sw/sw_optimised.s"
-	@echo "... test/test_main.o"
-	@echo "... test/test_main.i"
-	@echo "... test/test_main.s"
-	@echo "... test/test_nw.o"
-	@echo "... test/test_nw.i"
-	@echo "... test/test_nw.s"
-	@echo "... test/test_parser.o"
-	@echo "... test/test_parser.i"
-	@echo "... test/test_parser.s"
-	@echo "... test/test_sw.o"
-	@echo "... test/test_sw.i"
-	@echo "... test/test_sw.s"
 .PHONY : help
 
 

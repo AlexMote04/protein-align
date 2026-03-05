@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o.d"
   "CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o"
   "CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o.d"
+  "CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o"
+  "CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o.d"
   "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o"
   "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o.d"
   "CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o"

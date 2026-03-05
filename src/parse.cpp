@@ -14,10 +14,10 @@ static TableInitializer auto_init;
 
 void initConversionTable()
 {
-  // Initialize everything to unknown (24)
+  // Initialize everything to unknown (23)
   for (int i = 0; i < 128; i++)
   {
-    amino_to_uchar[i] = 22;
+    amino_to_uchar[i] = 23;
   }
 
   // Standard Amino Acids
@@ -49,7 +49,7 @@ void initConversionTable()
   amino_to_uchar['*'] = 23;
 }
 
-void parseQuery(std::vector<unsigned char> &query_seq, std::string query_path)
+void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_path)
 {
   // Open query file
   std::ifstream file(query_path);
@@ -81,7 +81,7 @@ void parseQuery(std::vector<unsigned char> &query_seq, std::string query_path)
       }
       else
       {
-        query_seq.push_back(22); // Defult to unknown for weird characters
+        query_seq.push_back(23); // Defult to unknown for weird characters
       }
     }
   }
@@ -90,7 +90,37 @@ void parseQuery(std::vector<unsigned char> &query_seq, std::string query_path)
     throw std::runtime_error("Invalid query file: No query sequence found");
 }
 
-void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offsets, std::string db_path, int num_seqs)
+void parseQueryParasail(std::string &query_seq, const std::string &query_path)
+{
+  // Open query file
+  std::ifstream file(query_path);
+  if (!file)
+    throw std::runtime_error("Could not open file: " + query_path);
+
+  // Read query sequence into string
+  std::string line;
+
+  // Parse header line
+  if (!std::getline(file, line) || line.empty() || line[0] != '>')
+    throw std::runtime_error("Invalid FASTA: Missing header line");
+
+  while (std::getline(file, line))
+  {
+    if (line.empty())
+      continue;
+
+    // Clean up potential Windows charriage returns
+    if (line.back() == '\r')
+      line.pop_back();
+
+    query_seq += line;
+  }
+
+  if (query_seq.empty())
+    throw std::runtime_error("Invalid query file: No query sequence found");
+}
+
+void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offsets, const std::string &db_path, int num_seqs)
 {
   if (num_seqs < 1 || num_seqs > MAX_NUM_SEQS)
     throw std::runtime_error("db_size must be between 1 and " + MAX_NUM_SEQS);
@@ -142,7 +172,7 @@ void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offse
         }
         else
         {
-          db_residues.push_back(24);
+          db_residues.push_back(23);
         }
         offset++; // Keep track for current offset
       }
@@ -155,4 +185,55 @@ void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offse
     throw std::runtime_error("Invalid database file: No sequences found");
   if ((db_offsets.size() - 1) < num_seqs)
     throw std::runtime_error("Tried parsing " + std::to_string(num_seqs) + " sequences but only found " + std::to_string(db_offsets.size() - 1) + " in database file");
+}
+
+void parseDBParasail(std::vector<std::string> &db_ascii, const std::string &db_path, int num_seqs)
+{
+  if (num_seqs < 1)
+    throw std::runtime_error("db_size must be at least 1");
+
+  std::ifstream file(db_path);
+  if (!file)
+    throw std::runtime_error("Could not open file: " + db_path);
+
+  std::string line;
+  std::string current_seq = "";
+
+  while (std::getline(file, line))
+  {
+    if (line.empty())
+      continue;
+
+    // Defend against Windows line endings
+    if (line.back() == '\r')
+      line.pop_back();
+
+    if (line[0] == '>')
+    {
+      // If we already accumulated a sequence, push it to the database
+      if (!current_seq.empty())
+      {
+        db_ascii.push_back(current_seq);
+        current_seq.clear(); // Reset for the next sequence
+
+        // Stop if we hit the requested number of sequences
+        if (db_ascii.size() == num_seqs)
+          break;
+      }
+    }
+    else
+    {
+      // Accumulate sequence lines!
+      current_seq += line;
+    }
+  }
+
+  // Push final sequence in the file
+  if (!current_seq.empty() && db_ascii.size() < num_seqs)
+  {
+    db_ascii.push_back(current_seq);
+  }
+
+  if (db_ascii.empty())
+    throw std::runtime_error("Invalid database file: No sequences found");
 }

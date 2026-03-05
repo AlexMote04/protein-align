@@ -170,4 +170,8 @@ CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o: \
  /home/alex/Code/protein-align/include/nw_cpu.h \
  /home/alex/Code/protein-align/include/blosum62.h \
  /home/alex/Code/protein-align/include/params.h \
- /home/alex/Code/protein-align/include/nw_gpu.cuh
+ /home/alex/Code/protein-align/include/nw_gpu.cuh \
+ /home/alex/Code/protein-align/include/nw_parasail.h \
+ /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail.h \
+ /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail/matrices/blosum62.h \
+ /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail/matrices/blosum_map.h

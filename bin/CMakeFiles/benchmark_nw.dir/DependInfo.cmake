@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alex/Code/protein-align/src/sw/sw_optimised.cu" "CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o.d"
   "/home/alex/Code/protein-align/src/benchmark_nw.cpp" "CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o.d"
   "/home/alex/Code/protein-align/src/nw/nw_cpu.cpp" "CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o.d"
+  "/home/alex/Code/protein-align/src/nw/nw_parasail.cpp" "CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o.d"
   "/home/alex/Code/protein-align/src/parse.cpp" "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o.d"
   "/home/alex/Code/protein-align/src/sw/sw_cpu.cpp" "CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o.d"
   )
