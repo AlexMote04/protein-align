@@ -8,13 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/alex/Code/protein-align/src/nw/nw_optimised.cu" "CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o.d"
-  "/home/alex/Code/protein-align/src/sw/sw_optimised.cu" "CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o.d"
-  "/home/alex/Code/protein-align/src/benchmark_nw.cpp" "CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o.d"
-  "/home/alex/Code/protein-align/src/nw/nw_cpu.cpp" "CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o.d"
-  "/home/alex/Code/protein-align/src/nw/nw_parasail.cpp" "CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o.d"
+  "/home/alex/Code/protein-align/src/alignGPU.cu" "CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o.d"
+  "/home/alex/Code/protein-align/src/alignCPU.cpp" "CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o.d"
+  "/home/alex/Code/protein-align/src/alignParasail.cpp" "CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o.d"
+  "/home/alex/Code/protein-align/src/benchmark.cpp" "CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o.d"
   "/home/alex/Code/protein-align/src/parse.cpp" "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o.d"
-  "/home/alex/Code/protein-align/src/sw/sw_cpu.cpp" "CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o" "gcc" "CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -69,19 +69,19 @@ include CMakeFiles/benchmark_nw.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/benchmark_nw.dir/flags.make
 
-CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
-CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o: /home/alex/Code/protein-align/src/benchmark_nw.cpp
-CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o -c /home/alex/Code/protein-align/src/benchmark_nw.cpp
+CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
+CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o: /home/alex/Code/protein-align/src/benchmark.cpp
+CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o -c /home/alex/Code/protein-align/src/benchmark.cpp
 
-CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/benchmark_nw.cpp > CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.i
+CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/benchmark.cpp > CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.i
 
-CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/benchmark_nw.cpp -o CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.s
+CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/benchmark.cpp -o CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.s
 
 CMakeFiles/benchmark_nw.dir/src/parse.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
 CMakeFiles/benchmark_nw.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/parse.cpp
@@ -97,102 +97,69 @@ CMakeFiles/benchmark_nw.dir/src/parse.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/parse.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/parse.cpp -o CMakeFiles/benchmark_nw.dir/src/parse.cpp.s
 
-CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
-CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o: /home/alex/Code/protein-align/src/sw/sw_cpu.cpp
-CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o -c /home/alex/Code/protein-align/src/sw/sw_cpu.cpp
+CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o: CMakeFiles/benchmark_nw.dir/flags.make
+CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o: CMakeFiles/benchmark_nw.dir/includes_CUDA.rsp
+CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o: /home/alex/Code/protein-align/src/alignGPU.cu
+CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o"
+	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o -MF CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o.d -x cu -c /home/alex/Code/protein-align/src/alignGPU.cu -o CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o
 
-CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/sw/sw_cpu.cpp > CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.i
-
-CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/sw/sw_cpu.cpp -o CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.s
-
-CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o: CMakeFiles/benchmark_nw.dir/flags.make
-CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o: CMakeFiles/benchmark_nw.dir/includes_CUDA.rsp
-CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o: /home/alex/Code/protein-align/src/sw/sw_optimised.cu
-CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CUDA object CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o"
-	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o -MF CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o.d -x cu -c /home/alex/Code/protein-align/src/sw/sw_optimised.cu -o CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o
-
-CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.i"
+CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.s"
+CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
-CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
-CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o: /home/alex/Code/protein-align/src/nw/nw_cpu.cpp
-CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o -c /home/alex/Code/protein-align/src/nw/nw_cpu.cpp
+CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
+CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/alignCPU.cpp
+CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o -c /home/alex/Code/protein-align/src/alignCPU.cpp
 
-CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/nw/nw_cpu.cpp > CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.i
+CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/alignCPU.cpp > CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.i
 
-CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/nw/nw_cpu.cpp -o CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.s
+CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/alignCPU.cpp -o CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.s
 
-CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o: CMakeFiles/benchmark_nw.dir/flags.make
-CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o: CMakeFiles/benchmark_nw.dir/includes_CUDA.rsp
-CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o: /home/alex/Code/protein-align/src/nw/nw_optimised.cu
-CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CUDA object CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o"
-	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o -MF CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o.d -x cu -c /home/alex/Code/protein-align/src/nw/nw_optimised.cu -o CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o
+CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
+CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o: /home/alex/Code/protein-align/src/alignParasail.cpp
+CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o -c /home/alex/Code/protein-align/src/alignParasail.cpp
 
-CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/alignParasail.cpp > CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.i
 
-CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
-
-CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o: CMakeFiles/benchmark_nw.dir/flags.make
-CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o: /home/alex/Code/protein-align/src/nw/nw_parasail.cpp
-CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o: CMakeFiles/benchmark_nw.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o -MF CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o.d -o CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o -c /home/alex/Code/protein-align/src/nw/nw_parasail.cpp
-
-CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/Code/protein-align/src/nw/nw_parasail.cpp > CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.i
-
-CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/nw/nw_parasail.cpp -o CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.s
+CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/alignParasail.cpp -o CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.s
 
 # Object files for target benchmark_nw
 benchmark_nw_OBJECTS = \
-"CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o" \
+"CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o" \
 "CMakeFiles/benchmark_nw.dir/src/parse.cpp.o" \
-"CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o" \
-"CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o" \
-"CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o" \
-"CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o" \
-"CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o"
+"CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o" \
+"CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o" \
+"CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o"
 
 # External object files for target benchmark_nw
 benchmark_nw_EXTERNAL_OBJECTS =
 
-benchmark_nw: CMakeFiles/benchmark_nw.dir/src/benchmark_nw.cpp.o
+benchmark_nw: CMakeFiles/benchmark_nw.dir/src/benchmark.cpp.o
 benchmark_nw: CMakeFiles/benchmark_nw.dir/src/parse.cpp.o
-benchmark_nw: CMakeFiles/benchmark_nw.dir/src/sw/sw_cpu.cpp.o
-benchmark_nw: CMakeFiles/benchmark_nw.dir/src/sw/sw_optimised.cu.o
-benchmark_nw: CMakeFiles/benchmark_nw.dir/src/nw/nw_cpu.cpp.o
-benchmark_nw: CMakeFiles/benchmark_nw.dir/src/nw/nw_optimised.cu.o
-benchmark_nw: CMakeFiles/benchmark_nw.dir/src/nw/nw_parasail.cpp.o
+benchmark_nw: CMakeFiles/benchmark_nw.dir/src/alignGPU.cu.o
+benchmark_nw: CMakeFiles/benchmark_nw.dir/src/alignCPU.cpp.o
+benchmark_nw: CMakeFiles/benchmark_nw.dir/src/alignParasail.cpp.o
 benchmark_nw: CMakeFiles/benchmark_nw.dir/build.make
 benchmark_nw: _deps/parasail-build/libparasail.so
 benchmark_nw: CMakeFiles/benchmark_nw.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable benchmark_nw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable benchmark_nw"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/benchmark_nw.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

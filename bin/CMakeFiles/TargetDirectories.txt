@@ -1,4 +1,4 @@
-/home/alex/Code/protein-align/bin/CMakeFiles/benchmark_nw.dir
+/home/alex/Code/protein-align/bin/CMakeFiles/benchmark.dir
 /home/alex/Code/protein-align/bin/CMakeFiles/package.dir
 /home/alex/Code/protein-align/bin/CMakeFiles/package_source.dir
 /home/alex/Code/protein-align/bin/CMakeFiles/edit_cache.dir

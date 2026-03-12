@@ -167,7 +167,11 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /usr/include/c++/13/bits/parse_numbers.h \
  /home/alex/Code/protein-align/include/parse.h \
  /usr/include/c++/13/sstream /usr/include/c++/13/bits/sstream.tcc \
- /home/alex/Code/protein-align/include/sw_cpu.h \
+ /home/alex/Code/protein-align/include/alignCPU.h \
  /home/alex/Code/protein-align/include/blosum62.h \
  /home/alex/Code/protein-align/include/params.h \
- /home/alex/Code/protein-align/include/sw_gpu.cuh
+ /home/alex/Code/protein-align/include/alignGPU.cuh \
+ /home/alex/Code/protein-align/include/alignParasail.h \
+ /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail.h \
+ /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail/matrices/blosum62.h \
+ /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail/matrices/blosum_map.h

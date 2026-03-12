@@ -1,5 +1,10 @@
-// BLOSUM62 substitution matrix.
 // Max alignment score is 11. int16_t supports numbers up to 32768. 2977 is a conservative upper bound on sequence length
+// Matrix made by matblas from blosum62.iij
+// * column uses minimum score
+// BLOSUM Clustered Scoring Matrix in 1/2 Bit Units
+// Blocks Database = /data/blocks_5.0/blocks.dat
+// Cluster Percentage: >= 62
+// Entropy =   0.6979, Expected =  -0.5209
 #pragma once
 #include <cstdint>
 

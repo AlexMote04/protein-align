@@ -28,11 +28,9 @@ FetchContent_MakeAvailable(parasail)
 
 set(SHARED_SOURCES 
     src/parse.cpp
-    src/sw/sw_cpu.cpp
-    src/sw/sw_optimised.cu
-    src/nw/nw_cpu.cpp
-    src/nw/nw_optimised.cu
-    src/nw/nw_parasail.cpp
+    src/alignGPU.cu
+    src/alignCPU.cpp
+    src/alignParasail.cpp
 )
 
 # add_executable(benchmark_sw 
@@ -41,11 +39,11 @@ set(SHARED_SOURCES
 # )
 # target_link_libraries(benchmark_sw PRIVATE parasail)
 
-add_executable(benchmark_nw 
-    src/benchmark_nw.cpp 
+add_executable(benchmark 
+    src/benchmark.cpp 
     ${SHARED_SOURCES}
 )
-target_link_libraries(benchmark_nw PRIVATE parasail)
+target_link_libraries(benchmark PRIVATE parasail)
 
 # add_executable(run_tests 
 #     test/test_main.cpp

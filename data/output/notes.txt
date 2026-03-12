@@ -1,0 +1,9 @@
+Pattern Length: 50, 100, 150, 200
+Sequence Lengths: 160, 320 ... 10240
+
+Attempt on Uniprot, Uniprot sorted, Synthetic
+
+Nsight?
+
+Data
+Num Seqs, Latency: Parasail Baseline GPU, Optimised GPU, Throughput: Parasail, Baseline GPU, Optimised GPU, Speedup: Parasail against Baseline, Baseline against Optimised
