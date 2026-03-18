@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/benchmark.dir/src/alignCPU.cpp.o"
   "CMakeFiles/benchmark.dir/src/alignCPU.cpp.o.d"
-  "CMakeFiles/benchmark.dir/src/alignGPU.cu.o"
-  "CMakeFiles/benchmark.dir/src/alignGPU.cu.o.d"
+  "CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o"
+  "CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o.d"
   "CMakeFiles/benchmark.dir/src/alignParasail.cpp.o"
   "CMakeFiles/benchmark.dir/src/alignParasail.cpp.o.d"
   "CMakeFiles/benchmark.dir/src/benchmark.cpp.o"

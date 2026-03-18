@@ -167,7 +167,6 @@ __global__ void align_sw(
                 H[index_curr] = h_curr;
                 F[index_curr] = f_curr;
 
-                // --- SHIFT REGISTERS FOR THE NEXT j ITERATION ---
                 h_left = h_curr;
                 e_left = e_curr;
                 h_diag = h_up; // The current 'up' becomes the 'diag' for the next cell to the right

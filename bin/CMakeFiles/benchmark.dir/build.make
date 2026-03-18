@@ -97,19 +97,19 @@ CMakeFiles/benchmark.dir/src/parse.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark.dir/src/parse.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/parse.cpp -o CMakeFiles/benchmark.dir/src/parse.cpp.s
 
-CMakeFiles/benchmark.dir/src/alignGPU.cu.o: CMakeFiles/benchmark.dir/flags.make
-CMakeFiles/benchmark.dir/src/alignGPU.cu.o: CMakeFiles/benchmark.dir/includes_CUDA.rsp
-CMakeFiles/benchmark.dir/src/alignGPU.cu.o: /home/alex/Code/protein-align/src/alignGPU.cu
-CMakeFiles/benchmark.dir/src/alignGPU.cu.o: CMakeFiles/benchmark.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/benchmark.dir/src/alignGPU.cu.o"
-	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/alignGPU.cu.o -MF CMakeFiles/benchmark.dir/src/alignGPU.cu.o.d -x cu -c /home/alex/Code/protein-align/src/alignGPU.cu -o CMakeFiles/benchmark.dir/src/alignGPU.cu.o
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: CMakeFiles/benchmark.dir/flags.make
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: CMakeFiles/benchmark.dir/includes_CUDA.rsp
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: /home/alex/Code/protein-align/src/alignGPUOptimised.cu
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: CMakeFiles/benchmark.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o"
+	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o -MF CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o.d -x cu -c /home/alex/Code/protein-align/src/alignGPUOptimised.cu -o CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o
 
-CMakeFiles/benchmark.dir/src/alignGPU.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark.dir/src/alignGPU.cu.i"
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/benchmark.dir/src/alignGPU.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark.dir/src/alignGPU.cu.s"
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: CMakeFiles/benchmark.dir/flags.make
@@ -144,7 +144,7 @@ CMakeFiles/benchmark.dir/src/alignParasail.cpp.s: cmake_force
 benchmark_OBJECTS = \
 "CMakeFiles/benchmark.dir/src/benchmark.cpp.o" \
 "CMakeFiles/benchmark.dir/src/parse.cpp.o" \
-"CMakeFiles/benchmark.dir/src/alignGPU.cu.o" \
+"CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o" \
 "CMakeFiles/benchmark.dir/src/alignCPU.cpp.o" \
 "CMakeFiles/benchmark.dir/src/alignParasail.cpp.o"
 
@@ -153,7 +153,7 @@ benchmark_EXTERNAL_OBJECTS =
 
 benchmark: CMakeFiles/benchmark.dir/src/benchmark.cpp.o
 benchmark: CMakeFiles/benchmark.dir/src/parse.cpp.o
-benchmark: CMakeFiles/benchmark.dir/src/alignGPU.cu.o
+benchmark: CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o
 benchmark: CMakeFiles/benchmark.dir/src/alignCPU.cpp.o
 benchmark: CMakeFiles/benchmark.dir/src/alignParasail.cpp.o
 benchmark: CMakeFiles/benchmark.dir/build.make

@@ -152,7 +152,7 @@ CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/a
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
-CMakeFiles/benchmark.dir/src/alignGPU.cu.o: /home/alex/Code/protein-align/src/alignGPU.cu \
+CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: /home/alex/Code/protein-align/src/alignGPUOptimised.cu \
   /home/alex/Code/protein-align/include/alignGPU.cuh \
   /home/alex/Code/protein-align/include/blosum62.h \
   /home/alex/Code/protein-align/include/params.h \
@@ -719,12 +719,15 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: /home/alex/Code/protein-align/src/
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
 CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/parse.cpp \
+  /home/alex/Code/protein-align/include/params.h \
   /home/alex/Code/protein-align/include/parse.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
+  /usr/include/c++/13/algorithm \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/algorithmfwd.h \
   /usr/include/c++/13/bits/alloc_traits.h \
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/basic_ios.h \
@@ -767,24 +770,29 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/c++/13/bits/requires_hosted.h \
   /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
+  /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
   /usr/include/c++/13/bits/stl_construct.h \
   /usr/include/c++/13/bits/stl_function.h \
+  /usr/include/c++/13/bits/stl_heap.h \
   /usr/include/c++/13/bits/stl_iterator.h \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
   /usr/include/c++/13/bits/streambuf.tcc \
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/utility.h \
   /usr/include/c++/13/bits/vector.tcc \
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
   /usr/include/c++/13/cwchar \
@@ -823,6 +831,7 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/time.h \
@@ -847,6 +856,8 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
@@ -908,7 +919,8 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
 
 /home/alex/Code/protein-align/src/parse.cpp:
@@ -972,6 +984,8 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/sm_35_atomic_functions.h:
 
@@ -1341,12 +1355,6 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/home/alex/Code/protein-align/src/alignGPU.cu:
-
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.h:
-
 /home/alex/Code/protein-align/include/alignGPU.cuh:
 
 /usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.h:
@@ -1421,6 +1429,8 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.hpp:
 
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.h:
+
 /usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.hpp:
@@ -1492,6 +1502,8 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 /home/alex/Code/protein-align/src/benchmark.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/home/alex/Code/protein-align/src/alignGPUOptimised.cu:
 
 /usr/include/c++/13/bits/chrono.h:
 

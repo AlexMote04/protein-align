@@ -28,7 +28,7 @@ FetchContent_MakeAvailable(parasail)
 
 set(SHARED_SOURCES 
     src/parse.cpp
-    src/alignGPU.cu
+    src/alignGPUOptimised.cu
     src/alignCPU.cpp
     src/alignParasail.cpp
 )

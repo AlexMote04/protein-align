@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/alex/Code/protein-align/src/alignGPU.cu" "CMakeFiles/benchmark.dir/src/alignGPU.cu.o" "gcc" "CMakeFiles/benchmark.dir/src/alignGPU.cu.o.d"
+  "/home/alex/Code/protein-align/src/alignGPUOptimised.cu" "CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o" "gcc" "CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o.d"
   "/home/alex/Code/protein-align/src/alignCPU.cpp" "CMakeFiles/benchmark.dir/src/alignCPU.cpp.o" "gcc" "CMakeFiles/benchmark.dir/src/alignCPU.cpp.o.d"
   "/home/alex/Code/protein-align/src/alignParasail.cpp" "CMakeFiles/benchmark.dir/src/alignParasail.cpp.o" "gcc" "CMakeFiles/benchmark.dir/src/alignParasail.cpp.o.d"
   "/home/alex/Code/protein-align/src/benchmark.cpp" "CMakeFiles/benchmark.dir/src/benchmark.cpp.o" "gcc" "CMakeFiles/benchmark.dir/src/benchmark.cpp.o.d"

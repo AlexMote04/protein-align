@@ -764,29 +764,29 @@ src/alignCPU.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignCPU.cpp.s
 .PHONY : src/alignCPU.cpp.s
 
-src/alignGPU.o: src/alignGPU.cu.o
-.PHONY : src/alignGPU.o
+src/alignGPUOptimised.o: src/alignGPUOptimised.cu.o
+.PHONY : src/alignGPUOptimised.o
 
 # target to build an object file
-src/alignGPU.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPU.cu.o
-.PHONY : src/alignGPU.cu.o
+src/alignGPUOptimised.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o
+.PHONY : src/alignGPUOptimised.cu.o
 
-src/alignGPU.i: src/alignGPU.cu.i
-.PHONY : src/alignGPU.i
+src/alignGPUOptimised.i: src/alignGPUOptimised.cu.i
+.PHONY : src/alignGPUOptimised.i
 
 # target to preprocess a source file
-src/alignGPU.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPU.cu.i
-.PHONY : src/alignGPU.cu.i
+src/alignGPUOptimised.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.i
+.PHONY : src/alignGPUOptimised.cu.i
 
-src/alignGPU.s: src/alignGPU.cu.s
-.PHONY : src/alignGPU.s
+src/alignGPUOptimised.s: src/alignGPUOptimised.cu.s
+.PHONY : src/alignGPUOptimised.s
 
 # target to generate assembly for a file
-src/alignGPU.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPU.cu.s
-.PHONY : src/alignGPU.cu.s
+src/alignGPUOptimised.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.s
+.PHONY : src/alignGPUOptimised.cu.s
 
 src/alignParasail.o: src/alignParasail.cpp.o
 .PHONY : src/alignParasail.o
@@ -920,9 +920,9 @@ help:
 	@echo "... src/alignCPU.o"
 	@echo "... src/alignCPU.i"
 	@echo "... src/alignCPU.s"
-	@echo "... src/alignGPU.o"
-	@echo "... src/alignGPU.i"
-	@echo "... src/alignGPU.s"
+	@echo "... src/alignGPUOptimised.o"
+	@echo "... src/alignGPUOptimised.i"
+	@echo "... src/alignGPUOptimised.s"
 	@echo "... src/alignParasail.o"
 	@echo "... src/alignParasail.i"
 	@echo "... src/alignParasail.s"

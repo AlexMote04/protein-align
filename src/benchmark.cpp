@@ -12,14 +12,13 @@
 #include "alignParasail.h"
 
 const std::string QUERY_PATH = "../data/input/query";
-const std::string DB_PATH = "../data/input/uniprot_sprot_sorted.fasta";
-const std::string RESULTS_PATH = "../data/output/nw.csv";
+const std::string DB_PATH = "../data/input/fixed_len.fasta";
 
 int main(int argc, char **argv)
 {
     if (argc != 3)
     {
-        std::cerr << "Usage: ./bin/benchmark_nw <algorithm> <num_seqs>\n";
+        std::cerr << "Usage: ./bin/benchmark <algorithm> <num_seqs>\n";
         return 1;
     }
 
@@ -41,6 +40,7 @@ int main(int argc, char **argv)
     // Data for Custom Implementation
     std::vector<unsigned char> query_seq;
     std::vector<unsigned char> db_residues;
+    std::vector<unsigned char> db_residues_soa;
     std::vector<int> db_offsets;
 
     // Data for Parasail (ASCII)
@@ -49,9 +49,12 @@ int main(int argc, char **argv)
 
     try
     {
-        // Load Integer Data
+        // Load Converted Data
         parseQuery(query_seq, QUERY_PATH);
         parseDB(db_residues, db_offsets, DB_PATH, num_seqs);
+
+        // SoA residues for optimised kernel
+        parseDBSoA(db_residues_soa, db_offsets, DB_PATH, num_seqs);
 
         // Load ASCII Data
         parseQueryParasail(query_ascii, QUERY_PATH);
@@ -64,11 +67,11 @@ int main(int argc, char **argv)
     }
 
     // ==========================================
-    // WARM-UP PHASE (The "Dummy" Run)
+    // WARM-UP PHASE
     // ==========================================
     // std::cout << "Warming up GPU context...\n";
 
-    // Create a microscopic dummy dataset
+    // Create a tiny dummy dataset
     std::vector<unsigned char> dummy_query = {0, 1, 2, 3}; // "ARND"
     std::vector<unsigned char> dummy_db = {0, 1, 2, 3};
     std::vector<int> dummy_offsets = {0, 4}; // 1 sequence, length 4
@@ -95,7 +98,7 @@ int main(int argc, char **argv)
 
     // std::cout << "Running Optimized GPU...\n";
     auto gpu_start = std::chrono::high_resolution_clock::now();
-    alignGPU(algorithm, gpu_scores, query_seq, db_residues, db_offsets);
+    alignGPU(algorithm, gpu_scores, query_seq, db_residues_soa, db_offsets);
     auto gpu_end = std::chrono::high_resolution_clock::now();
 
     // ==========================================
@@ -163,7 +166,7 @@ int main(int argc, char **argv)
     double parasail_gcups = total_cell_updates / (parasail_ms.count() * 1e6);
     double gpu_gcups = total_cell_updates / (gpu_ms.count() * 1e6);
 
-    // Latency: CPU, PARASAIL, NAIVE GPU, OPTMISED GPU. THROUGHPUT CPU, PARASAIL, NAIVE GPU, OPTIMISED GPU. SPEEDUP: CPU vs. Optimised, Parasail vs. Optimised
+    // Latency: CPU, PARASAIL, OPTMISED GPU. THROUGHPUT CPU, PARASAIL, OPTIMISED GPU. SPEEDUP: CPU vs. Optimised, Parasail vs. Optimised
     printf("%.1f, %.1f, %.1f, ", cpu_ms.count(), parasail_ms.count(), gpu_ms.count());
     printf("%.2f, %.2f, %.2f, ", cpu_gcups, parasail_gcups, gpu_gcups);
     printf("%.1f, %.1f\n", cpu_ms.count() / gpu_ms.count(), parasail_ms.count() / gpu_ms.count());
