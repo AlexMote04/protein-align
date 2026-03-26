@@ -12,8 +12,9 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
- /usr/include/c++/13/ostream /usr/include/c++/13/ios \
- /usr/include/c++/13/iosfwd /usr/include/c++/13/bits/stringfwd.h \
+ /usr/include/c++/13/pstl/pstl_config.h /usr/include/c++/13/ostream \
+ /usr/include/c++/13/ios /usr/include/c++/13/iosfwd \
+ /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/memoryfwd.h /usr/include/c++/13/bits/postypes.h \
  /usr/include/c++/13/cwchar /usr/include/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -104,7 +105,9 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /usr/include/c++/13/bits/basic_string.h \
  /usr/include/c++/13/ext/alloc_traits.h \
  /usr/include/c++/13/bits/alloc_traits.h \
- /usr/include/c++/13/bits/stl_construct.h \
+ /usr/include/c++/13/bits/stl_construct.h /usr/include/c++/13/string_view \
+ /usr/include/c++/13/bits/functional_hash.h \
+ /usr/include/c++/13/bits/string_view.tcc \
  /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cstdlib \
  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
@@ -128,8 +131,10 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
- /usr/include/c++/13/bits/functional_hash.h \
  /usr/include/c++/13/bits/basic_string.tcc \
+ /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
+ /usr/include/c++/13/bits/uses_allocator.h \
+ /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
@@ -157,7 +162,9 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/chrono \
+ /usr/include/c++/13/bits/stl_tempbuf.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/chrono \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
@@ -165,12 +172,38 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/c++/13/limits /usr/include/c++/13/ctime \
  /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime.h \
+ /usr/local/cuda/targets/x86_64-linux/include/crt/host_config.h \
+ /usr/local/cuda/targets/x86_64-linux/include/builtin_types.h \
+ /usr/local/cuda/targets/x86_64-linux/include/device_types.h \
+ /usr/local/cuda/targets/x86_64-linux/include/crt/host_defines.h \
+ /usr/local/cuda/targets/x86_64-linux/include/driver_types.h \
+ /usr/local/cuda/targets/x86_64-linux/include/vector_types.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+ /usr/include/linux/limits.h \
+ /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+ /usr/local/cuda/targets/x86_64-linux/include/surface_types.h \
+ /usr/local/cuda/targets/x86_64-linux/include/texture_types.h \
+ /usr/local/cuda/targets/x86_64-linux/include/library_types.h \
+ /usr/local/cuda/targets/x86_64-linux/include/channel_descriptor.h \
+ /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime_api.h \
+ /usr/local/cuda/targets/x86_64-linux/include/cuda_device_runtime_api.h \
+ /usr/local/cuda/targets/x86_64-linux/include/driver_functions.h \
+ /usr/local/cuda/targets/x86_64-linux/include/vector_functions.h \
+ /usr/local/cuda/targets/x86_64-linux/include/vector_functions.hpp \
+ /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
  /home/alex/Code/protein-align/include/parse.h \
  /usr/include/c++/13/sstream /usr/include/c++/13/bits/sstream.tcc \
  /home/alex/Code/protein-align/include/alignCPU.h \
  /home/alex/Code/protein-align/include/blosum62.h \
  /home/alex/Code/protein-align/include/params.h \
- /home/alex/Code/protein-align/include/alignGPU.cuh \
+ /home/alex/Code/protein-align/include/interAlignGPU.cuh \
+ /home/alex/Code/protein-align/include/intraAlignGPU.cuh \
  /home/alex/Code/protein-align/include/alignParasail.h \
  /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail.h \
  /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail/matrices/blosum62.h \

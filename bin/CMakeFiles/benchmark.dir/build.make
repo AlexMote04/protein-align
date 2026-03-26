@@ -97,25 +97,40 @@ CMakeFiles/benchmark.dir/src/parse.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/benchmark.dir/src/parse.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/Code/protein-align/src/parse.cpp -o CMakeFiles/benchmark.dir/src/parse.cpp.s
 
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: CMakeFiles/benchmark.dir/flags.make
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: CMakeFiles/benchmark.dir/includes_CUDA.rsp
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: /home/alex/Code/protein-align/src/alignGPUOptimised.cu
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: CMakeFiles/benchmark.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o"
-	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o -MF CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o.d -x cu -c /home/alex/Code/protein-align/src/alignGPUOptimised.cu -o CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o: CMakeFiles/benchmark.dir/flags.make
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o: CMakeFiles/benchmark.dir/includes_CUDA.rsp
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o: /home/alex/Code/protein-align/src/interAlignGPU.cu
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o: CMakeFiles/benchmark.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o"
+	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o -MF CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o.d -x cu -c /home/alex/Code/protein-align/src/interAlignGPU.cu -o CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o
 
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.i"
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark.dir/src/interAlignGPU.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.s"
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark.dir/src/interAlignGPU.cu.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o: CMakeFiles/benchmark.dir/flags.make
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o: CMakeFiles/benchmark.dir/includes_CUDA.rsp
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o: /home/alex/Code/protein-align/src/intraAlignGPU.cu
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o: CMakeFiles/benchmark.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CUDA object CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o"
+	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o -MF CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o.d -x cu -c /home/alex/Code/protein-align/src/intraAlignGPU.cu -o CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o
+
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: CMakeFiles/benchmark.dir/flags.make
 CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/alignCPU.cpp
 CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: CMakeFiles/benchmark.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/benchmark.dir/src/alignCPU.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/benchmark.dir/src/alignCPU.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/alignCPU.cpp.o -MF CMakeFiles/benchmark.dir/src/alignCPU.cpp.o.d -o CMakeFiles/benchmark.dir/src/alignCPU.cpp.o -c /home/alex/Code/protein-align/src/alignCPU.cpp
 
 CMakeFiles/benchmark.dir/src/alignCPU.cpp.i: cmake_force
@@ -129,7 +144,7 @@ CMakeFiles/benchmark.dir/src/alignCPU.cpp.s: cmake_force
 CMakeFiles/benchmark.dir/src/alignParasail.cpp.o: CMakeFiles/benchmark.dir/flags.make
 CMakeFiles/benchmark.dir/src/alignParasail.cpp.o: /home/alex/Code/protein-align/src/alignParasail.cpp
 CMakeFiles/benchmark.dir/src/alignParasail.cpp.o: CMakeFiles/benchmark.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/benchmark.dir/src/alignParasail.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/benchmark.dir/src/alignParasail.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/benchmark.dir/src/alignParasail.cpp.o -MF CMakeFiles/benchmark.dir/src/alignParasail.cpp.o.d -o CMakeFiles/benchmark.dir/src/alignParasail.cpp.o -c /home/alex/Code/protein-align/src/alignParasail.cpp
 
 CMakeFiles/benchmark.dir/src/alignParasail.cpp.i: cmake_force
@@ -144,7 +159,8 @@ CMakeFiles/benchmark.dir/src/alignParasail.cpp.s: cmake_force
 benchmark_OBJECTS = \
 "CMakeFiles/benchmark.dir/src/benchmark.cpp.o" \
 "CMakeFiles/benchmark.dir/src/parse.cpp.o" \
-"CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o" \
+"CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o" \
+"CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o" \
 "CMakeFiles/benchmark.dir/src/alignCPU.cpp.o" \
 "CMakeFiles/benchmark.dir/src/alignParasail.cpp.o"
 
@@ -153,13 +169,14 @@ benchmark_EXTERNAL_OBJECTS =
 
 benchmark: CMakeFiles/benchmark.dir/src/benchmark.cpp.o
 benchmark: CMakeFiles/benchmark.dir/src/parse.cpp.o
-benchmark: CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o
+benchmark: CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o
+benchmark: CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o
 benchmark: CMakeFiles/benchmark.dir/src/alignCPU.cpp.o
 benchmark: CMakeFiles/benchmark.dir/src/alignParasail.cpp.o
 benchmark: CMakeFiles/benchmark.dir/build.make
 benchmark: _deps/parasail-build/libparasail.so
 benchmark: CMakeFiles/benchmark.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable benchmark"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable benchmark"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/benchmark.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

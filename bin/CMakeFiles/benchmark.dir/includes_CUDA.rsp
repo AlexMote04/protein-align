@@ -1,1 +1,1 @@
--I"/home/alex/Code/protein-align/include" -I"/home/alex/Code/protein-align/bin/_deps/parasail-src"
+-I"/home/alex/Code/protein-align/include" -I"/usr/local/cuda/targets/x86_64-linux/include" -I"/home/alex/Code/protein-align/bin/_deps/parasail-src"

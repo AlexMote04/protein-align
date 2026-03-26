@@ -28,6 +28,7 @@ CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/a
   /usr/include/c++/13/bits/hash_bytes.h \
   /usr/include/c++/13/bits/invoke.h \
   /usr/include/c++/13/bits/localefwd.h \
+  /usr/include/c++/13/bits/memory_resource.h \
   /usr/include/c++/13/bits/memoryfwd.h \
   /usr/include/c++/13/bits/move.h \
   /usr/include/c++/13/bits/new_allocator.h \
@@ -52,13 +53,17 @@ CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/a
   /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
+  /usr/include/c++/13/bits/uses_allocator.h \
+  /usr/include/c++/13/bits/uses_allocator_args.h \
   /usr/include/c++/13/bits/utility.h \
   /usr/include/c++/13/bits/vector.tcc \
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
@@ -72,7 +77,12 @@ CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/a
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iosfwd \
   /usr/include/c++/13/new \
+  /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/string \
+  /usr/include/c++/13/string_view \
+  /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
@@ -152,9 +162,419 @@ CMakeFiles/benchmark.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/a
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
-CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: /home/alex/Code/protein-align/src/alignGPUOptimised.cu \
-  /home/alex/Code/protein-align/include/alignGPU.cuh \
+CMakeFiles/benchmark.dir/src/alignParasail.cpp.o: /home/alex/Code/protein-align/src/alignParasail.cpp \
+  _deps/parasail-src/parasail.h \
+  _deps/parasail-src/parasail/matrices/blosum62.h \
+  _deps/parasail-src/parasail/matrices/blosum_map.h \
+  /home/alex/Code/protein-align/include/alignParasail.h \
+  /home/alex/Code/protein-align/include/params.h \
+  /usr/include/alloca.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/c++/13/backward/binders.h \
+  /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/alloc_traits.h \
+  /usr/include/c++/13/bits/allocator.h \
+  /usr/include/c++/13/bits/basic_string.h \
+  /usr/include/c++/13/bits/basic_string.tcc \
+  /usr/include/c++/13/bits/char_traits.h \
+  /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/concept_check.h \
+  /usr/include/c++/13/bits/cpp_type_traits.h \
+  /usr/include/c++/13/bits/cxxabi_forced.h \
+  /usr/include/c++/13/bits/exception.h \
+  /usr/include/c++/13/bits/exception_defines.h \
+  /usr/include/c++/13/bits/functexcept.h \
+  /usr/include/c++/13/bits/functional_hash.h \
+  /usr/include/c++/13/bits/hash_bytes.h \
+  /usr/include/c++/13/bits/invoke.h \
+  /usr/include/c++/13/bits/localefwd.h \
+  /usr/include/c++/13/bits/memory_resource.h \
+  /usr/include/c++/13/bits/memoryfwd.h \
+  /usr/include/c++/13/bits/move.h \
+  /usr/include/c++/13/bits/new_allocator.h \
+  /usr/include/c++/13/bits/ostream_insert.h \
+  /usr/include/c++/13/bits/postypes.h \
+  /usr/include/c++/13/bits/predefined_ops.h \
+  /usr/include/c++/13/bits/ptr_traits.h \
+  /usr/include/c++/13/bits/range_access.h \
+  /usr/include/c++/13/bits/refwrap.h \
+  /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/std_abs.h \
+  /usr/include/c++/13/bits/stl_algobase.h \
+  /usr/include/c++/13/bits/stl_bvector.h \
+  /usr/include/c++/13/bits/stl_construct.h \
+  /usr/include/c++/13/bits/stl_function.h \
+  /usr/include/c++/13/bits/stl_iterator.h \
+  /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/13/bits/stl_iterator_base_types.h \
+  /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_uninitialized.h \
+  /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/string_view.tcc \
+  /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/uses_allocator.h \
+  /usr/include/c++/13/bits/uses_allocator_args.h \
+  /usr/include/c++/13/bits/utility.h \
+  /usr/include/c++/13/bits/vector.tcc \
+  /usr/include/c++/13/cctype \
+  /usr/include/c++/13/cerrno \
+  /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cstddef \
+  /usr/include/c++/13/cstdint \
+  /usr/include/c++/13/cstdio \
+  /usr/include/c++/13/cstdlib \
+  /usr/include/c++/13/cwchar \
+  /usr/include/c++/13/debug/assertions.h \
+  /usr/include/c++/13/debug/debug.h \
+  /usr/include/c++/13/ext/alloc_traits.h \
+  /usr/include/c++/13/ext/numeric_traits.h \
+  /usr/include/c++/13/ext/string_conversions.h \
+  /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/iosfwd \
+  /usr/include/c++/13/new \
+  /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/string \
+  /usr/include/c++/13/string_view \
+  /usr/include/c++/13/tuple \
+  /usr/include/c++/13/type_traits \
+  /usr/include/c++/13/vector \
+  /usr/include/ctype.h \
+  /usr/include/endian.h \
+  /usr/include/errno.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/linux/errno.h \
+  /usr/include/locale.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
+  /usr/include/wchar.h \
+  /usr/include/x86_64-linux-gnu/asm/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/locale.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+
+CMakeFiles/benchmark.dir/src/benchmark.cpp.o: /home/alex/Code/protein-align/src/benchmark.cpp \
+  _deps/parasail-src/parasail.h \
+  _deps/parasail-src/parasail/matrices/blosum62.h \
+  _deps/parasail-src/parasail/matrices/blosum_map.h \
+  /home/alex/Code/protein-align/include/alignCPU.h \
+  /home/alex/Code/protein-align/include/alignParasail.h \
   /home/alex/Code/protein-align/include/blosum62.h \
+  /home/alex/Code/protein-align/include/interAlignGPU.cuh \
+  /home/alex/Code/protein-align/include/intraAlignGPU.cuh \
+  /home/alex/Code/protein-align/include/params.h \
+  /home/alex/Code/protein-align/include/parse.h \
+  /usr/include/alloca.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/c++/13/algorithm \
+  /usr/include/c++/13/backward/binders.h \
+  /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/algorithmfwd.h \
+  /usr/include/c++/13/bits/alloc_traits.h \
+  /usr/include/c++/13/bits/allocator.h \
+  /usr/include/c++/13/bits/basic_ios.h \
+  /usr/include/c++/13/bits/basic_ios.tcc \
+  /usr/include/c++/13/bits/basic_string.h \
+  /usr/include/c++/13/bits/basic_string.tcc \
+  /usr/include/c++/13/bits/char_traits.h \
+  /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/chrono.h \
+  /usr/include/c++/13/bits/codecvt.h \
+  /usr/include/c++/13/bits/concept_check.h \
+  /usr/include/c++/13/bits/cpp_type_traits.h \
+  /usr/include/c++/13/bits/cxxabi_forced.h \
+  /usr/include/c++/13/bits/cxxabi_init_exception.h \
+  /usr/include/c++/13/bits/exception.h \
+  /usr/include/c++/13/bits/exception_defines.h \
+  /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/fstream.tcc \
+  /usr/include/c++/13/bits/functexcept.h \
+  /usr/include/c++/13/bits/functional_hash.h \
+  /usr/include/c++/13/bits/hash_bytes.h \
+  /usr/include/c++/13/bits/invoke.h \
+  /usr/include/c++/13/bits/ios_base.h \
+  /usr/include/c++/13/bits/istream.tcc \
+  /usr/include/c++/13/bits/locale_classes.h \
+  /usr/include/c++/13/bits/locale_classes.tcc \
+  /usr/include/c++/13/bits/locale_facets.h \
+  /usr/include/c++/13/bits/locale_facets.tcc \
+  /usr/include/c++/13/bits/localefwd.h \
+  /usr/include/c++/13/bits/memory_resource.h \
+  /usr/include/c++/13/bits/memoryfwd.h \
+  /usr/include/c++/13/bits/move.h \
+  /usr/include/c++/13/bits/nested_exception.h \
+  /usr/include/c++/13/bits/new_allocator.h \
+  /usr/include/c++/13/bits/ostream.tcc \
+  /usr/include/c++/13/bits/ostream_insert.h \
+  /usr/include/c++/13/bits/parse_numbers.h \
+  /usr/include/c++/13/bits/postypes.h \
+  /usr/include/c++/13/bits/predefined_ops.h \
+  /usr/include/c++/13/bits/ptr_traits.h \
+  /usr/include/c++/13/bits/range_access.h \
+  /usr/include/c++/13/bits/refwrap.h \
+  /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/sstream.tcc \
+  /usr/include/c++/13/bits/std_abs.h \
+  /usr/include/c++/13/bits/stl_algo.h \
+  /usr/include/c++/13/bits/stl_algobase.h \
+  /usr/include/c++/13/bits/stl_bvector.h \
+  /usr/include/c++/13/bits/stl_construct.h \
+  /usr/include/c++/13/bits/stl_function.h \
+  /usr/include/c++/13/bits/stl_heap.h \
+  /usr/include/c++/13/bits/stl_iterator.h \
+  /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/13/bits/stl_iterator_base_types.h \
+  /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_relops.h \
+  /usr/include/c++/13/bits/stl_tempbuf.h \
+  /usr/include/c++/13/bits/stl_uninitialized.h \
+  /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/streambuf.tcc \
+  /usr/include/c++/13/bits/streambuf_iterator.h \
+  /usr/include/c++/13/bits/string_view.tcc \
+  /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/uniform_int_dist.h \
+  /usr/include/c++/13/bits/uses_allocator.h \
+  /usr/include/c++/13/bits/uses_allocator_args.h \
+  /usr/include/c++/13/bits/utility.h \
+  /usr/include/c++/13/bits/vector.tcc \
+  /usr/include/c++/13/cctype \
+  /usr/include/c++/13/cerrno \
+  /usr/include/c++/13/chrono \
+  /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cstddef \
+  /usr/include/c++/13/cstdint \
+  /usr/include/c++/13/cstdio \
+  /usr/include/c++/13/cstdlib \
+  /usr/include/c++/13/ctime \
+  /usr/include/c++/13/cwchar \
+  /usr/include/c++/13/cwctype \
+  /usr/include/c++/13/debug/assertions.h \
+  /usr/include/c++/13/debug/debug.h \
+  /usr/include/c++/13/exception \
+  /usr/include/c++/13/ext/alloc_traits.h \
+  /usr/include/c++/13/ext/atomicity.h \
+  /usr/include/c++/13/ext/numeric_traits.h \
+  /usr/include/c++/13/ext/string_conversions.h \
+  /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/fstream \
+  /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/ios \
+  /usr/include/c++/13/iosfwd \
+  /usr/include/c++/13/iostream \
+  /usr/include/c++/13/istream \
+  /usr/include/c++/13/limits \
+  /usr/include/c++/13/new \
+  /usr/include/c++/13/ostream \
+  /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/ratio \
+  /usr/include/c++/13/sstream \
+  /usr/include/c++/13/stdexcept \
+  /usr/include/c++/13/streambuf \
+  /usr/include/c++/13/string \
+  /usr/include/c++/13/string_view \
+  /usr/include/c++/13/system_error \
+  /usr/include/c++/13/tuple \
+  /usr/include/c++/13/type_traits \
+  /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/utility \
+  /usr/include/c++/13/vector \
+  /usr/include/ctype.h \
+  /usr/include/endian.h \
+  /usr/include/errno.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/limits.h \
+  /usr/include/linux/errno.h \
+  /usr/include/linux/limits.h \
+  /usr/include/locale.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
+  /usr/include/time.h \
+  /usr/include/wchar.h \
+  /usr/include/wctype.h \
+  /usr/include/x86_64-linux-gnu/asm/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/locale.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/sched.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/x86_64-linux-gnu/bits/time.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/bits/timex.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/local/cuda/targets/x86_64-linux/include/builtin_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/channel_descriptor.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/host_config.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/host_defines.h \
+  /usr/local/cuda/targets/x86_64-linux/include/cuda_device_runtime_api.h \
+  /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime.h \
+  /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime_api.h \
+  /usr/local/cuda/targets/x86_64-linux/include/device_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/driver_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/driver_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/library_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/surface_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/texture_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/vector_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/vector_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/vector_types.h
+
+CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o: /home/alex/Code/protein-align/src/interAlignGPU.cu \
+  /home/alex/Code/protein-align/include/blosum62.h \
+  /home/alex/Code/protein-align/include/interAlignGPU.cuh \
   /home/alex/Code/protein-align/include/params.h \
   /usr/include/alloca.h \
   /usr/include/assert.h \
@@ -354,303 +774,100 @@ CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o: /home/alex/Code/protein-ali
   /usr/local/cuda/targets/x86_64-linux/include/vector_functions.hpp \
   /usr/local/cuda/targets/x86_64-linux/include/vector_types.h
 
-CMakeFiles/benchmark.dir/src/alignParasail.cpp.o: /home/alex/Code/protein-align/src/alignParasail.cpp \
-  _deps/parasail-src/parasail.h \
-  _deps/parasail-src/parasail/matrices/blosum62.h \
-  _deps/parasail-src/parasail/matrices/blosum_map.h \
-  /home/alex/Code/protein-align/include/alignParasail.h \
-  /home/alex/Code/protein-align/include/params.h \
-  /usr/include/alloca.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
-  /usr/include/c++/13/backward/binders.h \
-  /usr/include/c++/13/bit \
-  /usr/include/c++/13/bits/alloc_traits.h \
-  /usr/include/c++/13/bits/allocator.h \
-  /usr/include/c++/13/bits/basic_string.h \
-  /usr/include/c++/13/bits/basic_string.tcc \
-  /usr/include/c++/13/bits/char_traits.h \
-  /usr/include/c++/13/bits/charconv.h \
-  /usr/include/c++/13/bits/concept_check.h \
-  /usr/include/c++/13/bits/cpp_type_traits.h \
-  /usr/include/c++/13/bits/cxxabi_forced.h \
-  /usr/include/c++/13/bits/exception.h \
-  /usr/include/c++/13/bits/exception_defines.h \
-  /usr/include/c++/13/bits/functexcept.h \
-  /usr/include/c++/13/bits/functional_hash.h \
-  /usr/include/c++/13/bits/hash_bytes.h \
-  /usr/include/c++/13/bits/invoke.h \
-  /usr/include/c++/13/bits/localefwd.h \
-  /usr/include/c++/13/bits/memoryfwd.h \
-  /usr/include/c++/13/bits/move.h \
-  /usr/include/c++/13/bits/new_allocator.h \
-  /usr/include/c++/13/bits/ostream_insert.h \
-  /usr/include/c++/13/bits/postypes.h \
-  /usr/include/c++/13/bits/predefined_ops.h \
-  /usr/include/c++/13/bits/ptr_traits.h \
-  /usr/include/c++/13/bits/range_access.h \
-  /usr/include/c++/13/bits/refwrap.h \
-  /usr/include/c++/13/bits/requires_hosted.h \
-  /usr/include/c++/13/bits/std_abs.h \
-  /usr/include/c++/13/bits/stl_algobase.h \
-  /usr/include/c++/13/bits/stl_bvector.h \
-  /usr/include/c++/13/bits/stl_construct.h \
-  /usr/include/c++/13/bits/stl_function.h \
-  /usr/include/c++/13/bits/stl_iterator.h \
-  /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
-  /usr/include/c++/13/bits/stl_iterator_base_types.h \
-  /usr/include/c++/13/bits/stl_pair.h \
-  /usr/include/c++/13/bits/stl_uninitialized.h \
-  /usr/include/c++/13/bits/stl_vector.h \
-  /usr/include/c++/13/bits/stringfwd.h \
-  /usr/include/c++/13/bits/utility.h \
-  /usr/include/c++/13/bits/vector.tcc \
-  /usr/include/c++/13/cctype \
-  /usr/include/c++/13/cerrno \
-  /usr/include/c++/13/clocale \
-  /usr/include/c++/13/cstdint \
-  /usr/include/c++/13/cstdio \
-  /usr/include/c++/13/cstdlib \
-  /usr/include/c++/13/cwchar \
-  /usr/include/c++/13/debug/assertions.h \
-  /usr/include/c++/13/debug/debug.h \
-  /usr/include/c++/13/ext/alloc_traits.h \
-  /usr/include/c++/13/ext/numeric_traits.h \
-  /usr/include/c++/13/ext/string_conversions.h \
-  /usr/include/c++/13/ext/type_traits.h \
-  /usr/include/c++/13/initializer_list \
-  /usr/include/c++/13/iosfwd \
-  /usr/include/c++/13/new \
-  /usr/include/c++/13/string \
-  /usr/include/c++/13/type_traits \
-  /usr/include/c++/13/vector \
-  /usr/include/ctype.h \
-  /usr/include/endian.h \
-  /usr/include/errno.h \
-  /usr/include/features-time64.h \
-  /usr/include/features.h \
-  /usr/include/linux/errno.h \
-  /usr/include/locale.h \
-  /usr/include/stdc-predef.h \
-  /usr/include/stdint.h \
-  /usr/include/stdio.h \
-  /usr/include/stdlib.h \
-  /usr/include/wchar.h \
-  /usr/include/x86_64-linux-gnu/asm/errno.h \
-  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
-  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/endian.h \
-  /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/errno.h \
-  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
-  /usr/include/x86_64-linux-gnu/bits/floatn.h \
-  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/x86_64-linux-gnu/bits/locale.h \
-  /usr/include/x86_64-linux-gnu/bits/long-double.h \
-  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
-  /usr/include/x86_64-linux-gnu/bits/select.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
-  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
-  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
-  /usr/include/x86_64-linux-gnu/bits/time64.h \
-  /usr/include/x86_64-linux-gnu/bits/timesize.h \
-  /usr/include/x86_64-linux-gnu/bits/types.h \
-  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
-  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
-  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
-  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
-  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
-  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
-  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
-  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
-  /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
-
-CMakeFiles/benchmark.dir/src/benchmark.cpp.o: /home/alex/Code/protein-align/src/benchmark.cpp \
-  _deps/parasail-src/parasail.h \
-  _deps/parasail-src/parasail/matrices/blosum62.h \
-  _deps/parasail-src/parasail/matrices/blosum_map.h \
-  /home/alex/Code/protein-align/include/alignCPU.h \
-  /home/alex/Code/protein-align/include/alignGPU.cuh \
-  /home/alex/Code/protein-align/include/alignParasail.h \
+CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o: /home/alex/Code/protein-align/src/intraAlignGPU.cu \
   /home/alex/Code/protein-align/include/blosum62.h \
+  /home/alex/Code/protein-align/include/intraAlignGPU.cuh \
   /home/alex/Code/protein-align/include/params.h \
-  /home/alex/Code/protein-align/include/parse.h \
   /usr/include/alloca.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
-  /usr/include/c++/13/algorithm \
+  /usr/include/assert.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
-  /usr/include/c++/13/bits/algorithmfwd.h \
   /usr/include/c++/13/bits/alloc_traits.h \
   /usr/include/c++/13/bits/allocator.h \
-  /usr/include/c++/13/bits/basic_ios.h \
-  /usr/include/c++/13/bits/basic_ios.tcc \
-  /usr/include/c++/13/bits/basic_string.h \
-  /usr/include/c++/13/bits/basic_string.tcc \
-  /usr/include/c++/13/bits/char_traits.h \
-  /usr/include/c++/13/bits/charconv.h \
-  /usr/include/c++/13/bits/chrono.h \
-  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
-  /usr/include/c++/13/bits/cxxabi_forced.h \
-  /usr/include/c++/13/bits/cxxabi_init_exception.h \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
-  /usr/include/c++/13/bits/exception_ptr.h \
-  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
   /usr/include/c++/13/bits/invoke.h \
-  /usr/include/c++/13/bits/ios_base.h \
-  /usr/include/c++/13/bits/istream.tcc \
-  /usr/include/c++/13/bits/locale_classes.h \
-  /usr/include/c++/13/bits/locale_classes.tcc \
-  /usr/include/c++/13/bits/locale_facets.h \
-  /usr/include/c++/13/bits/locale_facets.tcc \
-  /usr/include/c++/13/bits/localefwd.h \
   /usr/include/c++/13/bits/memoryfwd.h \
   /usr/include/c++/13/bits/move.h \
-  /usr/include/c++/13/bits/nested_exception.h \
   /usr/include/c++/13/bits/new_allocator.h \
-  /usr/include/c++/13/bits/ostream.tcc \
-  /usr/include/c++/13/bits/ostream_insert.h \
-  /usr/include/c++/13/bits/parse_numbers.h \
-  /usr/include/c++/13/bits/postypes.h \
   /usr/include/c++/13/bits/predefined_ops.h \
   /usr/include/c++/13/bits/ptr_traits.h \
   /usr/include/c++/13/bits/range_access.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
-  /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
-  /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
   /usr/include/c++/13/bits/stl_construct.h \
   /usr/include/c++/13/bits/stl_function.h \
-  /usr/include/c++/13/bits/stl_heap.h \
   /usr/include/c++/13/bits/stl_iterator.h \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
-  /usr/include/c++/13/bits/stl_tempbuf.h \
+  /usr/include/c++/13/bits/stl_relops.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
-  /usr/include/c++/13/bits/streambuf.tcc \
-  /usr/include/c++/13/bits/streambuf_iterator.h \
-  /usr/include/c++/13/bits/stringfwd.h \
-  /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/utility.h \
   /usr/include/c++/13/bits/vector.tcc \
-  /usr/include/c++/13/cctype \
-  /usr/include/c++/13/cerrno \
-  /usr/include/c++/13/chrono \
-  /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cmath \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
-  /usr/include/c++/13/ctime \
-  /usr/include/c++/13/cwchar \
-  /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
   /usr/include/c++/13/debug/debug.h \
-  /usr/include/c++/13/exception \
   /usr/include/c++/13/ext/alloc_traits.h \
-  /usr/include/c++/13/ext/atomicity.h \
   /usr/include/c++/13/ext/numeric_traits.h \
-  /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
-  /usr/include/c++/13/fstream \
   /usr/include/c++/13/initializer_list \
-  /usr/include/c++/13/ios \
-  /usr/include/c++/13/iosfwd \
-  /usr/include/c++/13/iostream \
-  /usr/include/c++/13/istream \
-  /usr/include/c++/13/limits \
+  /usr/include/c++/13/math.h \
   /usr/include/c++/13/new \
-  /usr/include/c++/13/ostream \
-  /usr/include/c++/13/ratio \
-  /usr/include/c++/13/sstream \
-  /usr/include/c++/13/stdexcept \
-  /usr/include/c++/13/streambuf \
-  /usr/include/c++/13/string \
-  /usr/include/c++/13/system_error \
+  /usr/include/c++/13/stdlib.h \
   /usr/include/c++/13/type_traits \
-  /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/utility \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
-  /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
-  /usr/include/linux/errno.h \
-  /usr/include/locale.h \
-  /usr/include/pthread.h \
-  /usr/include/sched.h \
+  /usr/include/limits.h \
+  /usr/include/linux/limits.h \
+  /usr/include/math.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/time.h \
-  /usr/include/wchar.h \
-  /usr/include/wctype.h \
-  /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/x86_64-linux-gnu/bits/locale.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
-  /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
-  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -674,49 +891,90 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: /home/alex/Code/protein-align/src/
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
-  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+  /usr/local/cuda/targets/x86_64-linux/include/builtin_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/channel_descriptor.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/common_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/cudacc_ext.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/device_double_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/device_double_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/device_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/device_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/host_config.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/host_defines.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/math_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/math_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_90_rt.h \
+  /usr/local/cuda/targets/x86_64-linux/include/crt/sm_90_rt.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/cuda_device_runtime_api.h \
+  /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime.h \
+  /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime_api.h \
+  /usr/local/cuda/targets/x86_64-linux/include/device_atomic_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/device_atomic_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/device_launch_parameters.h \
+  /usr/local/cuda/targets/x86_64-linux/include/device_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/driver_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/driver_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/library_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_20_atomic_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_20_atomic_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_20_intrinsics.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_20_intrinsics.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_30_intrinsics.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_30_intrinsics.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_32_atomic_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_32_atomic_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_32_intrinsics.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_32_intrinsics.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_35_atomic_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_35_intrinsics.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_60_atomic_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_60_atomic_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.h \
+  /usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/surface_indirect_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/surface_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/texture_indirect_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/texture_types.h \
+  /usr/local/cuda/targets/x86_64-linux/include/vector_functions.h \
+  /usr/local/cuda/targets/x86_64-linux/include/vector_functions.hpp \
+  /usr/local/cuda/targets/x86_64-linux/include/vector_types.h
 
 CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/parse.cpp \
   /home/alex/Code/protein-align/include/params.h \
@@ -756,6 +1014,7 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/c++/13/bits/locale_facets.h \
   /usr/include/c++/13/bits/locale_facets.tcc \
   /usr/include/c++/13/bits/localefwd.h \
+  /usr/include/c++/13/bits/memory_resource.h \
   /usr/include/c++/13/bits/memoryfwd.h \
   /usr/include/c++/13/bits/move.h \
   /usr/include/c++/13/bits/nested_exception.h \
@@ -785,13 +1044,17 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/c++/13/bits/stl_vector.h \
   /usr/include/c++/13/bits/streambuf.tcc \
   /usr/include/c++/13/bits/streambuf_iterator.h \
+  /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
+  /usr/include/c++/13/bits/uses_allocator.h \
+  /usr/include/c++/13/bits/uses_allocator_args.h \
   /usr/include/c++/13/bits/utility.h \
   /usr/include/c++/13/bits/vector.tcc \
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
@@ -811,13 +1074,19 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
   /usr/include/c++/13/iosfwd \
   /usr/include/c++/13/iostream \
   /usr/include/c++/13/istream \
+  /usr/include/c++/13/limits \
   /usr/include/c++/13/new \
   /usr/include/c++/13/ostream \
+  /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
+  /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
   /usr/include/c++/13/vector \
@@ -925,79 +1194,75 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 /home/alex/Code/protein-align/src/parse.cpp:
 
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
+/usr/local/cuda/targets/x86_64-linux/include/surface_indirect_functions.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_60_atomic_functions.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_35_intrinsics.h:
 
-/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_32_intrinsics.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/sched.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_32_atomic_functions.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_30_intrinsics.hpp:
 
-/usr/include/wctype.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_30_intrinsics.h:
 
-/usr/include/sched.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_20_intrinsics.hpp:
 
-/usr/include/pthread.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_20_atomic_functions.hpp:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h:
+/usr/local/cuda/targets/x86_64-linux/include/device_launch_parameters.h:
 
-/usr/include/c++/13/typeinfo:
+/usr/local/cuda/targets/x86_64-linux/include/device_atomic_functions.hpp:
 
-/usr/include/c++/13/streambuf:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_90_rt.hpp:
 
-/usr/include/c++/13/stdexcept:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.hpp:
 
-/usr/include/c++/13/ostream:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.h:
 
-/usr/include/c++/13/istream:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.h:
 
-/usr/include/c++/13/iostream:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.hpp:
 
-/usr/include/c++/13/fstream:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.h:
 
-/usr/include/c++/13/exception:
+/usr/local/cuda/targets/x86_64-linux/include/crt/math_functions.hpp:
 
-/usr/include/c++/13/cwctype:
-
-/usr/include/c++/13/ctime:
-
-/usr/include/c++/13/chrono:
-
-/usr/include/c++/13/bits/streambuf.tcc:
-
-/usr/include/c++/13/bits/sstream.tcc:
-
-/usr/include/c++/13/bits/ostream.tcc:
-
-/usr/include/c++/13/bits/nested_exception.h:
-
-/usr/include/c++/13/bits/locale_facets.tcc:
+/usr/local/cuda/targets/x86_64-linux/include/crt/device_double_functions.hpp:
 
 /usr/local/cuda/targets/x86_64-linux/include/crt/cudacc_ext.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+/usr/local/cuda/targets/x86_64-linux/include/crt/common_functions.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_35_atomic_functions.h:
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/strings.h:
+
+/usr/include/c++/13/stdlib.h:
+
+/usr/include/c++/13/math.h:
+
+/usr/include/c++/13/cmath:
+
+/usr/include/assert.h:
+
+/usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/include/strings.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -1011,29 +1276,19 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 /usr/local/cuda/targets/x86_64-linux/include/channel_descriptor.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_35_intrinsics.h:
-
-/usr/include/locale.h:
-
 /usr/include/x86_64-linux-gnu/bits/locale.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/c++/13/limits:
-
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
 /usr/include/c++/13/bits/basic_string.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+/usr/local/cuda/targets/x86_64-linux/include/crt/math_functions.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/device_double_functions.h:
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/c++/13/bits/uses_allocator_args.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
@@ -1045,35 +1300,59 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 /usr/include/stdlib.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/math_functions.hpp:
-
-/usr/include/c++/13/ratio:
-
-/usr/include/linux/limits.h:
-
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/features-time64.h:
 
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/c++/13/string_view:
+
+/home/alex/Code/protein-align/src/intraAlignGPU.cu:
+
 /usr/include/stdint.h:
 
 /usr/include/endian.h:
 
+/usr/include/c++/13/bits/streambuf.tcc:
+
 /usr/include/ctype.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.h:
+/usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.hpp:
 
-/usr/include/c++/13/vector:
+/usr/include/c++/13/bits/range_access.h:
+
+/usr/local/cuda/targets/x86_64-linux/include/sm_35_atomic_functions.h:
+
+/usr/include/c++/13/pstl/pstl_config.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+_deps/parasail-src/parasail/matrices/blosum62.h:
+
+/usr/include/c++/13/pstl/glue_algorithm_defs.h:
+
+/usr/local/cuda/targets/x86_64-linux/include/crt/device_double_functions.h:
+
+/usr/include/c++/13/pstl/execution_defs.h:
+
+/usr/include/c++/13/bits/basic_ios.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
 
 /usr/include/c++/13/ext/type_traits.h:
 
 /usr/include/c++/13/ext/string_conversions.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
 /usr/include/errno.h:
 
 /usr/include/c++/13/bits/functional_hash.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
 
 /usr/include/c++/13/debug/assertions.h:
 
@@ -1081,21 +1360,53 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 /usr/include/c++/13/cstdint:
 
+/usr/local/cuda/targets/x86_64-linux/include/sm_20_intrinsics.h:
+
+/usr/include/c++/13/cstdio:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/c++/13/fstream:
+
+/usr/include/c++/13/vector:
+
+/usr/include/c++/13/cstddef:
+
+/usr/include/c++/13/bits/stl_algo.h:
+
+/usr/include/c++/13/clocale:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/include/c++/13/cerrno:
+
+/usr/local/cuda/targets/x86_64-linux/include/sm_20_atomic_functions.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+
+/usr/local/cuda/targets/x86_64-linux/include/crt/device_functions.h:
+
+/usr/include/c++/13/cctype:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+
 /usr/include/c++/13/bits/invoke.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_32_intrinsics.h:
 
-/usr/include/c++/13/bits/char_traits.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.hpp:
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/c++/13/bits/exception.h:
 
+/usr/include/c++/13/bits/memory_resource.h:
+
+/usr/include/c++/13/streambuf:
+
 /usr/include/c++/13/bits/memoryfwd.h:
-
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
-
-/usr/include/time.h:
 
 /usr/include/c++/13/bits/functexcept.h:
 
@@ -1105,8 +1416,6 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 /usr/include/c++/13/bits/algorithmfwd.h:
 
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
 /usr/include/c++/13/ext/alloc_traits.h:
 
 /usr/include/c++/13/new:
@@ -1115,21 +1424,13 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 /usr/include/c++/13/bits/concept_check.h:
 
-/usr/include/c++/13/sstream:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/x86_64-linux-gnu/bits/local_lim.h:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/crt/math_functions.h:
-
 /usr/include/c++/13/bits/stl_pair.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/home/alex/Code/protein-align/include/interAlignGPU.cuh:
+
+/usr/include/c++/13/exception:
 
 /usr/include/c++/13/algorithm:
 
@@ -1139,6 +1440,10 @@ CMakeFiles/benchmark.dir/src/parse.cpp.o: /home/alex/Code/protein-align/src/pars
 
 _deps/parasail-src/parasail.h:
 
+/usr/local/cuda/targets/x86_64-linux/include/device_atomic_functions.h:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
 /usr/include/c++/13/ext/numeric_traits.h:
 
 /usr/include/c++/13/bits/stl_iterator.h:
@@ -1147,29 +1452,15 @@ _deps/parasail-src/parasail.h:
 
 /home/alex/Code/protein-align/src/alignCPU.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
-
-/usr/include/c++/13/cerrno:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/math.h:
-
 /usr/local/cuda/targets/x86_64-linux/include/crt/host_defines.h:
 
 /usr/include/c++/13/bits/localefwd.h:
 
-/usr/include/c++/13/bits/streambuf_iterator.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_60_atomic_functions.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
 /home/alex/Code/protein-align/include/alignParasail.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+/usr/local/cuda/targets/x86_64-linux/include/sm_32_atomic_functions.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_20_atomic_functions.h:
+/usr/include/c++/13/bits/vector.tcc:
 
 /usr/include/c++/13/bits/allocator.h:
 
@@ -1183,29 +1474,17 @@ _deps/parasail-src/parasail.h:
 
 /usr/include/c++/13/backward/binders.h:
 
-/usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/c++/13/bits/requires_hosted.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_90_rt.hpp:
-
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/c++/13/string:
 
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/asm-generic/errno.h:
-
 /usr/include/c++/13/bits/new_allocator.h:
 
 /usr/include/c++/13/bits/stl_uninitialized.h:
+
+/home/alex/Code/protein-align/src/interAlignGPU.cu:
 
 /usr/include/c++/13/system_error:
 
@@ -1239,29 +1518,21 @@ _deps/parasail-src/parasail.h:
 
 /usr/include/asm-generic/errno-base.h:
 
-/usr/include/c++/13/clocale:
-
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/c++/13/cwchar:
 
 _deps/parasail-src/parasail/matrices/blosum_map.h:
 
-/usr/include/c++/13/bits/predefined_ops.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/crt/device_double_functions.hpp:
-
 /home/alex/Code/protein-align/include/params.h:
 
-/usr/include/c++/13/bits/stl_algo.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/include/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/crt/sm_90_rt.h:
 
@@ -1269,21 +1540,17 @@ _deps/parasail-src/parasail/matrices/blosum_map.h:
 
 /usr/include/c++/13/bits/stl_function.h:
 
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
-/usr/include/c++/13/bits/utility.h:
-
 /usr/include/c++/13/bits/ostream_insert.h:
-
-/usr/include/c++/13/math.h:
 
 /usr/include/c++/13/bits/postypes.h:
 
-/usr/include/c++/13/bits/parse_numbers.h:
+/usr/include/c++/13/bits/uses_allocator.h:
 
-/usr/include/c++/13/bits/std_abs.h:
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 /usr/include/linux/errno.h:
 
@@ -1295,19 +1562,53 @@ _deps/parasail-src/parasail/matrices/blosum_map.h:
 
 /usr/include/c++/13/bits/stl_vector.h:
 
+/usr/include/c++/13/bits/predefined_ops.h:
+
+/home/alex/Code/protein-align/include/intraAlignGPU.cuh:
+
 /usr/include/c++/13/bits/stl_tempbuf.h:
+
+/usr/include/features.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/c++/13/bits/requires_hosted.h:
+
+/usr/include/c++/13/bits/locale_facets.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/c++/13/bits/string_view.tcc:
+
+/usr/include/locale.h:
+
+/usr/include/c++/13/bits/utility.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
 /home/alex/Code/protein-align/include/alignCPU.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/device_functions.h:
+/usr/local/cuda/targets/x86_64-linux/include/texture_indirect_functions.h:
 
-/usr/include/c++/13/cctype:
+/usr/include/c++/13/bits/charconv.h:
 
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/c++/13/bits/stl_relops.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_30_intrinsics.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
@@ -1315,19 +1616,13 @@ _deps/parasail-src/parasail/matrices/blosum_map.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
+/usr/local/cuda/targets/x86_64-linux/include/crt/device_functions.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+/usr/include/c++/13/bits/exception_defines.h:
 
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
-
-_deps/parasail-src/parasail/matrices/blosum62.h:
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
-
-/usr/include/c++/13/bits/range_access.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.hpp:
 
 /usr/include/c++/13/bits/ios_base.h:
 
@@ -1339,8 +1634,6 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_30_intrinsics.h:
-
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
@@ -1351,25 +1644,89 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
-/home/alex/Code/protein-align/include/alignGPU.cuh:
+/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.h:
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
-/usr/include/c++/13/type_traits:
+/home/alex/Code/protein-align/src/alignParasail.cpp:
 
-/usr/local/cuda/targets/x86_64-linux/include/vector_functions.hpp:
+/usr/include/string.h:
 
-/usr/include/assert.h:
+/home/alex/Code/protein-align/src/benchmark.cpp:
 
-/usr/include/c++/13/cmath:
+/usr/include/c++/13/iostream:
 
-/usr/include/c++/13/stdlib.h:
+/home/alex/Code/protein-align/include/parse.h:
 
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/c++/13/bits/chrono.h:
+
+/usr/include/c++/13/bits/codecvt.h:
+
+/usr/include/c++/13/bits/cxxabi_init_exception.h:
+
+/usr/include/c++/13/bits/exception_ptr.h:
+
+/usr/include/c++/13/bits/istream.tcc:
+
+/usr/include/c++/13/bits/fstream.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/c++/13/bits/locale_classes.h:
+
+/usr/include/c++/13/bits/uniform_int_dist.h:
+
+/usr/include/c++/13/bits/locale_classes.tcc:
+
+/usr/include/c++/13/tuple:
+
+/usr/include/c++/13/bits/nested_exception.h:
+
+/usr/include/c++/13/bits/ostream.tcc:
+
+/usr/include/c++/13/bits/std_abs.h:
+
+/usr/include/c++/13/bits/parse_numbers.h:
+
+/usr/include/c++/13/bits/sstream.tcc:
+
+/usr/include/c++/13/cwctype:
+
+/usr/include/linux/limits.h:
+
+/usr/include/c++/13/ratio:
+
+/usr/local/cuda/targets/x86_64-linux/include/sm_60_atomic_functions.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/c++/13/bits/streambuf_iterator.h:
+
+/usr/include/c++/13/ostream:
+
+/usr/include/c++/13/chrono:
+
+/usr/include/c++/13/ctime:
+
+/usr/local/cuda/targets/x86_64-linux/include/builtin_types.h:
+
+/usr/include/c++/13/ios:
+
+/usr/include/c++/13/istream:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
+/usr/include/c++/13/limits:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/usr/include/c++/13/sstream:
+
+/usr/include/c++/13/stdexcept:
 
 /usr/include/c++/13/bits/stl_heap.h:
 
@@ -1379,61 +1736,63 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 
 /usr/include/limits.h:
 
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+/usr/include/pthread.h:
 
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+/usr/include/wctype.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+/usr/include/sched.h:
 
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
-/usr/include/c++/13/bits/stl_relops.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/usr/include/c++/13/bits/vector.tcc:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_32_atomic_functions.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/include/c++/13/bits/locale_classes.h:
+/usr/include/x86_64-linux-gnu/bits/sched.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
+/usr/include/asm-generic/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
+
+/usr/include/c++/13/type_traits:
+
+/usr/local/cuda/targets/x86_64-linux/include/vector_functions.hpp:
+
 /usr/include/c++/13/ext/atomicity.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
-/usr/include/c++/13/ios:
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/builtin_types.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
 
-/home/alex/Code/protein-align/include/parse.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/common_functions.h:
+/usr/include/c++/13/typeinfo:
 
-/usr/include/c++/13/bits/exception_defines.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/device_functions.hpp:
+/usr/local/cuda/targets/x86_64-linux/include/sm_61_intrinsics.hpp:
 
-/usr/include/c++/13/cstdio:
+/usr/include/c++/13/bits/char_traits.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_20_intrinsics.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_100_rt.hpp:
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_70_rt.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/crt/sm_80_rt.hpp:
+/usr/include/c++/13/bits/locale_facets.h:
+
+/usr/local/cuda/targets/x86_64-linux/include/crt/host_config.h:
 
 /usr/include/c++/13/iosfwd:
 
@@ -1442,14 +1801,6 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/cuda_runtime_api.h:
-
-/usr/include/x86_64-linux-gnu/asm/errno.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/device_atomic_functions.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/device_atomic_functions.hpp:
-
-/usr/local/cuda/targets/x86_64-linux/include/device_launch_parameters.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/device_types.h:
 
@@ -1463,62 +1814,4 @@ _deps/parasail-src/parasail/matrices/blosum62.h:
 
 /usr/local/cuda/targets/x86_64-linux/include/library_types.h:
 
-/usr/local/cuda/targets/x86_64-linux/include/sm_20_atomic_functions.hpp:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_20_intrinsics.hpp:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_32_atomic_functions.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_32_intrinsics.h:
-
-/usr/include/c++/13/bits/basic_ios.tcc:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_32_intrinsics.hpp:
-
-/usr/local/cuda/targets/x86_64-linux/include/sm_60_atomic_functions.h:
-
-/usr/include/c++/13/bits/codecvt.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/surface_indirect_functions.h:
-
 /usr/local/cuda/targets/x86_64-linux/include/surface_types.h:
-
-/usr/include/c++/13/bits/charconv.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/local/cuda/targets/x86_64-linux/include/texture_indirect_functions.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-
-/home/alex/Code/protein-align/src/alignParasail.cpp:
-
-/usr/include/string.h:
-
-/home/alex/Code/protein-align/src/benchmark.cpp:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/home/alex/Code/protein-align/src/alignGPUOptimised.cu:
-
-/usr/include/c++/13/bits/chrono.h:
-
-/usr/include/c++/13/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/13/bits/exception_ptr.h:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/usr/include/c++/13/bits/fstream.tcc:
-
-/usr/include/c++/13/bits/uniform_int_dist.h:
-
-/usr/include/c++/13/bits/locale_classes.tcc:
-
-/usr/local/cuda/targets/x86_64-linux/include/crt/host_config.h:
-
-/usr/include/c++/13/bits/locale_facets.h:

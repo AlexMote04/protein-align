@@ -11,7 +11,7 @@ CUDA_FLAGS = -std=c++14 -arch=native
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/alex/Code/protein-align/include -I/home/alex/Code/protein-align/bin/_deps/parasail-src
+CXX_INCLUDES = -I/home/alex/Code/protein-align/include -I/usr/local/cuda/targets/x86_64-linux/include -I/home/alex/Code/protein-align/bin/_deps/parasail-src
 
-CXX_FLAGS = -std=gnu++14
+CXX_FLAGS = -std=gnu++17
 

@@ -5,20 +5,24 @@
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
+#include <cuda_runtime.h>
 
 #include "parse.h"
 #include "alignCPU.h"
-#include "alignGPU.cuh"
+#include "interAlignGPU.cuh"
+#include "intraAlignGPU.cuh"
 #include "alignParasail.h"
 
+#define TILE_SIZE 32
+
 const std::string QUERY_PATH = "../data/input/query";
-const std::string DB_PATH = "../data/input/fixed_len.fasta";
+const std::string DB_PATH = "../data/input/uniprot_sprot.fasta";
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc != 4)
     {
-        std::cerr << "Usage: ./bin/benchmark <algorithm> <num_seqs>\n";
+        std::cerr << "Usage: ./bin/benchmark <algorithm> <num_seqs> <threshold>\n";
         return 1;
     }
 
@@ -33,15 +37,36 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    int num_seqs = std::atoi(argv[2]);
+    int num_seqs = 0;
+    int threshold = 0;
+
+    try
+    {
+        num_seqs = std::stoi(argv[2]);
+        threshold = std::stoi(argv[3]);
+
+        if (num_seqs <= 0 || threshold <= 0)
+            throw std::invalid_argument("Values must be positive integers.");
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cerr << "Error: Invalid number format. " << e.what() << "\n";
+        std::cerr << "Usage: ./bin/benchmark <algorithm> <num_seqs> <threshold>\n";
+        return 1;
+    }
+    catch (const std::out_of_range &e)
+    {
+        std::cerr << "Error: Number provided is out of integer range.\n";
+        return 1;
+    }
 
     initConversionTable();
 
     // Data for Custom Implementation
     std::vector<unsigned char> query_seq;
-    std::vector<unsigned char> db_residues;
     std::vector<unsigned char> db_residues_soa;
     std::vector<int> db_offsets;
+    std::vector<std::vector<unsigned char>> massive_sequences;
 
     // Data for Parasail (ASCII)
     std::string query_ascii;
@@ -49,21 +74,27 @@ int main(int argc, char **argv)
 
     try
     {
-        // Load Converted Data
+        // Load Queries
         parseQuery(query_seq, QUERY_PATH);
-        parseDB(db_residues, db_offsets, DB_PATH, num_seqs);
-
-        // SoA residues for optimised kernel
-        parseDBSoA(db_residues_soa, db_offsets, DB_PATH, num_seqs);
-
-        // Load ASCII Data
         parseQueryParasail(query_ascii, QUERY_PATH);
-        parseDBParasail(db_ascii, DB_PATH, num_seqs);
+
+        // Load or Cache the Sorted Database
+        std::vector<std::string> sorted_db = loadOrCacheDatabase(DB_PATH, num_seqs);
+
+        // Generate Memory Layouts
+        generateDBSoA(sorted_db, db_residues_soa, db_offsets, massive_sequences, threshold);
+        generateDBParasail(sorted_db, db_ascii);
     }
     catch (const std::runtime_error &e)
     {
         std::cerr << "Parsing Error: " << e.what() << '\n';
         return 1;
+    }
+
+    if (query_seq.size() > MAX_QUERY_LEN)
+    {
+        fprintf(stderr, "Error: Query length exceeds MAX_QUERY_LEN.\n");
+        return -1;
     }
 
     // ==========================================
@@ -77,56 +108,97 @@ int main(int argc, char **argv)
     std::vector<int> dummy_offsets = {0, 4}; // 1 sequence, length 4
     std::vector<int> dummy_scores(1);
 
-    alignGPU(algorithm, dummy_scores, dummy_query, dummy_db, dummy_offsets);
+    interAlignGPU(algorithm, dummy_scores, dummy_query, dummy_db, dummy_offsets);
 
-    std::vector<int> cpu_scores(num_seqs);
     std::vector<int> parasail_scores(num_seqs);
     std::vector<int> gpu_scores(num_seqs);
 
     // ==========================================
     // TIMING PHASE
     // ==========================================
-    // std::cout << "Running Naive CPU...\n";
-    auto cpu_start = std::chrono::high_resolution_clock::now();
-    alignCPU(algorithm, cpu_scores, query_seq, db_residues, db_offsets);
-    auto cpu_end = std::chrono::high_resolution_clock::now();
 
-    // std::cout << "Running Parasail (SIMD)...\n";
     auto parasail_start = std::chrono::high_resolution_clock::now();
     alignParasail(algorithm, parasail_scores, query_ascii, db_ascii);
     auto parasail_end = std::chrono::high_resolution_clock::now();
 
-    // std::cout << "Running Optimized GPU...\n";
-    auto gpu_start = std::chrono::high_resolution_clock::now();
-    alignGPU(algorithm, gpu_scores, query_seq, db_residues_soa, db_offsets);
-    auto gpu_end = std::chrono::high_resolution_clock::now();
+    size_t num_small_seqs = num_seqs - massive_sequences.size();
+    size_t num_big_seqs = massive_sequences.size();
+
+    std::cout << num_small_seqs << " " << num_big_seqs << "\n";
+    auto gpu_inter_start = std::chrono::high_resolution_clock::now();
+    if (num_small_seqs > 0)
+    {
+        interAlignGPU(algorithm, gpu_scores, query_seq, db_residues_soa, db_offsets);
+    }
+    auto gpu_inter_end = std::chrono::high_resolution_clock::now();
+
+    // Final massive sequence with have largest length since db is sorted
+    int max_target_len = 0;
+    if (num_big_seqs > 0)
+        max_target_len = static_cast<int>(massive_sequences[massive_sequences.size() - 1].size());
+
+    int query_len = query_seq.size();
+    int max_num_blocks_x = (query_len + TILE_SIZE - 1) / TILE_SIZE;
+    int max_num_blocks_y = (max_target_len + TILE_SIZE - 1) / TILE_SIZE;
+    int max_num_tiles_total = max_num_blocks_x * max_num_blocks_y;
+
+    // Declare and Allocate device pointers
+    unsigned char *d_query{}, *d_target{};
+    int16_t *d_row_H{}, *d_row_E{}, *d_row_F{};
+    int16_t *d_col_H{}, *d_col_E{}, *d_col_F{};
+    int16_t *d_corner_H{};
+    int *d_max_score{};
+
+    if (num_big_seqs > 0)
+    {
+        cudaMalloc((void **)&d_query, query_len * sizeof(unsigned char));
+        cudaMalloc((void **)&d_target, max_target_len * sizeof(unsigned char));
+
+        cudaMalloc((void **)&d_row_H, max_target_len * sizeof(int16_t));
+        cudaMalloc((void **)&d_row_E, max_target_len * sizeof(int16_t));
+        cudaMalloc((void **)&d_row_F, max_target_len * sizeof(int16_t));
+
+        cudaMalloc((void **)&d_col_H, query_len * sizeof(int16_t));
+        cudaMalloc((void **)&d_col_E, query_len * sizeof(int16_t));
+        cudaMalloc((void **)&d_col_F, query_len * sizeof(int16_t));
+
+        cudaMalloc((void **)&d_corner_H, max_num_tiles_total * sizeof(int16_t));
+        cudaMalloc((void **)&d_max_score, sizeof(int));
+
+        // Copy the Query sequence ONCE
+        cudaMemcpy(d_query, query_seq.data(), query_len * sizeof(unsigned char), cudaMemcpyHostToDevice);
+    }
+
+    auto gpu_intra_start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < massive_sequences.size(); i++)
+    {
+        gpu_scores[i + num_small_seqs] = intraAlignGPU(
+            algorithm, query_seq, massive_sequences[i],
+            d_query, d_target,
+            d_row_H, d_row_E, d_row_F,
+            d_col_H, d_col_E, d_col_F,
+            d_corner_H, d_max_score);
+    }
+
+    if (num_big_seqs > 0)
+    {
+        cudaFree(d_query);
+        cudaFree(d_target);
+        cudaFree(d_row_H);
+        cudaFree(d_row_E);
+        cudaFree(d_row_F);
+        cudaFree(d_col_H);
+        cudaFree(d_col_E);
+        cudaFree(d_col_F);
+        cudaFree(d_corner_H);
+        cudaFree(d_max_score);
+    }
+
+    auto gpu_intra_end = std::chrono::high_resolution_clock::now();
 
     // ==========================================
     // VERIFICATION PHASE
     // ==========================================
-    int cpu_mismatches = 0;
-    for (size_t i = 0; i < num_seqs; i++)
-    {
-        if (cpu_scores[i] != parasail_scores[i])
-        {
-            if (cpu_mismatches < 5)
-            { // Only print the first 5 to avoid terminal spam
-                std::cerr << "--- MISMATCH AT SEQUENCE " << i << " ---\n";
-                std::cerr << "Target String  : " << db_ascii[i] << "\n";
-                std::cerr << "Target Length  : " << db_ascii[i].length() << " residues\n";
-                std::cerr << "Naive CPU Score: " << cpu_scores[i] << "\n";
-                std::cerr << "Parasail Score : " << parasail_scores[i] << "\n";
-                std::cerr << "Difference     : " << std::abs(cpu_scores[i] - parasail_scores[i]) << "\n\n";
-            }
-            cpu_mismatches++;
-        }
-    }
-
-    if (cpu_mismatches > 0)
-    {
-        std::cerr << "FAILED: " << cpu_mismatches << " Naive CPU scores did not match Parasail!\n";
-        return 1;
-    }
 
     int gpu_mismatches = 0;
     for (size_t i = 0; i < num_seqs; i++)
@@ -138,7 +210,7 @@ int main(int argc, char **argv)
                 std::cerr << "--- MISMATCH AT SEQUENCE " << i << " ---\n";
                 std::cerr << "Target String  : " << db_ascii[i] << "\n";
                 std::cerr << "Target Length  : " << db_ascii[i].length() << " residues\n";
-                std::cerr << "Naive CPU Score: " << gpu_scores[i] << "\n";
+                std::cerr << "GPU Score: " << gpu_scores[i] << "\n";
                 std::cerr << "Parasail Score : " << parasail_scores[i] << "\n";
                 std::cerr << "Difference     : " << std::abs(gpu_scores[i] - parasail_scores[i]) << "\n\n";
             }
@@ -148,45 +220,31 @@ int main(int argc, char **argv)
 
     if (gpu_mismatches > 0)
     {
-        std::cerr << "FAILED: " << gpu_mismatches << " Naive CPU scores did not match Parasail!\n";
+        std::cerr << "FAILED: " << gpu_mismatches << " GPU scores did not match Parasail!\n";
         return 1;
     }
-
-    // std::cout << "PASS! All implementations perfectly match the Gold Standard.\n\n";
 
     // ==========================================
     // METRICS & REPORTING (Console)
     // ==========================================
-    std::chrono::duration<double, std::milli> cpu_ms = cpu_end - cpu_start;
     std::chrono::duration<double, std::milli> parasail_ms = parasail_end - parasail_start;
-    std::chrono::duration<double, std::milli> gpu_ms = gpu_end - gpu_start;
+    std::chrono::duration<double, std::milli> gpu_inter_ms = gpu_inter_end - gpu_inter_start;
+    std::chrono::duration<double, std::milli> gpu_intra_ms = gpu_intra_end - gpu_intra_start;
+    std::chrono::duration<double, std::milli> gpu_total_ms = gpu_inter_ms + gpu_intra_ms;
 
-    double total_cell_updates = static_cast<double>(query_seq.size()) * db_residues.size();
-    double cpu_gcups = total_cell_updates / (cpu_ms.count() * 1e6);
+    size_t total_db_residues = 0;
+    for (const auto &seq : db_ascii)
+    {
+        total_db_residues += seq.length();
+    }
+    double total_cell_updates = static_cast<double>(query_ascii.size()) * total_db_residues;
     double parasail_gcups = total_cell_updates / (parasail_ms.count() * 1e6);
-    double gpu_gcups = total_cell_updates / (gpu_ms.count() * 1e6);
+    double gpu_gcups = total_cell_updates / (gpu_total_ms.count() * 1e6);
 
-    // Latency: CPU, PARASAIL, OPTMISED GPU. THROUGHPUT CPU, PARASAIL, OPTIMISED GPU. SPEEDUP: CPU vs. Optimised, Parasail vs. Optimised
-    printf("%.1f, %.1f, %.1f, ", cpu_ms.count(), parasail_ms.count(), gpu_ms.count());
-    printf("%.2f, %.2f, %.2f, ", cpu_gcups, parasail_gcups, gpu_gcups);
-    printf("%.1f, %.1f\n", cpu_ms.count() / gpu_ms.count(), parasail_ms.count() / gpu_ms.count());
-
-    // ==========================================
-    // METRICS & REPORTING (Verbose)
-    // ==========================================
-    // printf("--- Execution Time ---\n");
-    // printf("Naive CPU: %.2f ms\n", cpu_ms.count());
-    // printf("Parasail : %.2f ms\n", parasail_ms.count());
-    // printf("GPU CUDA : %.2f ms\n\n", gpu_ms.count());
-
-    // printf("--- GCUPS (Giga Cell Updates Per Second) ---\n");
-    // printf("Naive CPU: %.4f\n", cpu_gcups);
-    // printf("Parasail : %.4f\n", parasail_gcups);
-    // printf("GPU CUDA : %.4f\n\n", gpu_gcups);
-
-    // printf("--- Speedup ---\n");
-    // printf("GPU vs Naive CPU: %.2fx\n", cpu_ms.count() / gpu_ms.count());
-    // printf("GPU vs Parasail : %.2fx\n", parasail_ms.count() / gpu_ms.count());
+    // Latency: PARASAIL, OPTIMISED GPU. THROUGHPUT PARASAIL, OPTIMISED GPU. SPEEDUP: Parasail vs. Optimised
+    printf("%.1f, %.1f, ", parasail_ms.count(), gpu_total_ms.count());
+    printf("%.2f, %.2f, ", parasail_gcups, gpu_gcups);
+    printf("%.1f\n", parasail_ms.count() / gpu_total_ms.count());
 
     return 0;
 }

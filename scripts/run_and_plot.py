@@ -86,7 +86,7 @@ def main():
     print("Benchmarking complete. Generating plots...")
 
     # Plotting
-    # Note: We use a Log2 scale for the X-axis because your sequence sizes double each step.
+    # Note: We use a Log2 scale for the X-axis because sequence sizes double each step.
     # This prevents the smaller data points from getting squished together on the left side.
 
     # Plot A: Latency (Log-Log scale is usually best for time vs doubling workload)
@@ -137,7 +137,7 @@ def main():
         label="GPU vs Parasail Speedup",
     )
 
-    # Add a red dashed line at y=1 to easily see where GPU becomes faster
+    # Add a red dashed line at y=1 to easily see GPU becomes faster
     plt.axhline(y=1, color="r", linestyle="--", label="1x (Break-even)")
 
     plt.xscale("log", base=2)

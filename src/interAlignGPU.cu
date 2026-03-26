@@ -1,4 +1,4 @@
-#include "alignGPU.cuh"
+#include "interAlignGPU.cuh"
 #include "params.h"
 #include "blosum62.h"
 #include <cstdio>
@@ -217,9 +217,9 @@ __global__ void align_sw(
     scores[gindex] = max_score; // Write out the max score found during the trace
 }
 
-int alignGPU(const int algorithm, std::vector<int> &scores, const std::vector<unsigned char> &query_seq, const std::vector<unsigned char> &db_residues, const std::vector<int> &db_offsets)
+int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vector<unsigned char> &query_seq, const std::vector<unsigned char> &db_residues, const std::vector<int> &db_offsets)
 {
-    const int NUM_ALIGNMENTS = scores.size();
+    const int NUM_ALIGNMENTS = db_offsets.size() - 1;
     const int NUM_ROWS = query_seq.size() + 1;
 
     // Calculate SoA Batch Offsets
@@ -229,6 +229,7 @@ int alignGPU(const int algorithm, std::vector<int> &scores, const std::vector<un
 
     for (int b = 0; b < num_batches; ++b)
     {
+        // Get length of longest sequence in batch
         int max_len = 0;
         for (int t = 0; t < 32; ++t)
         {
@@ -240,15 +241,16 @@ int alignGPU(const int algorithm, std::vector<int> &scores, const std::vector<un
                     max_len = len;
             }
         }
+        // Batch size is no_batches * longest_seq_in_batch
         batch_res_offsets[b + 1] = batch_res_offsets[b] + (max_len * 32);
         batch_H_offsets[b + 1] = batch_H_offsets[b] + 2 * (max_len + 1) * 32;
     }
 
     // Device copies
-    int *d_scores, *d_db_offsets, *d_batch_res_offsets, *d_batch_H_offsets;
-    unsigned char *d_db_residues;
-    int16_t *d_H, *d_F;
-    int8_t *d_blosum62;
+    int *d_scores{}, *d_db_offsets{}, *d_batch_res_offsets{}, *d_batch_H_offsets{};
+    unsigned char *d_db_residues{};
+    int16_t *d_H{}, *d_F{};
+    int8_t *d_blosum62{};
 
     // Use the calculated offsets for exact sizing
     const int scores_bytes = sizeof(int) * NUM_ALIGNMENTS;

@@ -3,6 +3,8 @@
 #include <fstream>
 #include <stdexcept>
 #include <algorithm>
+#include <string_view>
+#include <limits>
 
 unsigned char amino_to_uchar[128];
 
@@ -112,11 +114,8 @@ static std::vector<std::string> readFastaSeqs(const std::string &path, int max_s
 // QUERY PARSERS
 // ------------------------------------------------------------------
 
-// This function reads a single sequence from a FASTA file, maps each amino acid to it's internal
-// unsigned char representation and stores the converted vector into query_seq
 void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_path)
 {
-    // Read exactly 1 sequence
     auto seqs = readFastaSeqs(query_path, 1);
 
     if (seqs[0].size() > MAX_QUERY_LEN)
@@ -129,114 +128,140 @@ void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_
     }
 }
 
-// This function reads a single sequence from a FASTA file into query_seq
 void parseQueryParasail(std::string &query_seq, const std::string &query_path)
 {
     auto seqs = readFastaSeqs(query_path, 1);
     query_seq = seqs[0];
 }
 
-// ------------------------------------------------------------------
-// DATABASE PARSERS
-// ------------------------------------------------------------------
+// ==================================================================
+// CACHING
+// ==================================================================
 
-// This function reads and converts up to num_seqs sequences from a FASTA file and stores the converted characters sequentially in db_residues
-// db_offsets stores the start index of each sequence in the vector
-void parseDB(std::vector<unsigned char> &db_residues, std::vector<int> &db_offsets, const std::string &db_path, int num_seqs)
+std::vector<std::string> loadOrCacheDatabase(const std::string &fasta_path, int num_seqs)
 {
-    if (num_seqs < 1 || num_seqs > MAX_NUM_SEQS)
-        throw std::runtime_error("db_size out of bounds");
+    std::vector<std::string> db;
 
-    auto seqs = readFastaSeqs(db_path, num_seqs);
-
-    if (seqs.size() < num_seqs)
-        throw std::runtime_error("Tried parsing " + std::to_string(num_seqs) + " sequences but only found " + std::to_string(seqs.size()));
-
-    db_residues.clear();
-    db_offsets.clear();
-
-    int offset = 0;
-    for (const auto &seq : seqs)
+    // Try reading the binary file
+    std::string cache_path = fasta_path + ".bin";
+    std::ifstream bin_in(cache_path, std::ios::binary);
+    if (bin_in.is_open())
     {
-        db_offsets.push_back(offset);
-        for (unsigned char c : seq)
+        int cached_num_seqs;
+        bin_in.read(reinterpret_cast<char *>(&cached_num_seqs), sizeof(int));
+
+        // Read up to what's requested, capping at what's available
+        int seqs_to_load = std::min(num_seqs, cached_num_seqs);
+        db.resize(seqs_to_load);
+
+        for (int i = 0; i < seqs_to_load; i++)
         {
-            db_residues.push_back((c < 128) ? amino_to_uchar[c] : 23);
-            offset++;
+            int len;
+            bin_in.read(reinterpret_cast<char *>(&len), sizeof(int));
+            db[i].resize(len);
+            bin_in.read(&db[i][0], len);
+        }
+        bin_in.close();
+        return db;
+    }
+
+    // Cache Miss: Read the ENTIRE FASTA file directly into db
+    db = readFastaSeqs(fasta_path, std::numeric_limits<int>::max());
+
+    // Sort by sequence length
+    std::sort(db.begin(), db.end(), [](const std::string &a, const std::string &b)
+              { return a.length() < b.length(); });
+
+    // Save to binary cache
+    std::ofstream bin_out(cache_path, std::ios::binary);
+    if (bin_out.is_open())
+    {
+        int total_seqs = db.size();
+        bin_out.write(reinterpret_cast<char *>(&total_seqs), sizeof(int));
+        for (const auto &seq : db)
+        {
+            int len = seq.length();
+            bin_out.write(reinterpret_cast<const char *>(&len), sizeof(int));
+            bin_out.write(seq.data(), len);
         }
     }
-    db_offsets.push_back(offset); // Extra offset for final sequence length
+
+    // Slice down to requested num_seqs for this execution
+    if (num_seqs < db.size())
+    {
+        db.resize(num_seqs);
+    }
+
+    return db;
 }
 
-// This function reads and converts up to num_seqs sequences from a FASTA file and stores the characters in batches of 32 characters (SoA)
-// db_offsets stores the ORIGINAL start index of each sequence in the vector (not in SoA form, so is only used for getting the lengths of sequences)
-void parseDBSoA(std::vector<unsigned char> &db_residues, std::vector<int> &db_offsets, const std::string &db_path, int num_seqs)
+// ==================================================================
+// GENERATORS
+// ==================================================================
+
+void generateDBSoA(const std::vector<std::string> &sorted_db,
+                   std::vector<unsigned char> &db_residues,
+                   std::vector<int> &db_offsets,
+                   std::vector<std::vector<unsigned char>> &massive_sequences,
+                   int threshold)
 {
-    if (num_seqs < 1 || num_seqs > MAX_NUM_SEQS)
-        throw std::runtime_error("db_size out of bounds");
-
-    auto seqs = readFastaSeqs(db_path, num_seqs);
-
-    if (seqs.size() < num_seqs)
-        throw std::runtime_error("Tried parsing " + std::to_string(num_seqs) + " sequences but only found " + std::to_string(seqs.size()));
-
     db_residues.clear();
     db_offsets.clear();
+    massive_sequences.clear();
 
-    // Populate offsets (unpadded)
+    auto cutoff_it = std::find_if(sorted_db.begin(), sorted_db.end(),
+                                  [threshold](const std::string &seq)
+                                  {
+                                      return seq.size() >= threshold;
+                                  });
+
+    int num_small = std::distance(sorted_db.begin(), cutoff_it);
+
     int unpadded_offset = 0;
-    for (const auto &seq : seqs)
+    for (int i = 0; i < num_small; i++)
     {
         db_offsets.push_back(unpadded_offset);
-        unpadded_offset += seq.size();
+        unpadded_offset += sorted_db[i].size();
     }
     db_offsets.push_back(unpadded_offset);
 
-    // Interleave and format as Structure of Arrays (SoA)
-    for (size_t b = 0; b < seqs.size(); b += 32) // Loop through each batch of 32
+    for (int b = 0; b < num_small; b += 32)
     {
-        // Last batch could be less that 32 so take min
-        size_t batch_end = std::min(seqs.size(), b + 32);
+        int batch_end = std::min(num_small, b + 32);
+        size_t max_len = sorted_db[batch_end - 1].size();
 
-        // Calculate longest sequence in batch
-        size_t max_len = 0;
-        for (size_t k = b; k < batch_end; k++)
-        {
-            max_len = std::max(seqs[k].size(), max_len);
-        }
-
-        // Need max_len structures of 32 characters
         for (size_t i = 0; i < max_len; i++)
         {
             for (size_t j = 0; j < 32; j++)
             {
-                size_t seq_idx = b + j;
-                if (seq_idx < seqs.size() && i < seqs[seq_idx].size())
+                int seq_idx = b + j;
+                if (seq_idx < num_small && i < sorted_db[seq_idx].size())
                 {
-                    // Add character i of sequence seq_idx to structure
-                    unsigned char c = seqs[seq_idx][i];
+                    unsigned char c = sorted_db[seq_idx][i];
                     db_residues.push_back((c < 128) ? amino_to_uchar[c] : 23);
                 }
                 else
                 {
-                    // Either this sequence is shorter than max sequence in batch
-                    // or this sequence is outside the batch size (final batch)
-                    db_residues.push_back(23); // Pad with unknown
+                    db_residues.push_back(23);
                 }
             }
         }
     }
+
+    for (auto it = cutoff_it; it != sorted_db.end(); ++it)
+    {
+        std::vector<unsigned char> converted_seq;
+        converted_seq.reserve(it->size());
+        for (char c : *it)
+        {
+            converted_seq.push_back((c < 128) ? amino_to_uchar[static_cast<unsigned char>(c)] : 23);
+        }
+        massive_sequences.push_back(converted_seq);
+    }
 }
 
-// This function reads and converts up to num_seqs sequences from a FASTA file and stores the raw characters as a flat string in db_ascii
-// db_offsets stores the start index of each sequence in the string
-void parseDBParasail(std::vector<std::string> &db_ascii, const std::string &db_path, int num_seqs)
+void generateDBParasail(const std::vector<std::string> &sorted_db, std::vector<std::string> &db_ascii)
 {
-    if (num_seqs < 1)
-        throw std::runtime_error("db_size must be at least 1");
-
-    db_ascii = readFastaSeqs(db_path, num_seqs);
-
-    if (db_ascii.size() < num_seqs)
-        throw std::runtime_error("Tried parsing " + std::to_string(num_seqs) + " sequences but only found " + std::to_string(db_ascii.size()));
+    // Since both are now std::vector<std::string>, this is just a direct assignment
+    db_ascii = sorted_db;
 }

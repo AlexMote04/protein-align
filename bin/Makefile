@@ -764,30 +764,6 @@ src/alignCPU.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignCPU.cpp.s
 .PHONY : src/alignCPU.cpp.s
 
-src/alignGPUOptimised.o: src/alignGPUOptimised.cu.o
-.PHONY : src/alignGPUOptimised.o
-
-# target to build an object file
-src/alignGPUOptimised.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.o
-.PHONY : src/alignGPUOptimised.cu.o
-
-src/alignGPUOptimised.i: src/alignGPUOptimised.cu.i
-.PHONY : src/alignGPUOptimised.i
-
-# target to preprocess a source file
-src/alignGPUOptimised.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.i
-.PHONY : src/alignGPUOptimised.cu.i
-
-src/alignGPUOptimised.s: src/alignGPUOptimised.cu.s
-.PHONY : src/alignGPUOptimised.s
-
-# target to generate assembly for a file
-src/alignGPUOptimised.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignGPUOptimised.cu.s
-.PHONY : src/alignGPUOptimised.cu.s
-
 src/alignParasail.o: src/alignParasail.cpp.o
 .PHONY : src/alignParasail.o
 
@@ -835,6 +811,54 @@ src/benchmark.s: src/benchmark.cpp.s
 src/benchmark.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/benchmark.cpp.s
 .PHONY : src/benchmark.cpp.s
+
+src/interAlignGPU.o: src/interAlignGPU.cu.o
+.PHONY : src/interAlignGPU.o
+
+# target to build an object file
+src/interAlignGPU.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o
+.PHONY : src/interAlignGPU.cu.o
+
+src/interAlignGPU.i: src/interAlignGPU.cu.i
+.PHONY : src/interAlignGPU.i
+
+# target to preprocess a source file
+src/interAlignGPU.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/interAlignGPU.cu.i
+.PHONY : src/interAlignGPU.cu.i
+
+src/interAlignGPU.s: src/interAlignGPU.cu.s
+.PHONY : src/interAlignGPU.s
+
+# target to generate assembly for a file
+src/interAlignGPU.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/interAlignGPU.cu.s
+.PHONY : src/interAlignGPU.cu.s
+
+src/intraAlignGPU.o: src/intraAlignGPU.cu.o
+.PHONY : src/intraAlignGPU.o
+
+# target to build an object file
+src/intraAlignGPU.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o
+.PHONY : src/intraAlignGPU.cu.o
+
+src/intraAlignGPU.i: src/intraAlignGPU.cu.i
+.PHONY : src/intraAlignGPU.i
+
+# target to preprocess a source file
+src/intraAlignGPU.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.i
+.PHONY : src/intraAlignGPU.cu.i
+
+src/intraAlignGPU.s: src/intraAlignGPU.cu.s
+.PHONY : src/intraAlignGPU.s
+
+# target to generate assembly for a file
+src/intraAlignGPU.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.s
+.PHONY : src/intraAlignGPU.cu.s
 
 src/parse.o: src/parse.cpp.o
 .PHONY : src/parse.o
@@ -920,15 +944,18 @@ help:
 	@echo "... src/alignCPU.o"
 	@echo "... src/alignCPU.i"
 	@echo "... src/alignCPU.s"
-	@echo "... src/alignGPUOptimised.o"
-	@echo "... src/alignGPUOptimised.i"
-	@echo "... src/alignGPUOptimised.s"
 	@echo "... src/alignParasail.o"
 	@echo "... src/alignParasail.i"
 	@echo "... src/alignParasail.s"
 	@echo "... src/benchmark.o"
 	@echo "... src/benchmark.i"
 	@echo "... src/benchmark.s"
+	@echo "... src/interAlignGPU.o"
+	@echo "... src/interAlignGPU.i"
+	@echo "... src/interAlignGPU.s"
+	@echo "... src/intraAlignGPU.o"
+	@echo "... src/intraAlignGPU.i"
+	@echo "... src/intraAlignGPU.s"
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"
