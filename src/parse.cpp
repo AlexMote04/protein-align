@@ -6,8 +6,10 @@
 #include <string_view>
 #include <limits>
 
+// Lookup table for encoding sequence characters
 unsigned char amino_to_uchar[128];
 
+// C++ trick to populate lookup table before program is executed
 struct TableInitializer
 {
     TableInitializer()
@@ -76,6 +78,7 @@ static std::vector<std::string> readFastaSeqs(const std::string &path, int max_s
         if (line.empty())
             continue;
 
+        // Handle windows \r artifacts
         if (line.back() == '\r')
             line.pop_back();
 
@@ -84,6 +87,7 @@ static std::vector<std::string> readFastaSeqs(const std::string &path, int max_s
             if (!in_seq)
                 throw std::runtime_error("Invalid FASTA: Header with no sequence in " + path);
 
+            // Start of new sequence
             sequences.push_back(current_seq);
             current_seq.clear();
 
@@ -101,6 +105,7 @@ static std::vector<std::string> readFastaSeqs(const std::string &path, int max_s
 
     if (in_seq && sequences.size() < max_seqs)
     {
+        // Final sequence needs to be manually pushed (no final header)
         sequences.push_back(current_seq);
     }
 
@@ -114,6 +119,7 @@ static std::vector<std::string> readFastaSeqs(const std::string &path, int max_s
 // QUERY PARSERS
 // ------------------------------------------------------------------
 
+// This function reads a query sequence from query_path and stores the encoded sequence into query_seq
 void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_path)
 {
     auto seqs = readFastaSeqs(query_path, 1);
@@ -121,6 +127,7 @@ void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_
     if (seqs[0].size() > MAX_QUERY_LEN)
         throw std::runtime_error("query sequence must be shorter than " + std::to_string(MAX_QUERY_LEN + 1));
 
+    // Encode string into vector of chars
     query_seq.clear();
     for (unsigned char c : seqs[0])
     {
@@ -128,8 +135,10 @@ void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_
     }
 }
 
+// This function reads a query sequence from query_path and stores the raw ascii sequence into query_seq
 void parseQueryParasail(std::string &query_seq, const std::string &query_path)
 {
+    // Parasail uses ascii chars so no need to convert
     auto seqs = readFastaSeqs(query_path, 1);
     query_seq = seqs[0];
 }
@@ -138,6 +147,9 @@ void parseQueryParasail(std::string &query_seq, const std::string &query_path)
 // CACHING
 // ==================================================================
 
+// This function caches the database to speedup subsequent runs of the program. It first attempts to load the cached
+// database and if this fails, it will parse the original database and generate a binary encoded version of the database.
+// This function returns a vector of strings where each string is a sequence from the database in ascii format
 std::vector<std::string> loadOrCacheDatabase(const std::string &fasta_path, int num_seqs)
 {
     std::vector<std::string> db;
@@ -148,6 +160,7 @@ std::vector<std::string> loadOrCacheDatabase(const std::string &fasta_path, int 
     if (bin_in.is_open())
     {
         int cached_num_seqs;
+        // First integer denotes number of sequences in database
         bin_in.read(reinterpret_cast<char *>(&cached_num_seqs), sizeof(int));
 
         // Read up to what's requested, capping at what's available
@@ -156,7 +169,7 @@ std::vector<std::string> loadOrCacheDatabase(const std::string &fasta_path, int 
 
         for (int i = 0; i < seqs_to_load; i++)
         {
-            int len;
+            int len; // Number of characters in sequence
             bin_in.read(reinterpret_cast<char *>(&len), sizeof(int));
             db[i].resize(len);
             bin_in.read(&db[i][0], len);
@@ -199,6 +212,9 @@ std::vector<std::string> loadOrCacheDatabase(const std::string &fasta_path, int 
 // GENERATORS
 // ==================================================================
 
+// This function inserts sequences with length < threshold into db_residues in an encoded SoA format (batches of 32 sequences).
+// Sequences that have length >= threshold will be stored in massive_sequences as a vector of encoded vectors.
+// db_offsets will hold the original character start indices of the small sequences in the sorted_db.
 void generateDBSoA(const std::vector<std::string> &sorted_db,
                    std::vector<unsigned char> &db_residues,
                    std::vector<int> &db_offsets,
@@ -209,6 +225,7 @@ void generateDBSoA(const std::vector<std::string> &sorted_db,
     db_offsets.clear();
     massive_sequences.clear();
 
+    // Get iterator to first sequence >= threshold
     auto cutoff_it = std::find_if(sorted_db.begin(), sorted_db.end(),
                                   [threshold](const std::string &seq)
                                   {
@@ -217,24 +234,30 @@ void generateDBSoA(const std::vector<std::string> &sorted_db,
 
     int num_small = std::distance(sorted_db.begin(), cutoff_it);
 
+    // Store pointers to where each sequence would start if sequences were stored as a flat unpadded vector of characters
     int unpadded_offset = 0;
     for (int i = 0; i < num_small; i++)
     {
         db_offsets.push_back(unpadded_offset);
         unpadded_offset += sorted_db[i].size();
     }
-    db_offsets.push_back(unpadded_offset);
+    db_offsets.push_back(unpadded_offset); // Pointer past the final character in database for calculating length of final sequence
 
+    // Loop through each batch of 32 sequences
     for (int b = 0; b < num_small; b += 32)
     {
-        int batch_end = std::min(num_small, b + 32);
-        size_t max_len = sorted_db[batch_end - 1].size();
+        int batch_end = std::min(num_small, b + 32);      // Database might not be multiple of 32
+        size_t max_len = sorted_db[batch_end - 1].size(); // Batch size is equal to length largest sequence in batch
 
+        // Loop through each character of sequences in batch
         for (size_t i = 0; i < max_len; i++)
         {
+            // Store first character of each sequence in batch
             for (size_t j = 0; j < 32; j++)
             {
                 int seq_idx = b + j;
+
+                // Only convert valid characters
                 if (seq_idx < num_small && i < sorted_db[seq_idx].size())
                 {
                     unsigned char c = sorted_db[seq_idx][i];
@@ -242,12 +265,14 @@ void generateDBSoA(const std::vector<std::string> &sorted_db,
                 }
                 else
                 {
+                    // Pad with '*'
                     db_residues.push_back(23);
                 }
             }
         }
     }
 
+    // Handle massive sequences (>= threshold)
     for (auto it = cutoff_it; it != sorted_db.end(); ++it)
     {
         std::vector<unsigned char> converted_seq;
@@ -262,6 +287,6 @@ void generateDBSoA(const std::vector<std::string> &sorted_db,
 
 void generateDBParasail(const std::vector<std::string> &sorted_db, std::vector<std::string> &db_ascii)
 {
-    // Since both are now std::vector<std::string>, this is just a direct assignment
+    // Since both are std::vector<std::string>, this is just a direct assignment
     db_ascii = sorted_db;
 }

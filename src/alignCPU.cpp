@@ -1,4 +1,6 @@
 #include "alignCPU.h"
+#include <cstdint>
+#include <algorithm>
 
 int align_sw(const unsigned char *query_seq, const unsigned char *target_seq, const int M, const int N, std::vector<int16_t> &H, std::vector<int16_t> &E, std::vector<int16_t> &F)
 {

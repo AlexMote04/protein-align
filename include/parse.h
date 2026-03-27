@@ -2,10 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <stdexcept>
 
 void initConversionTable();
 void parseQuery(std::vector<unsigned char> &query_seq, const std::string &query_path);

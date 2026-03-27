@@ -36,7 +36,7 @@ __global__ void align_nw(
     // Using shared memory is faster than constant memory in this case since
     // Reads are scattered between threads
     __shared__ int8_t shared_blosum62[24 * 24];
-    for (int i = threadIdx.x; i < 576; i += blockDim.x)
+    for (int i = threadIdx.x; i < 24 * 24; i += blockDim.x)
         shared_blosum62[i] = blosum62[i];
 
     __syncthreads(); // Ensure threads matrix is fully loaded
@@ -138,7 +138,7 @@ __global__ void align_sw(
     // Using shared memory is faster than constant mamory in this case since
     // Reads are scattered between threads
     __shared__ int8_t shared_blosum62[24 * 24];
-    for (int i = threadIdx.x; i < 576; i += blockDim.x)
+    for (int i = threadIdx.x; i < 24 * 24; i += blockDim.x)
         shared_blosum62[i] = blosum62[i];
 
     __syncthreads(); // Ensure threads matrix is fully loaded
@@ -278,7 +278,7 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     CUDA_CHECK(cudaMalloc((void **)&d_db_residues, db_residues_bytes));
     CUDA_CHECK(cudaMalloc((void **)&d_H, matrix_bytes));
     CUDA_CHECK(cudaMalloc((void **)&d_F, matrix_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_blosum62, 576));
+    CUDA_CHECK(cudaMalloc((void **)&d_blosum62, 24 * 24));
 
     // Copy arrays to device
     CUDA_CHECK(cudaMemcpy(d_db_offsets, db_offsets.data(), offsets_bytes, cudaMemcpyHostToDevice));
@@ -286,7 +286,7 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     CUDA_CHECK(cudaMemcpy(d_batch_H_offsets, batch_H_offsets.data(), batch_H_bytes, cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemcpy(d_db_residues, db_residues.data(), db_residues_bytes, cudaMemcpyHostToDevice));
 
-    CUDA_CHECK(cudaMemcpy(d_blosum62, blosum62, sizeof(int8_t) * 576, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(d_blosum62, blosum62, sizeof(int8_t) * 24 * 24, cudaMemcpyHostToDevice));
 
     if (algorithm == 0)
         align_nw<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_H, d_F, d_blosum62, NUM_ROWS, NUM_ALIGNMENTS);

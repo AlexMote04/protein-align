@@ -1,9 +1,9 @@
 #include "intraAlignGPU.cuh"
 #include "params.h"
 #include "blosum62.h"
+#include "params.h"
 #include <cstdio>
 #include <vector>
-#define TILE_SIZE 32
 
 __constant__ int8_t cuda_blosum62[24 * 24];
 
@@ -16,7 +16,7 @@ __constant__ int8_t cuda_blosum62[24 * 24];
         {                                                                                                \
             fprintf(stderr, "CUDA Error:\n  File: %s\n  Line: %d\n  Error code: %d\n  Error text: %s\n", \
                     __FILE__, __LINE__, err, cudaGetErrorString(err));                                   \
-            return -1;                                                                                   \
+            goto cleanup;                                                                                \
         }                                                                                                \
     } while (0)
 
@@ -207,59 +207,115 @@ align_massive_wavefront_tile(
 }
 
 int intraAlignGPU(
-    const int algorithm,
+    int algorithm,
     const std::vector<unsigned char> &query_seq,
-    const std::vector<unsigned char> &target_seq,
-    unsigned char *d_query, unsigned char *d_target,
-    int16_t *d_row_H, int16_t *d_row_E, int16_t *d_row_F,
-    int16_t *d_col_H, int16_t *d_col_E, int16_t *d_col_F,
-    int16_t *d_corner_H, int *d_max_score)
+    const std::vector<std::vector<unsigned char>> &massive_sequences,
+    std::vector<int> &results,
+    int result_offset)
 {
+    if (massive_sequences.empty())
+        return -1;
+
     const int query_len = query_seq.size();
-    const int target_len = target_seq.size();
 
-    int num_blocks_x = (query_len + TILE_SIZE - 1) / TILE_SIZE;
-    int num_blocks_y = (target_len + TILE_SIZE - 1) / TILE_SIZE;
-    int total_macro_diagonals = num_blocks_x + num_blocks_y - 1;
+    // Find max target length (since the DB is sorted, it's the last element, but this is safer)
+    int max_target_len = 0;
+    for (const auto &seq : massive_sequences)
+    {
+        if (seq.size() > max_target_len)
+        {
+            max_target_len = seq.size();
+        }
+    }
 
-    int host_max_score = 0;
-    int final_score = 0;
+    int max_num_blocks_x = (query_len + TILE_SIZE - 1) / TILE_SIZE;
+    int max_num_blocks_y = (max_target_len + TILE_SIZE - 1) / TILE_SIZE;
+    int max_num_tiles_total = max_num_blocks_x * max_num_blocks_y;
 
-    // Reset SW max score for this specific run
-    CUDA_CHECK(cudaMemcpy(d_max_score, &host_max_score, sizeof(int), cudaMemcpyHostToDevice));
+    unsigned char *d_query{}, *d_target{};
+    int16_t *d_row_H{}, *d_row_E{}, *d_row_F{};
+    int16_t *d_col_H{}, *d_col_E{}, *d_col_F{};
+    int16_t *d_corner_H{};
+    int *d_max_score{};
 
-    // ONLY copy the target sequence (Query is copied once in main)
-    CUDA_CHECK(cudaMemcpy(d_target, target_seq.data(), target_len * sizeof(unsigned char), cudaMemcpyHostToDevice));
+    int return_code = 0;
 
-    // Load BLOSUM matrix
+    // Allocate Memory
+    CUDA_CHECK(cudaMalloc((void **)&d_query, query_len * sizeof(unsigned char)));
+    CUDA_CHECK(cudaMalloc((void **)&d_target, max_target_len * sizeof(unsigned char)));
+    CUDA_CHECK(cudaMalloc((void **)&d_row_H, max_target_len * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_row_E, max_target_len * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_row_F, max_target_len * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_col_H, query_len * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_col_E, query_len * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_col_F, query_len * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_corner_H, max_num_tiles_total * sizeof(int16_t)));
+    CUDA_CHECK(cudaMalloc((void **)&d_max_score, sizeof(int)));
+
+    // Transfer Constant/Query Data
+    CUDA_CHECK(cudaMemcpy(d_query, query_seq.data(), query_len * sizeof(unsigned char), cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemcpyToSymbol(cuda_blosum62, blosum62, sizeof(int8_t) * 24 * 24));
 
-    // Execute Macro-Wavefront Loop
-    for (int step = 0; step < total_macro_diagonals; step++)
+    // Process Batch
+    for (size_t i = 0; i < massive_sequences.size(); i++)
     {
-        int min_x = max(0, step - num_blocks_y + 1);
-        int max_x = min(step, num_blocks_x - 1);
-        int num_tiles = max_x - min_x + 1;
+        const auto &target_seq = massive_sequences[i];
+        int target_len = target_seq.size();
 
-        align_massive_wavefront_tile<<<num_tiles, TILE_SIZE>>>(
-            d_row_H, d_col_H, d_row_E, d_col_E, d_row_F, d_col_F, d_corner_H,
-            d_query, d_target, query_len, target_len,
-            step, num_blocks_x, num_blocks_y, algorithm, d_max_score);
+        int host_max_score = 0;
+        CUDA_CHECK(cudaMemcpy(d_max_score, &host_max_score, sizeof(int), cudaMemcpyHostToDevice));
+        CUDA_CHECK(cudaMemcpy(d_target, target_seq.data(), target_len * sizeof(unsigned char), cudaMemcpyHostToDevice));
+
+        int num_blocks_x = (query_len + TILE_SIZE - 1) / TILE_SIZE;
+        int num_blocks_y = (target_len + TILE_SIZE - 1) / TILE_SIZE;
+        int total_macro_diagonals = num_blocks_x + num_blocks_y - 1;
+
+        for (int step = 0; step < total_macro_diagonals; step++)
+        {
+            int min_x = max(0, step - num_blocks_y + 1);
+            int max_x = min(step, num_blocks_x - 1);
+            int num_tiles = max_x - min_x + 1;
+
+            align_massive_wavefront_tile<<<num_tiles, TILE_SIZE>>>(
+                d_row_H, d_col_H, d_row_E, d_col_E, d_row_F, d_col_F, d_corner_H,
+                d_query, d_target, query_len, target_len,
+                step, num_blocks_x, num_blocks_y, algorithm, d_max_score);
+        }
+
+        CUDA_CHECK(cudaDeviceSynchronize());
+
+        int final_score = 0;
+        if (algorithm == 0)
+        {
+            int16_t nw_score;
+            CUDA_CHECK(cudaMemcpy(&nw_score, &d_row_H[target_len - 1], sizeof(int16_t), cudaMemcpyDeviceToHost));
+            final_score = nw_score;
+        }
+        else
+        {
+            CUDA_CHECK(cudaMemcpy(&final_score, d_max_score, sizeof(int), cudaMemcpyDeviceToHost));
+        }
+
+        // Store result directly into the overall scores vector
+        results[result_offset + i] = final_score;
     }
 
-    CUDA_CHECK(cudaDeviceSynchronize());
+    goto cleanup_success;
 
-    // Fetch Final Score
-    if (algorithm == 0)
-    {
-        int16_t nw_score;
-        CUDA_CHECK(cudaMemcpy(&nw_score, &d_row_H[target_len - 1], sizeof(int16_t), cudaMemcpyDeviceToHost));
-        final_score = nw_score;
-    }
-    else
-    {
-        CUDA_CHECK(cudaMemcpy(&final_score, d_max_score, sizeof(int), cudaMemcpyDeviceToHost));
-    }
+cleanup:
+    return_code = -1;
 
-    return final_score;
+cleanup_success:
+    cudaFree(d_query);
+    cudaFree(d_target);
+    cudaFree(d_row_H);
+    cudaFree(d_row_E);
+    cudaFree(d_row_F);
+    cudaFree(d_col_H);
+    cudaFree(d_col_E);
+    cudaFree(d_col_F);
+    cudaFree(d_corner_H);
+    cudaFree(d_max_score);
+
+    return return_code;
 }

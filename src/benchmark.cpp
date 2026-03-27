@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
-#include <cuda_runtime.h>
 
 #include "parse.h"
 #include "alignCPU.h"
@@ -13,11 +12,11 @@
 #include "intraAlignGPU.cuh"
 #include "alignParasail.h"
 
-#define TILE_SIZE 32
-
 const std::string QUERY_PATH = "../data/input/query";
 const std::string DB_PATH = "../data/input/uniprot_sprot.fasta";
 
+// This program calculates the alignment scores for a query sequence against a database of target sequences using multiple different
+// Implementations of NW and SW and measure their performance.
 int main(int argc, char **argv)
 {
     if (argc != 4)
@@ -37,8 +36,8 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    int num_seqs = 0;
-    int threshold = 0;
+    int num_seqs{};
+    int threshold{};
 
     try
     {
@@ -100,15 +99,17 @@ int main(int argc, char **argv)
     // ==========================================
     // WARM-UP PHASE
     // ==========================================
-    // std::cout << "Warming up GPU context...\n";
 
     // Create a tiny dummy dataset
     std::vector<unsigned char> dummy_query = {0, 1, 2, 3}; // "ARND"
-    std::vector<unsigned char> dummy_db = {0, 1, 2, 3};
-    std::vector<int> dummy_offsets = {0, 4}; // 1 sequence, length 4
+    std::vector<std::string> dummy_db = {"ARND"};
+    std::vector<unsigned char> dummy_residues_soa{};
+    std::vector<int> dummy_offsets{};
+    std::vector<std::vector<unsigned char>> dummy_massive_sequences{};
+    generateDBSoA(dummy_db, dummy_residues_soa, dummy_offsets, dummy_massive_sequences, 1000);
     std::vector<int> dummy_scores(1);
 
-    interAlignGPU(algorithm, dummy_scores, dummy_query, dummy_db, dummy_offsets);
+    interAlignGPU(algorithm, dummy_scores, dummy_query, dummy_residues_soa, dummy_offsets);
 
     std::vector<int> parasail_scores(num_seqs);
     std::vector<int> gpu_scores(num_seqs);
@@ -124,76 +125,14 @@ int main(int argc, char **argv)
     size_t num_small_seqs = num_seqs - massive_sequences.size();
     size_t num_big_seqs = massive_sequences.size();
 
-    std::cout << num_small_seqs << " " << num_big_seqs << "\n";
     auto gpu_inter_start = std::chrono::high_resolution_clock::now();
     if (num_small_seqs > 0)
-    {
         interAlignGPU(algorithm, gpu_scores, query_seq, db_residues_soa, db_offsets);
-    }
     auto gpu_inter_end = std::chrono::high_resolution_clock::now();
 
-    // Final massive sequence with have largest length since db is sorted
-    int max_target_len = 0;
-    if (num_big_seqs > 0)
-        max_target_len = static_cast<int>(massive_sequences[massive_sequences.size() - 1].size());
-
-    int query_len = query_seq.size();
-    int max_num_blocks_x = (query_len + TILE_SIZE - 1) / TILE_SIZE;
-    int max_num_blocks_y = (max_target_len + TILE_SIZE - 1) / TILE_SIZE;
-    int max_num_tiles_total = max_num_blocks_x * max_num_blocks_y;
-
-    // Declare and Allocate device pointers
-    unsigned char *d_query{}, *d_target{};
-    int16_t *d_row_H{}, *d_row_E{}, *d_row_F{};
-    int16_t *d_col_H{}, *d_col_E{}, *d_col_F{};
-    int16_t *d_corner_H{};
-    int *d_max_score{};
-
-    if (num_big_seqs > 0)
-    {
-        cudaMalloc((void **)&d_query, query_len * sizeof(unsigned char));
-        cudaMalloc((void **)&d_target, max_target_len * sizeof(unsigned char));
-
-        cudaMalloc((void **)&d_row_H, max_target_len * sizeof(int16_t));
-        cudaMalloc((void **)&d_row_E, max_target_len * sizeof(int16_t));
-        cudaMalloc((void **)&d_row_F, max_target_len * sizeof(int16_t));
-
-        cudaMalloc((void **)&d_col_H, query_len * sizeof(int16_t));
-        cudaMalloc((void **)&d_col_E, query_len * sizeof(int16_t));
-        cudaMalloc((void **)&d_col_F, query_len * sizeof(int16_t));
-
-        cudaMalloc((void **)&d_corner_H, max_num_tiles_total * sizeof(int16_t));
-        cudaMalloc((void **)&d_max_score, sizeof(int));
-
-        // Copy the Query sequence ONCE
-        cudaMemcpy(d_query, query_seq.data(), query_len * sizeof(unsigned char), cudaMemcpyHostToDevice);
-    }
-
     auto gpu_intra_start = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < massive_sequences.size(); i++)
-    {
-        gpu_scores[i + num_small_seqs] = intraAlignGPU(
-            algorithm, query_seq, massive_sequences[i],
-            d_query, d_target,
-            d_row_H, d_row_E, d_row_F,
-            d_col_H, d_col_E, d_col_F,
-            d_corner_H, d_max_score);
-    }
-
     if (num_big_seqs > 0)
-    {
-        cudaFree(d_query);
-        cudaFree(d_target);
-        cudaFree(d_row_H);
-        cudaFree(d_row_E);
-        cudaFree(d_row_F);
-        cudaFree(d_col_H);
-        cudaFree(d_col_E);
-        cudaFree(d_col_F);
-        cudaFree(d_corner_H);
-        cudaFree(d_max_score);
-    }
-
+        intraAlignGPU(algorithm, query_seq, massive_sequences, gpu_scores, num_small_seqs);
     auto gpu_intra_end = std::chrono::high_resolution_clock::now();
 
     // ==========================================

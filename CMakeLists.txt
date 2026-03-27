@@ -1,13 +1,15 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.18)
+
 project(protein-align LANGUAGES CXX CUDA C)
 
+# C++ and CUDA standards
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_STANDARD 14)
+set(CMAKE_CUDA_STANDARD 17) 
+set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+
 set(CMAKE_CUDA_RUNTIME_LIBRARY Static)
 set(CMAKE_CUDA_ARCHITECTURES native)
-
-include_directories(include)
 
 # ==========================================
 # Fetch and Build Parasail
@@ -24,8 +26,10 @@ FetchContent_Declare(
     GIT_TAG        v2.6.2
 )
 FetchContent_MakeAvailable(parasail)
-# ==========================================
 
+# ==========================================
+# Shared Sources
+# ==========================================
 set(SHARED_SOURCES 
     src/parse.cpp
     src/interAlignGPU.cu
@@ -34,18 +38,26 @@ set(SHARED_SOURCES
     src/alignParasail.cpp
 )
 
+# ==========================================
+# Target: Benchmark Executable
+# ==========================================
 add_executable(benchmark 
     src/benchmark.cpp 
     ${SHARED_SOURCES}
 )
 
-target_include_directories(benchmark PRIVATE ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
-target_link_libraries(benchmark PRIVATE parasail cudart)
+target_include_directories(benchmark PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# add_executable(run_tests 
-#     test/test_main.cpp
-#     test/test_parser.cpp
-#     test/test_sw.cpp
-#     test/test_nw.cpp
-#     ${SHARED_SOURCES}
-# )
+target_link_libraries(benchmark PRIVATE parasail)
+
+# ==========================================
+# Target: Tests
+# ==========================================
+add_executable(run_tests 
+    test/test_main.cpp
+    test/test_parse.cpp
+    ${SHARED_SOURCES}
+)
+
+target_include_directories(run_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(run_tests PRIVATE parasail)
