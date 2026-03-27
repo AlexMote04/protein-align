@@ -195,6 +195,19 @@ benchmark/fast:
 .PHONY : benchmark/fast
 
 #=============================================================================
+# Target rules for targets named run_tests
+
+# Build rule for target.
+run_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests
+.PHONY : run_tests
+
+# fast build rule for target.
+run_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
+.PHONY : run_tests/fast
+
+#=============================================================================
 # Target rules for targets named parasail_core
 
 # Build rule for target.
@@ -746,6 +759,7 @@ src/alignCPU.o: src/alignCPU.cpp.o
 # target to build an object file
 src/alignCPU.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignCPU.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/alignCPU.cpp.o
 .PHONY : src/alignCPU.cpp.o
 
 src/alignCPU.i: src/alignCPU.cpp.i
@@ -754,6 +768,7 @@ src/alignCPU.i: src/alignCPU.cpp.i
 # target to preprocess a source file
 src/alignCPU.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignCPU.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/alignCPU.cpp.i
 .PHONY : src/alignCPU.cpp.i
 
 src/alignCPU.s: src/alignCPU.cpp.s
@@ -762,6 +777,7 @@ src/alignCPU.s: src/alignCPU.cpp.s
 # target to generate assembly for a file
 src/alignCPU.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignCPU.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/alignCPU.cpp.s
 .PHONY : src/alignCPU.cpp.s
 
 src/alignParasail.o: src/alignParasail.cpp.o
@@ -770,6 +786,7 @@ src/alignParasail.o: src/alignParasail.cpp.o
 # target to build an object file
 src/alignParasail.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignParasail.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/alignParasail.cpp.o
 .PHONY : src/alignParasail.cpp.o
 
 src/alignParasail.i: src/alignParasail.cpp.i
@@ -778,6 +795,7 @@ src/alignParasail.i: src/alignParasail.cpp.i
 # target to preprocess a source file
 src/alignParasail.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignParasail.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/alignParasail.cpp.i
 .PHONY : src/alignParasail.cpp.i
 
 src/alignParasail.s: src/alignParasail.cpp.s
@@ -786,6 +804,7 @@ src/alignParasail.s: src/alignParasail.cpp.s
 # target to generate assembly for a file
 src/alignParasail.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/alignParasail.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/alignParasail.cpp.s
 .PHONY : src/alignParasail.cpp.s
 
 src/benchmark.o: src/benchmark.cpp.o
@@ -818,6 +837,7 @@ src/interAlignGPU.o: src/interAlignGPU.cu.o
 # target to build an object file
 src/interAlignGPU.cu.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/interAlignGPU.cu.o
 .PHONY : src/interAlignGPU.cu.o
 
 src/interAlignGPU.i: src/interAlignGPU.cu.i
@@ -826,6 +846,7 @@ src/interAlignGPU.i: src/interAlignGPU.cu.i
 # target to preprocess a source file
 src/interAlignGPU.cu.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/interAlignGPU.cu.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/interAlignGPU.cu.i
 .PHONY : src/interAlignGPU.cu.i
 
 src/interAlignGPU.s: src/interAlignGPU.cu.s
@@ -834,6 +855,7 @@ src/interAlignGPU.s: src/interAlignGPU.cu.s
 # target to generate assembly for a file
 src/interAlignGPU.cu.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/interAlignGPU.cu.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/interAlignGPU.cu.s
 .PHONY : src/interAlignGPU.cu.s
 
 src/intraAlignGPU.o: src/intraAlignGPU.cu.o
@@ -842,6 +864,7 @@ src/intraAlignGPU.o: src/intraAlignGPU.cu.o
 # target to build an object file
 src/intraAlignGPU.cu.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o
 .PHONY : src/intraAlignGPU.cu.o
 
 src/intraAlignGPU.i: src/intraAlignGPU.cu.i
@@ -850,6 +873,7 @@ src/intraAlignGPU.i: src/intraAlignGPU.cu.i
 # target to preprocess a source file
 src/intraAlignGPU.cu.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.i
 .PHONY : src/intraAlignGPU.cu.i
 
 src/intraAlignGPU.s: src/intraAlignGPU.cu.s
@@ -858,6 +882,7 @@ src/intraAlignGPU.s: src/intraAlignGPU.cu.s
 # target to generate assembly for a file
 src/intraAlignGPU.cu.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.s
 .PHONY : src/intraAlignGPU.cu.s
 
 src/parse.o: src/parse.cpp.o
@@ -866,6 +891,7 @@ src/parse.o: src/parse.cpp.o
 # target to build an object file
 src/parse.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/parse.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.o
 .PHONY : src/parse.cpp.o
 
 src/parse.i: src/parse.cpp.i
@@ -874,6 +900,7 @@ src/parse.i: src/parse.cpp.i
 # target to preprocess a source file
 src/parse.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/parse.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.i
 .PHONY : src/parse.cpp.i
 
 src/parse.s: src/parse.cpp.s
@@ -882,7 +909,56 @@ src/parse.s: src/parse.cpp.s
 # target to generate assembly for a file
 src/parse.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/parse.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/parse.cpp.s
 .PHONY : src/parse.cpp.s
+
+test/test_main.o: test/test_main.cpp.o
+.PHONY : test/test_main.o
+
+# target to build an object file
+test/test_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.o
+.PHONY : test/test_main.cpp.o
+
+test/test_main.i: test/test_main.cpp.i
+.PHONY : test/test_main.i
+
+# target to preprocess a source file
+test/test_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.i
+.PHONY : test/test_main.cpp.i
+
+test/test_main.s: test/test_main.cpp.s
+.PHONY : test/test_main.s
+
+# target to generate assembly for a file
+test/test_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_main.cpp.s
+.PHONY : test/test_main.cpp.s
+
+test/test_parse.o: test/test_parse.cpp.o
+.PHONY : test/test_parse.o
+
+# target to build an object file
+test/test_parse.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parse.cpp.o
+.PHONY : test/test_parse.cpp.o
+
+test/test_parse.i: test/test_parse.cpp.i
+.PHONY : test/test_parse.i
+
+# target to preprocess a source file
+test/test_parse.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parse.cpp.i
+.PHONY : test/test_parse.cpp.i
+
+test/test_parse.s: test/test_parse.cpp.s
+.PHONY : test/test_parse.s
+
+# target to generate assembly for a file
+test/test_parse.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_parse.cpp.s
+.PHONY : test/test_parse.cpp.s
 
 # Help Target
 help:
@@ -927,6 +1003,7 @@ help:
 	@echo "... parasail_sse41_table"
 	@echo "... parasail_sse41_trace"
 	@echo "... parasail_stats"
+	@echo "... run_tests"
 	@echo "... sais"
 	@echo "... ssw"
 	@echo "... test_align"
@@ -959,6 +1036,12 @@ help:
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"
+	@echo "... test/test_main.o"
+	@echo "... test/test_main.i"
+	@echo "... test/test_main.s"
+	@echo "... test/test_parse.o"
+	@echo "... test/test_parse.i"
+	@echo "... test/test_parse.s"
 .PHONY : help
 
 

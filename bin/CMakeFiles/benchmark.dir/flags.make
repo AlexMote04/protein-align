@@ -7,11 +7,11 @@ CUDA_DEFINES =
 
 CUDA_INCLUDES = --options-file CMakeFiles/benchmark.dir/includes_CUDA.rsp
 
-CUDA_FLAGS = -std=c++14 -arch=native
+CUDA_FLAGS = -std=c++17 -arch=native
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/alex/Code/protein-align/include -I/usr/local/cuda/targets/x86_64-linux/include -I/home/alex/Code/protein-align/bin/_deps/parasail-src
+CXX_INCLUDES = -I/home/alex/Code/protein-align/include -I/home/alex/Code/protein-align/bin/_deps/parasail-src
 
 CXX_FLAGS = -std=gnu++17
 
