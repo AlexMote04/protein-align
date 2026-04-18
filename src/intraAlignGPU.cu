@@ -1,7 +1,6 @@
 #include "intraAlignGPU.cuh"
 #include "params.h"
 #include "blosum62.h"
-#include "params.h"
 #include <cstdio>
 #include <vector>
 

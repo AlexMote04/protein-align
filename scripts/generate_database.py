@@ -2,9 +2,9 @@ import random
 
 CHARS = "ARNDCQEGHILKMFPSTWYVBZX*"
 
-DB_PATH = "./data/input/fixed_len.fasta"
-NUM_SEQUENCES = 131072  # Number of sequences in database
-SEQUENCE_LEN = 256  # Number of db sequences
+DB_PATH = "./data/input/query_360.fasta"
+NUM_SEQUENCES = 1  # Number of sequences in database
+SEQUENCE_LEN = 360  # Length of each target sequence
 
 with open(DB_PATH, "w", encoding="utf-8") as outfile:
     for sequence in range(NUM_SEQUENCES):

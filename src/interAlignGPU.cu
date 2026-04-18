@@ -312,6 +312,7 @@ cleanup_success:
     cudaFree(d_db_residues);
     cudaFree(d_H);
     cudaFree(d_F);
+    cudaFree(d_blosum62);
 
     return return_code;
 }

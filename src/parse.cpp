@@ -215,7 +215,7 @@ std::vector<std::string> loadOrCacheDatabase(const std::string &fasta_path, int 
 // This function inserts sequences with length < threshold into db_residues in an encoded SoA format (batches of 32 sequences).
 // Sequences that have length >= threshold will be stored in massive_sequences as a vector of encoded vectors.
 // db_offsets will hold the original character start indices of the small sequences in the sorted_db.
-void generateDBSoA(const std::vector<std::string> &sorted_db,
+void generateDBGPU(const std::vector<std::string> &sorted_db,
                    std::vector<unsigned char> &db_residues,
                    std::vector<int> &db_offsets,
                    std::vector<std::vector<unsigned char>> &massive_sequences,
@@ -289,4 +289,21 @@ void generateDBParasail(const std::vector<std::string> &sorted_db, std::vector<s
 {
     // Since both are std::vector<std::string>, this is just a direct assignment
     db_ascii = sorted_db;
+}
+
+void generateDBCPU(const std::vector<std::string> &sorted_db, std::vector<unsigned char> &db_cpu, std::vector<int> &offsets)
+{
+    offsets.clear();
+    offsets.push_back(0);
+    int cur_offset = 0;
+
+    for (std::string target_string : sorted_db)
+    {
+        for (unsigned char c : target_string)
+        {
+            db_cpu.push_back((c < 128) ? amino_to_uchar[c] : 23);
+            cur_offset += 1;
+        }
+        offsets.push_back(cur_offset);
+    }
 }
