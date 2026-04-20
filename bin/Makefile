@@ -885,6 +885,33 @@ src/intraAlignGPU.cu.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.s
 .PHONY : src/intraAlignGPU.cu.s
 
+src/naiveInterGPU.o: src/naiveInterGPU.cu.o
+.PHONY : src/naiveInterGPU.o
+
+# target to build an object file
+src/naiveInterGPU.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/naiveInterGPU.cu.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o
+.PHONY : src/naiveInterGPU.cu.o
+
+src/naiveInterGPU.i: src/naiveInterGPU.cu.i
+.PHONY : src/naiveInterGPU.i
+
+# target to preprocess a source file
+src/naiveInterGPU.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/naiveInterGPU.cu.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.i
+.PHONY : src/naiveInterGPU.cu.i
+
+src/naiveInterGPU.s: src/naiveInterGPU.cu.s
+.PHONY : src/naiveInterGPU.s
+
+# target to generate assembly for a file
+src/naiveInterGPU.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark.dir/build.make CMakeFiles/benchmark.dir/src/naiveInterGPU.cu.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.s
+.PHONY : src/naiveInterGPU.cu.s
+
 src/parse.o: src/parse.cpp.o
 .PHONY : src/parse.o
 
@@ -1033,6 +1060,9 @@ help:
 	@echo "... src/intraAlignGPU.o"
 	@echo "... src/intraAlignGPU.i"
 	@echo "... src/intraAlignGPU.s"
+	@echo "... src/naiveInterGPU.o"
+	@echo "... src/naiveInterGPU.i"
+	@echo "... src/naiveInterGPU.s"
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"

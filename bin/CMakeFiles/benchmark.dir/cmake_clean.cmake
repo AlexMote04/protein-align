@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/benchmark.dir/src/interAlignGPU.cu.o.d"
   "CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o"
   "CMakeFiles/benchmark.dir/src/intraAlignGPU.cu.o.d"
+  "CMakeFiles/benchmark.dir/src/naiveInterGPU.cu.o"
+  "CMakeFiles/benchmark.dir/src/naiveInterGPU.cu.o.d"
   "CMakeFiles/benchmark.dir/src/parse.cpp.o"
   "CMakeFiles/benchmark.dir/src/parse.cpp.o.d"
   "benchmark"

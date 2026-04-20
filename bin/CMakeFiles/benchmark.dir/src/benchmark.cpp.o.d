@@ -178,6 +178,7 @@ CMakeFiles/benchmark.dir/src/benchmark.cpp.o: \
  /home/alex/Code/protein-align/include/params.h \
  /home/alex/Code/protein-align/include/interAlignGPU.cuh \
  /home/alex/Code/protein-align/include/intraAlignGPU.cuh \
+ /home/alex/Code/protein-align/include/naiveInterGPU.cuh \
  /home/alex/Code/protein-align/include/alignParasail.h \
  /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail.h \
  /home/alex/Code/protein-align/bin/_deps/parasail-src/parasail/matrices/blosum62.h \

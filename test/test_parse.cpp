@@ -76,7 +76,7 @@ TEST_CASE("generateDBSoA correctly pads and splits sequences", "[soa_generator]"
     SECTION("Splits massive sequences correctly based on threshold")
     {
         int threshold = 3; // "EFG" and "HILK" should become massive
-        generateDBSoA(sorted_db, db_residues, db_offsets, massive_sequences, threshold);
+        generateDBGPU(sorted_db, db_residues, db_offsets, massive_sequences, threshold);
 
         // Check Split
         CHECK(db_offsets.size() == 3); // 2 small seqs + 1 tail offset
@@ -92,7 +92,7 @@ TEST_CASE("generateDBSoA correctly pads and splits sequences", "[soa_generator]"
     SECTION("SoA padding logic and batch chunking")
     {
         int threshold = 10; // All sequences are "small"
-        generateDBSoA(sorted_db, db_residues, db_offsets, massive_sequences, threshold);
+        generateDBGPU(sorted_db, db_residues, db_offsets, massive_sequences, threshold);
 
         // Total 4 sequences. Fits in exactly 1 batch of 32.
         // Max length in batch = 4 ("HILK").
@@ -117,7 +117,7 @@ TEST_CASE("generateDBSoA correctly pads and splits sequences", "[soa_generator]"
     SECTION("db_offsets calculates unpadded start positions")
     {
         int threshold = 10;
-        generateDBSoA(sorted_db, db_residues, db_offsets, massive_sequences, threshold);
+        generateDBGPU(sorted_db, db_residues, db_offsets, massive_sequences, threshold);
 
         // Lengths: 1, 2, 3, 4
         std::vector<int> expected_offsets = {

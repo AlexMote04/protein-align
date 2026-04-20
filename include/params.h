@@ -4,9 +4,12 @@
 
 #include <cstdint>
 
-#define TILE_SIZE 32
-
-constexpr int16_t OPEN = 10;
-constexpr int16_t EXTEND = 1;
-constexpr int MAX_NUM_SEQS = 100000;
+constexpr int32_t OPEN = 10;
+constexpr int32_t EXTEND = 1;
 constexpr int MAX_QUERY_LEN = 8192;
+#define NEG_INF_32 (INT32_MIN / 2)
+
+// Flag any cell whose score reaches this magnitude — leaves margin for one
+// more OPEN/EXTEND subtraction before int16 arithmetic would actually wrap.
+constexpr int16_t OVERFLOW_THRESHOLD_16 = 30000;
+constexpr int16_t NEG_INF_16 = -30000;

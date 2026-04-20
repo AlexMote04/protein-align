@@ -13,5 +13,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/alex/Code/protein-align/include -I/home/alex/Code/protein-align/bin/_deps/parasail-src
 
-CXX_FLAGS = -std=gnu++17
+CXX_FLAGS = -std=gnu++17 -fopenmp
 

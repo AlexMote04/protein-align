@@ -1,5 +1,6 @@
-#include "naiveInterGPU.cuh"
 #include <cstdio>
+#include <vector>
+#include <algorithm>
 #include "params.h"
 #include "blosum62.h"
 
@@ -17,58 +18,51 @@
 
 __constant__ int8_t cuda_blosum62[24 * 24];
 
-__global__ void align_nw(int *scores, const unsigned char *query_seq, const unsigned char *db_residues, const int *db_offsets, int16_t *H, int16_t *E, int16_t *F, const int NUM_ROWS, const int NUM_COLS_GLOBAL, const int NUM_RESIDUES)
+__global__ void align_nw(int *scores, const unsigned char *query_seq, const unsigned char *db_residues, const int *db_offsets, int32_t *H, int32_t *E, int32_t *F, const int NUM_ROWS, const int NUM_COLS_BATCH, const int NUM_ALIGNMENTS)
 {
-    int gindex = blockIdx.x * blockDim.x + threadIdx.x; // Calculate global index
+    int gindex = blockIdx.x * blockDim.x + threadIdx.x;
 
-    // Bounds check
-    if (gindex < NUM_COLS_GLOBAL - NUM_RESIDUES) // Equal to NUM_ALIGNMENTS, saves passing it as a kernel parameter
+    if (gindex < NUM_ALIGNMENTS)
     {
-        // Calculate length of local matrix to fill
-        const int NUM_COLUMNS_LOCAL = db_offsets[gindex + 1] - db_offsets[gindex] + 1; // Add one for zeros column
+        const int NUM_COLUMNS_LOCAL = db_offsets[gindex + 1] - db_offsets[gindex] + 1;
 
-        H = H + db_offsets[gindex] + gindex; // Add one column of zeros per alignment
+        H = H + db_offsets[gindex] + gindex;
         E = E + db_offsets[gindex] + gindex;
         F = F + db_offsets[gindex] + gindex;
 
-        // Initialize top-left corner
         H[0] = 0;
-        E[0] = -10000;
-        F[0] = -10000;
+        E[0] = NEG_INF_32;
+        F[0] = NEG_INF_32;
 
-        // Set first row
         for (int j = 1; j < NUM_COLUMNS_LOCAL; j += 1)
         {
             H[j] = -OPEN - (j - 1) * EXTEND;
-            F[j] = -10000; // Large negative number
+            F[j] = NEG_INF_32;
         }
 
-        // Set first column
         for (int i = 1; i < NUM_ROWS; i++)
         {
-            int index = i * NUM_COLS_GLOBAL;
+            int index = i * NUM_COLS_BATCH;
             H[index] = -OPEN - (i - 1) * EXTEND;
-            E[index] = -10000;
+            E[index] = NEG_INF_32;
         }
 
-        // Fill matrices
-        int16_t val = 0;
+        int32_t val = 0;
         for (int i = 1; i < NUM_ROWS; i++)
         {
             for (int j = 1; j < NUM_COLUMNS_LOCAL; j++)
             {
-                int index = i * NUM_COLS_GLOBAL + j;
+                int index = i * NUM_COLS_BATCH + j;
                 int left = index - 1;
-                int up = index - NUM_COLS_GLOBAL;
+                int up = index - NUM_COLS_BATCH;
                 int diag = up - 1;
 
-                E[index] = (H[left] - OPEN) > (E[left] - EXTEND) ? (H[left] - OPEN) : (E[left] - EXTEND); // Horizontal gap
-                F[index] = (H[up] - OPEN) > (F[up] - EXTEND) ? (H[up] - OPEN) : (F[up] - EXTEND);         // Vertical gap
+                E[index] = (H[left] - OPEN) > (E[left] - EXTEND) ? (H[left] - OPEN) : (E[left] - EXTEND);
+                F[index] = (H[up] - OPEN) > (F[up] - EXTEND) ? (H[up] - OPEN) : (F[up] - EXTEND);
 
                 int db_residue_idx = db_offsets[gindex] + (j - 1);
-                val = H[diag] + cuda_blosum62[query_seq[i - 1] * 24 + db_residues[db_residue_idx]]; // Diag Score
+                val = H[diag] + cuda_blosum62[query_seq[i - 1] * 24 + db_residues[db_residue_idx]];
 
-                // Find max of scores
                 val = E[index] > val ? E[index] : val;
                 val = F[index] > val ? F[index] : val;
                 H[index] = val;
@@ -78,121 +72,167 @@ __global__ void align_nw(int *scores, const unsigned char *query_seq, const unsi
     }
 }
 
-__global__ void align_sw(int *scores, const unsigned char *query_seq, const unsigned char *db_residues, const int *db_offsets, int16_t *H, int16_t *E, int16_t *F, const int NUM_ROWS, const int NUM_COLS_GLOBAL, const int NUM_RESIDUES)
+__global__ void align_sw(int *scores, const unsigned char *query_seq, const unsigned char *db_residues, const int *db_offsets, int32_t *H, int32_t *E, int32_t *F, const int NUM_ROWS, const int NUM_COLS_BATCH, const int NUM_ALIGNMENTS)
 {
-    int gindex = blockIdx.x * blockDim.x + threadIdx.x; // Calculate global index
+    int gindex = blockIdx.x * blockDim.x + threadIdx.x;
 
-    // Bounds check
-    if (gindex < NUM_COLS_GLOBAL - NUM_RESIDUES) // Equal to NUM_ALIGNMENTS, saves passing it as a kernel parameter
+    if (gindex < NUM_ALIGNMENTS)
     {
-        // Calculate length of local matrix to fill
-        const int NUM_COLUMNS_LOCAL = db_offsets[gindex + 1] - db_offsets[gindex] + 1; // Add one for zeros column
+        const int NUM_COLUMNS_LOCAL = db_offsets[gindex + 1] - db_offsets[gindex] + 1;
+        int32_t max_score = 0;
 
-        int16_t max_score = 0; // Optimal alignment score
-
-        H = H + db_offsets[gindex] + gindex; // Add one column of zeros per alignment
+        H = H + db_offsets[gindex] + gindex;
         E = E + db_offsets[gindex] + gindex;
         F = F + db_offsets[gindex] + gindex;
 
-        // Set first row
         for (int i = 0; i < NUM_COLUMNS_LOCAL; i += 1)
         {
             H[i] = 0;
-            F[i] = -10000; // Large negative number
+            F[i] = NEG_INF_32;
         }
 
-        // Set first column
-        for (int j = 0; j < NUM_ROWS * NUM_COLS_GLOBAL; j += NUM_COLS_GLOBAL)
+        for (int j = 0; j < NUM_ROWS * NUM_COLS_BATCH; j += NUM_COLS_BATCH)
         {
             H[j] = 0;
-            E[j] = -10000;
+            E[j] = NEG_INF_32;
         }
 
-        // Fill matrices
         for (int i = 1; i < NUM_ROWS; i++)
-        { // Skip first row
+        {
             for (int j = 1; j < NUM_COLUMNS_LOCAL; j++)
-            { // Skip first column
-                int index = i * NUM_COLS_GLOBAL + j;
+            {
+                int index = i * NUM_COLS_BATCH + j;
                 int left = index - 1;
-                int up = index - NUM_COLS_GLOBAL;
+                int up = index - NUM_COLS_BATCH;
                 int diag = up - 1;
 
-                E[index] = (H[left] - OPEN) > (E[left] - EXTEND) ? (H[left] - OPEN) : (E[left] - EXTEND); // Horizontal gap
-                F[index] = (H[up] - OPEN) > (F[up] - EXTEND) ? (H[up] - OPEN) : (F[up] - EXTEND);         // Vertical gap
+                E[index] = (H[left] - OPEN) > (E[left] - EXTEND) ? (H[left] - OPEN) : (E[left] - EXTEND);
+                F[index] = (H[up] - OPEN) > (F[up] - EXTEND) ? (H[up] - OPEN) : (F[up] - EXTEND);
 
                 int db_residue_idx = db_offsets[gindex] + (j - 1);
-                int16_t val = H[diag] + cuda_blosum62[query_seq[i - 1] * 24 + db_residues[db_residue_idx]]; // Diag Score
+                int32_t val = H[diag] + cuda_blosum62[query_seq[i - 1] * 24 + db_residues[db_residue_idx]];
 
-                // Find max of scores
                 val = E[index] > val ? E[index] : val;
                 val = F[index] > val ? F[index] : val;
                 H[index] = (val < 0) ? 0 : val;
 
-                max_score = H[index] > max_score ? H[index] : max_score; // Update best score seen so far
+                max_score = H[index] > max_score ? H[index] : max_score;
             }
         }
-
-        // Save best score
         scores[gindex] = max_score;
     }
 }
 
-int naiveInterGPU(int algorithm, std::vector<int> &scores, const std::vector<unsigned char> &query_seq, const std::vector<unsigned char> &db_residues, const std::vector<int> &db_offsets)
+int naiveInterGPU(int algorithm,
+                  std::vector<int> &scores,
+                  const std::vector<unsigned char> &query_seq,
+                  const std::vector<unsigned char> &db_residues,
+                  const std::vector<int> &db_offsets)
 {
     const int NUM_ALIGNMENTS = scores.size();
+    const int NUM_ROWS = query_seq.size() + 1;
     const int NUM_RESIDUES = db_residues.size();
 
-    // Device copies
-    int *d_scores, *d_db_offsets;
-    unsigned char *d_query_seq, *d_db_residues;
-    int16_t *d_H, *d_E, *d_F;
+    const size_t MATRIX_MEMORY_BUDGET = static_cast<size_t>(3) * 1024 * 1024 * 1024; // 3 GB
+    const size_t bytes_per_col = sizeof(int32_t) * NUM_ROWS;
+    const size_t bytes_per_seq = bytes_per_col * 3; // H, E, F combined
 
-    const int NUM_ROWS = query_seq.size() + 1;          // Number of rows in matrix
-    const int NUM_COLS = NUM_RESIDUES + NUM_ALIGNMENTS; // Need to allow space for columns of zeros between alignments
+    // Dry-run batching to find max allocation requirements
+    int batch_start = 0;
+    int max_batch_cols = 0;
+    int max_batch_alignments = 0;
 
-    const int scores_bytes = sizeof(int) * NUM_ALIGNMENTS;
-    const int offsets_bytes = scores_bytes + sizeof(int);
-    const int db_residues_bytes = sizeof(unsigned char) * NUM_RESIDUES;
-    const int query_seq_bytes = sizeof(unsigned char) * query_seq.size();
-    const int matrix_bytes = sizeof(int16_t) * NUM_ROWS * NUM_COLS;
+    while (batch_start < NUM_ALIGNMENTS)
+    {
+        int batch_cols = 0;
+        int batch_end = batch_start;
+        while (batch_end < NUM_ALIGNMENTS)
+        {
+            int seq_len = db_offsets[batch_end + 1] - db_offsets[batch_end];
+            int cols = seq_len + 1; // +1 for zero column
+            if (static_cast<size_t>(batch_cols + cols) * bytes_per_seq > MATRIX_MEMORY_BUDGET && batch_end > batch_start)
+                break;
+            batch_cols += cols;
+            batch_end++;
+        }
+        if (batch_cols > max_batch_cols)
+            max_batch_cols = batch_cols;
+        if (batch_end - batch_start > max_batch_alignments)
+            max_batch_alignments = batch_end - batch_start;
+        batch_start = batch_end;
+    }
 
-    // Kernel launch params
-    const int THREADS = 64;
-    const int BLOCKS = (NUM_ALIGNMENTS + THREADS - 1) / THREADS;
-
+    // Allocate ALL device memory exactly once
+    int32_t *d_H{}, *d_E{}, *d_F{};
+    unsigned char *d_query_seq{}, *d_db_residues{};
+    int *d_scores{}, *d_db_offsets{};
     int return_code = 0;
-    // Copy substitution matrix to device
+
     CUDA_CHECK(cudaMemcpyToSymbol(cuda_blosum62, blosum62, sizeof(int8_t) * 24 * 24));
 
-    // Alloc space for device copies
-    CUDA_CHECK(cudaMalloc((void **)&d_scores, scores_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_db_offsets, offsets_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_db_residues, db_residues_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_query_seq, query_seq_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_H, matrix_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_E, matrix_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_F, matrix_bytes));
+    CUDA_CHECK(cudaMalloc((void **)&d_H, max_batch_cols * bytes_per_col));
+    CUDA_CHECK(cudaMalloc((void **)&d_E, max_batch_cols * bytes_per_col));
+    CUDA_CHECK(cudaMalloc((void **)&d_F, max_batch_cols * bytes_per_col));
 
-    // Copy arrays to device
-    CUDA_CHECK(cudaMemcpy(d_db_offsets, db_offsets.data(), offsets_bytes, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_db_residues, db_residues.data(), db_residues_bytes, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_query_seq, query_seq.data(), query_seq_bytes, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMalloc((void **)&d_query_seq, query_seq.size() * sizeof(unsigned char)));
+    CUDA_CHECK(cudaMemcpy(d_query_seq, query_seq.data(), query_seq.size() * sizeof(unsigned char), cudaMemcpyHostToDevice));
 
-    if (algorithm == 0)
+    // Upload entirely, batches will just use pointer arithmetic to read their slice
+    CUDA_CHECK(cudaMalloc((void **)&d_db_residues, NUM_RESIDUES * sizeof(unsigned char)));
+    CUDA_CHECK(cudaMemcpy(d_db_residues, db_residues.data(), NUM_RESIDUES * sizeof(unsigned char), cudaMemcpyHostToDevice));
+
+    CUDA_CHECK(cudaMalloc((void **)&d_scores, max_batch_alignments * sizeof(int)));
+    CUDA_CHECK(cudaMalloc((void **)&d_db_offsets, (max_batch_alignments + 1) * sizeof(int)));
+
+    // Process batches
+    batch_start = 0;
+    while (batch_start < NUM_ALIGNMENTS)
     {
-        align_nw<<<BLOCKS, THREADS>>>(d_scores, d_query_seq, d_db_residues, d_db_offsets, d_H, d_E, d_F, NUM_ROWS, NUM_COLS, NUM_RESIDUES);
-    }
-    else
-    {
-        align_sw<<<BLOCKS, THREADS>>>(d_scores, d_query_seq, d_db_residues, d_db_offsets, d_H, d_E, d_F, NUM_ROWS, NUM_COLS, NUM_RESIDUES);
-    }
+        int batch_cols = 0;
+        int batch_end = batch_start;
+        while (batch_end < NUM_ALIGNMENTS)
+        {
+            int seq_len = db_offsets[batch_end + 1] - db_offsets[batch_end];
+            int cols = seq_len + 1;
+            if (static_cast<size_t>(batch_cols + cols) * bytes_per_seq > MATRIX_MEMORY_BUDGET && batch_end > batch_start)
+                break;
+            batch_cols += cols;
+            batch_end++;
+        }
 
-    CUDA_CHECK(cudaGetLastError());      // Check for valid launch params
-    CUDA_CHECK(cudaDeviceSynchronize()); // Check for execution errors (segfaults)
+        int batch_num_alignments = batch_end - batch_start;
+        int batch_first_residue = db_offsets[batch_start];
 
-    // Copy result back to host
-    CUDA_CHECK(cudaMemcpy(scores.data(), d_scores, scores_bytes, cudaMemcpyDeviceToHost));
+        // Rebase offsets relative to this batch
+        std::vector<int> batch_offsets(batch_num_alignments + 1);
+        for (int i = 0; i <= batch_num_alignments; ++i)
+        {
+            batch_offsets[i] = db_offsets[batch_start + i] - batch_first_residue;
+        }
+
+        CUDA_CHECK(cudaMemcpy(d_db_offsets, batch_offsets.data(), (batch_num_alignments + 1) * sizeof(int), cudaMemcpyHostToDevice));
+
+        const int THREADS = 64;
+        const int BLOCKS = (batch_num_alignments + THREADS - 1) / THREADS;
+
+        if (algorithm == 0)
+        {
+            align_nw<<<BLOCKS, THREADS>>>(d_scores, d_query_seq, d_db_residues + batch_first_residue, d_db_offsets,
+                                          d_H, d_E, d_F, NUM_ROWS, batch_cols, batch_num_alignments);
+        }
+        else
+        {
+            align_sw<<<BLOCKS, THREADS>>>(d_scores, d_query_seq, d_db_residues + batch_first_residue, d_db_offsets,
+                                          d_H, d_E, d_F, NUM_ROWS, batch_cols, batch_num_alignments);
+        }
+
+        CUDA_CHECK(cudaGetLastError());
+        CUDA_CHECK(cudaDeviceSynchronize());
+
+        CUDA_CHECK(cudaMemcpy(scores.data() + batch_start, d_scores, batch_num_alignments * sizeof(int), cudaMemcpyDeviceToHost));
+
+        batch_start = batch_end;
+    }
 
     goto cleanup_success;
 
@@ -200,13 +240,20 @@ cleanup:
     return_code = -1;
 
 cleanup_success:
-    cudaFree(d_scores);
-    cudaFree(d_db_offsets);
-    cudaFree(d_query_seq);
-    cudaFree(d_db_residues);
-    cudaFree(d_H);
-    cudaFree(d_E);
-    cudaFree(d_F);
+    if (d_H)
+        cudaFree(d_H);
+    if (d_E)
+        cudaFree(d_E);
+    if (d_F)
+        cudaFree(d_F);
+    if (d_query_seq)
+        cudaFree(d_query_seq);
+    if (d_db_residues)
+        cudaFree(d_db_residues);
+    if (d_scores)
+        cudaFree(d_scores);
+    if (d_db_offsets)
+        cudaFree(d_db_offsets);
 
     return return_code;
 }

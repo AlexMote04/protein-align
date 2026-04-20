@@ -11,6 +11,8 @@ set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 set(CMAKE_CUDA_RUNTIME_LIBRARY Static)
 set(CMAKE_CUDA_ARCHITECTURES native)
 
+find_package(OpenMP REQUIRED)
+
 # ==========================================
 # Fetch and Build Parasail
 # ==========================================
@@ -34,6 +36,7 @@ set(SHARED_SOURCES
     src/parse.cpp
     src/interAlignGPU.cu
     src/intraAlignGPU.cu
+    src/naiveInterGPU.cu
     src/alignCPU.cpp
     src/alignParasail.cpp
 )
@@ -48,7 +51,7 @@ add_executable(benchmark
 
 target_include_directories(benchmark PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(benchmark PRIVATE parasail)
+target_link_libraries(benchmark PRIVATE parasail OpenMP::OpenMP_CXX)
 
 # ==========================================
 # Target: Tests
@@ -60,4 +63,4 @@ add_executable(run_tests
 )
 
 target_include_directories(run_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(run_tests PRIVATE parasail)
+target_link_libraries(run_tests PRIVATE parasail OpenMP::OpenMP_CXX)

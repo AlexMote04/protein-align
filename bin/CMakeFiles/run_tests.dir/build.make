@@ -141,10 +141,25 @@ CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
+CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o: CMakeFiles/run_tests.dir/includes_CUDA.rsp
+CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o: /home/alex/Code/protein-align/src/naiveInterGPU.cu
+CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CUDA object CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o"
+	/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o -MF CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o.d -x cu -c /home/alex/Code/protein-align/src/naiveInterGPU.cu -o CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o
+
+CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
+
 CMakeFiles/run_tests.dir/src/alignCPU.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/src/alignCPU.cpp.o: /home/alex/Code/protein-align/src/alignCPU.cpp
 CMakeFiles/run_tests.dir/src/alignCPU.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/run_tests.dir/src/alignCPU.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/run_tests.dir/src/alignCPU.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/src/alignCPU.cpp.o -MF CMakeFiles/run_tests.dir/src/alignCPU.cpp.o.d -o CMakeFiles/run_tests.dir/src/alignCPU.cpp.o -c /home/alex/Code/protein-align/src/alignCPU.cpp
 
 CMakeFiles/run_tests.dir/src/alignCPU.cpp.i: cmake_force
@@ -158,7 +173,7 @@ CMakeFiles/run_tests.dir/src/alignCPU.cpp.s: cmake_force
 CMakeFiles/run_tests.dir/src/alignParasail.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/src/alignParasail.cpp.o: /home/alex/Code/protein-align/src/alignParasail.cpp
 CMakeFiles/run_tests.dir/src/alignParasail.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/run_tests.dir/src/alignParasail.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/run_tests.dir/src/alignParasail.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/src/alignParasail.cpp.o -MF CMakeFiles/run_tests.dir/src/alignParasail.cpp.o.d -o CMakeFiles/run_tests.dir/src/alignParasail.cpp.o -c /home/alex/Code/protein-align/src/alignParasail.cpp
 
 CMakeFiles/run_tests.dir/src/alignParasail.cpp.i: cmake_force
@@ -176,6 +191,7 @@ run_tests_OBJECTS = \
 "CMakeFiles/run_tests.dir/src/parse.cpp.o" \
 "CMakeFiles/run_tests.dir/src/interAlignGPU.cu.o" \
 "CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o" \
+"CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o" \
 "CMakeFiles/run_tests.dir/src/alignCPU.cpp.o" \
 "CMakeFiles/run_tests.dir/src/alignParasail.cpp.o"
 
@@ -187,12 +203,15 @@ run_tests: CMakeFiles/run_tests.dir/test/test_parse.cpp.o
 run_tests: CMakeFiles/run_tests.dir/src/parse.cpp.o
 run_tests: CMakeFiles/run_tests.dir/src/interAlignGPU.cu.o
 run_tests: CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o
+run_tests: CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o
 run_tests: CMakeFiles/run_tests.dir/src/alignCPU.cpp.o
 run_tests: CMakeFiles/run_tests.dir/src/alignParasail.cpp.o
 run_tests: CMakeFiles/run_tests.dir/build.make
 run_tests: _deps/parasail-build/libparasail.so
+run_tests: /usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so
+run_tests: /usr/lib/x86_64-linux-gnu/libpthread.a
 run_tests: CMakeFiles/run_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable run_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/run_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/run_tests.dir/src/interAlignGPU.cu.o.d"
   "CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o"
   "CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o.d"
+  "CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o"
+  "CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o.d"
   "CMakeFiles/run_tests.dir/src/parse.cpp.o"
   "CMakeFiles/run_tests.dir/src/parse.cpp.o.d"
   "CMakeFiles/run_tests.dir/test/test_main.cpp.o"

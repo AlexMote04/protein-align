@@ -1,0 +1,7 @@
+Implementation,Algorithm,Latency (ms),GCUPS
+Parasail,NW,32930.2,2.20
+Naive GPU Inter,NW,119366.4,0.60
+GPU Inter,NW,12310.0,6.00
+Parasail,SW,15650.9,4.70
+Naive GPU Inter,SW,119825.4,0.60
+GPU Inter,SW,12389.4,5.90

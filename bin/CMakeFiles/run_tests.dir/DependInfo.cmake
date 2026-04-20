@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alex/Code/protein-align/src/interAlignGPU.cu" "CMakeFiles/run_tests.dir/src/interAlignGPU.cu.o" "gcc" "CMakeFiles/run_tests.dir/src/interAlignGPU.cu.o.d"
   "/home/alex/Code/protein-align/src/intraAlignGPU.cu" "CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o" "gcc" "CMakeFiles/run_tests.dir/src/intraAlignGPU.cu.o.d"
+  "/home/alex/Code/protein-align/src/naiveInterGPU.cu" "CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o" "gcc" "CMakeFiles/run_tests.dir/src/naiveInterGPU.cu.o.d"
   "/home/alex/Code/protein-align/src/alignCPU.cpp" "CMakeFiles/run_tests.dir/src/alignCPU.cpp.o" "gcc" "CMakeFiles/run_tests.dir/src/alignCPU.cpp.o.d"
   "/home/alex/Code/protein-align/src/alignParasail.cpp" "CMakeFiles/run_tests.dir/src/alignParasail.cpp.o" "gcc" "CMakeFiles/run_tests.dir/src/alignParasail.cpp.o.d"
   "/home/alex/Code/protein-align/src/parse.cpp" "CMakeFiles/run_tests.dir/src/parse.cpp.o" "gcc" "CMakeFiles/run_tests.dir/src/parse.cpp.o.d"
