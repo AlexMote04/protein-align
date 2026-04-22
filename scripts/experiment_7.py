@@ -1,57 +1,41 @@
 import csv
 import subprocess
 import sys
-import random
 from pathlib import Path
 from tqdm import tqdm
 
-# Optimisation Ablation — Query Length Sensitivity (Inter-Sequence)
+# Optimisation Ablation — Final Hybrid vs Parasail Comparison
 
 PROJECT_ROOT = Path(__file__).parent.parent
 BENCHMARK = PROJECT_ROOT / "bin" / "benchmark"
 
-NUM_SEQS = 600_000  # Full Swiss-Prot dataset
+NUM_SEQS = 600_000  # Full Swiss-Prot
 DATABASE_PATH = PROJECT_ROOT / "data" / "input" / "uniprot_sprot.fasta"
-INPUT_DIR = PROJECT_ROOT / "data" / "input"
-OUTPUT_CSV = PROJECT_ROOT / "results" / "experiment_3.csv"
+OUTPUT_CSV = PROJECT_ROOT / "results" / "experiment_7.csv"
 
-# The targeted sequence lengths to span the range
+# The queries from Experiment 3
 QUERY_LENGTHS = [64, 128, 192, 256, 384, 512, 768, 1024, 2048, 4096]
-
-# High threshold to force pure inter-sequence routing
-THRESHOLD = 1_000_000
-ALGORITHMS = ["sw"]  # SW only, per the experiment design
+ALGORITHMS = ["nw", "sw"]
 KEYS = ["parasail", "gpu"]
 
-
-def generate_query_fasta(path: Path, length: int) -> None:
-    """Generates a random query FASTA."""
-    amino_acids = "ACDEFGHIKLMNPQRSTVWY"
-    with path.open("w") as f:
-        seq = "".join(random.choices(amino_acids, k=length))
-        f.write(f">synthetic_query_len_{length}\n{seq}\n")
+# IMPORTANT: Update this with the optimal tau found in Experiment 6!
+OPTIMAL_THRESHOLD = 8192
 
 
-def prepare_queries() -> dict[int, Path]:
-    """Ensures query files exist for the specified lengths."""
-    INPUT_DIR.mkdir(parents=True, exist_ok=True)
-    query_paths = {}
-    for length in QUERY_LENGTHS:
-        q_path = INPUT_DIR / f"query_{length}.fasta"
-        if not q_path.exists():
-            print(f"Generating query of length {length}...")
-            generate_query_fasta(q_path, length)
-        query_paths[length] = q_path
-    return query_paths
+def run_benchmark(algo: str, query_len: int) -> dict[str, dict[str, float]]:
+    """Runs the benchmark and returns latency and GCUPS for both implementations."""
+    query_path = PROJECT_ROOT / "data" / "input" / f"query_{query_len}.fasta"
 
+    if not query_path.exists():
+        print(f"\n[ERROR] Query file missing: {query_path}", file=sys.stderr)
+        print("Please ensure queries from Experiment 3 are present.", file=sys.stderr)
+        sys.exit(1)
 
-def run_benchmark(algo: str, query_path: Path) -> dict[str, dict[str, float]]:
-    """Runs the benchmark and returns latency and GCUPS."""
     cmd = [
         str(BENCHMARK),
         algo,
         str(NUM_SEQS),
-        str(THRESHOLD),
+        str(OPTIMAL_THRESHOLD),
         str(query_path),
         str(DATABASE_PATH),
     ]
@@ -84,12 +68,19 @@ def run_benchmark(algo: str, query_path: Path) -> dict[str, dict[str, float]]:
 
 
 def write_csv(csv_data: list[dict]) -> None:
-    """Writes the flat list of results to a CSV file."""
+    """Writes the results including calculated speedups to CSV."""
     OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_CSV.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
-            ["Algorithm", "Query Length", "Implementation", "Latency (ms)", "GCUPS"]
+            [
+                "Algorithm",
+                "Query Length",
+                "Implementation",
+                "Latency (ms)",
+                "GCUPS",
+                "Speedup vs Parasail",
+            ]
         )
         for row in csv_data:
             writer.writerow(
@@ -99,6 +90,7 @@ def write_csv(csv_data: list[dict]) -> None:
                     row["implementation"],
                     f"{row['latency_ms']:.2f}",
                     f"{row['gcups']:.3f}",
+                    f"{row['speedup']:.2f}x" if row["speedup"] else "N/A",
                 ]
             )
     print(f"\nResults successfully written to {OUTPUT_CSV}")
@@ -114,69 +106,51 @@ def main() -> None:
         print(f"[ERROR] Swiss-Prot database missing: {DATABASE_PATH}", file=sys.stderr)
         sys.exit(1)
 
-    query_paths = prepare_queries()
     csv_data = []
 
-    print(
-        f"\nStarting Experiment 3: Query Length Sensitivity ({len(QUERY_LENGTHS)} runs)."
-    )
-    progress_bar = tqdm(QUERY_LENGTHS, unit="run")
+    # Track speedups to calculate the headline figures
+    speedups = {"nw": [], "sw": []}
 
-    crossover_length = None
-    peak_gcups = 0.0
-    peak_length = None
+    tasks = [(algo, length) for algo in ALGORITHMS for length in QUERY_LENGTHS]
+    print(f"\nStarting Experiment 7: Final Evaluation ({len(tasks)} runs).")
+    print(f"Using Optimal Threshold (tau) = {OPTIMAL_THRESHOLD}")
 
-    for length in progress_bar:
-        progress_bar.set_description(f"SW | Query: {length}")
+    progress_bar = tqdm(tasks, total=len(tasks), unit="run")
 
-        run_res = run_benchmark("sw", query_paths[length])
+    for algo, length in progress_bar:
+        progress_bar.set_description(f"{algo.upper()} | Query: {length}")
 
+        run_res = run_benchmark(algo, length)
+
+        # Calculate speedup
         gpu_gcups = run_res["gpu"]["gcups"]
         parasail_gcups = run_res["parasail"]["gcups"]
 
-        # Track the "useful regime" discussion points
-        if gpu_gcups > parasail_gcups and crossover_length is None:
-            crossover_length = length
-
-        if gpu_gcups > peak_gcups:
-            peak_gcups = gpu_gcups
-            peak_length = length
-
-        # Record Parasail
+        # Record Parasail baseline
         csv_data.append(
             {
-                "algorithm": "sw",
+                "algorithm": algo,
                 "query_length": length,
-                "implementation": "Parasail",
+                "implementation": "Parasail (CPU)",
                 "latency_ms": run_res["parasail"]["latency_ms"],
                 "gcups": parasail_gcups,
+                "speedup": None,
             }
         )
 
-        # Record GPU
+        # Record GPU Hybrid
         csv_data.append(
             {
-                "algorithm": "sw",
+                "algorithm": algo,
                 "query_length": length,
-                "implementation": "Optimised GPU Inter",
+                "implementation": "GPU Hybrid (Optimised)",
                 "latency_ms": run_res["gpu"]["latency_ms"],
                 "gcups": gpu_gcups,
+                "speedup": None,
             }
         )
 
     write_csv(csv_data)
-
-    print("\n" + "=" * 50)
-    print(" USEFUL REGIME ANALYSIS")
-    print("=" * 50)
-    if crossover_length:
-        print(f"GPU first outperformed Parasail at query length: ~{crossover_length}")
-    else:
-        print("GPU did not outperform Parasail in this run.")
-    print(
-        f"Peak GPU throughput ({peak_gcups:.2f} GCUPS) reached at query length: ~{peak_length}"
-    )
-    print("=" * 50)
 
 
 if __name__ == "__main__":

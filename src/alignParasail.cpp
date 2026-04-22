@@ -8,8 +8,8 @@ void alignParasail(const int algorithm, std::vector<int> &scores, const std::str
 
   if (algorithm == 0)
   {
-// Loop through the database
-#pragma omp parallel for schedule(dynamic, 64) // dynamic scheduling is the better choice here since db is sorted
+    // Loop through the database
+    // #pragma omp parallel for schedule(dynamic, 64) // dynamic scheduling is the better choice here since db is sorted
     for (size_t i = 0; i < db_ascii.size(); i++)
     {
       // Run the Needleman-Wunsch 'scan' algorithm (the fastest SIMD approach for NW)
@@ -28,7 +28,7 @@ void alignParasail(const int algorithm, std::vector<int> &scores, const std::str
   }
   else
   {
-#pragma omp parallel for schedule(dynamic, 64)
+    // #pragma omp parallel for schedule(dynamic, 64)
     for (size_t i = 0; i < db_ascii.size(); i++)
     {
       // Run the Smith-Waterman'scan' algorithm

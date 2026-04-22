@@ -13,11 +13,11 @@
 #include "naiveInterGPU.cuh"
 #include "alignParasail.h"
 
-#define num_repeats 5
+#define num_repeats 3
 
+// This warms up the GPU for before benchmarking
 void warmUpGpu()
 {
-    // This warms up the GPU for more accurate benchmarking
     std::vector<unsigned char> dummy_query = {0, 1, 2, 3}; // "ARND"
     std::vector<std::string> dummy_db = {"ARND"};
     std::vector<unsigned char> dummy_residues_soa{};
@@ -29,6 +29,7 @@ void warmUpGpu()
     interAlignGPU(0, dummy_scores, dummy_query, dummy_residues_soa, dummy_offsets);
 }
 
+// This verifies that our implementation scores match parasail
 void checkResults(const std::vector<int> &correct_scores, const std::vector<int> &test_scores, std::string version_name)
 {
     int mismatches = 0;
@@ -48,6 +49,7 @@ void checkResults(const std::vector<int> &correct_scores, const std::vector<int>
         throw std::runtime_error("FAILED: " + version_name + " scores did not match Parasail!\n");
 }
 
+// This runs parasail n times and returns the average run time
 std::chrono::duration<double, std::milli> runParasail(int algorithm, const std::string &query_path, const std::vector<std::string> &sorted_db, std::vector<int> &parasail_scores)
 {
     // This will provide the gold standard used for verification
@@ -69,6 +71,7 @@ std::chrono::duration<double, std::milli> runParasail(int algorithm, const std::
     return total_ms / num_repeats;
 }
 
+// This runs our CPU implemenation n times and returns the average runtime
 std::chrono::duration<double, std::milli> runCPU(int algorithm, const std::string &query_path, const std::vector<std::string> &sorted_db, const std::vector<int> &parasail_scores)
 {
     // Load data
@@ -96,6 +99,7 @@ std::chrono::duration<double, std::milli> runCPU(int algorithm, const std::strin
     return total_ms / num_repeats;
 }
 
+// This runs our Naive GPU implemenation n times and returns the average runtime
 std::chrono::duration<double, std::milli> runNaiveGPU(int algorithm, const std::string &query_path, const std::vector<std::string> &sorted_db, const std::vector<int> &parasail_scores)
 {
     // Load data
@@ -108,21 +112,18 @@ std::chrono::duration<double, std::milli> runNaiveGPU(int algorithm, const std::
 
     std::vector<int> gpu_scores(sorted_db.size());
 
-    std::chrono::duration<double, std::milli> total_ms{};
+    float total_kernel_ms = 0.0f;
 
     for (int i = 0; i < num_repeats; i++)
     {
-        auto gpu_start = std::chrono::high_resolution_clock::now();
-        naiveInterGPU(algorithm, gpu_scores, query_seq, db_residues_gpu, db_offsets_gpu);
-        auto gpu_end = std::chrono::high_resolution_clock::now();
-        total_ms += gpu_end - gpu_start;
-
+        total_kernel_ms += naiveInterGPU(algorithm, gpu_scores, query_seq, db_residues_gpu, db_offsets_gpu);
         checkResults(parasail_scores, gpu_scores, "Naive GPU");
     }
 
-    return total_ms / num_repeats;
+    return std::chrono::duration<double, std::milli>{total_kernel_ms / num_repeats};
 }
 
+// This runs our Optimised GPU hybrid implementation n times and returns the average runtime
 std::chrono::duration<double, std::milli> runGPU(int algorithm, const std::string &query_path, const std::vector<std::string> &sorted_db, const std::vector<int> &parasail_scores, int threshold)
 {
     // Data for GPU Implementation
@@ -142,34 +143,28 @@ std::chrono::duration<double, std::milli> runGPU(int algorithm, const std::strin
     size_t num_large_seqs = large_seqs.size();
     size_t num_small_seqs = sorted_db.size() - num_large_seqs;
 
-    std::chrono::duration<double, std::milli> total_ms{};
+    float total_kernel_ms = 0.0f;
 
     for (int i = 0; i < num_repeats; i++)
     {
-        auto gpu_inter_start = std::chrono::high_resolution_clock::now();
+        float inter_ms = 0.0f, intra_ms = 0.0f;
         if (num_small_seqs > 0)
-            interAlignGPU(algorithm, gpu_scores, query_seq, small_seqs_soa, soa_offsets);
-        auto gpu_inter_end = std::chrono::high_resolution_clock::now();
-
-        auto gpu_intra_start = std::chrono::high_resolution_clock::now();
+            inter_ms = interAlignGPU(algorithm, gpu_scores, query_seq, small_seqs_soa, soa_offsets);
         if (num_large_seqs > 0)
-            intraAlignGPU(algorithm, query_seq, large_seqs, gpu_scores, num_small_seqs);
-        auto gpu_intra_end = std::chrono::high_resolution_clock::now();
-
-        std::chrono::duration<double, std::milli> gpu_inter_ms = gpu_inter_end - gpu_inter_start;
-        std::chrono::duration<double, std::milli> gpu_intra_ms = gpu_intra_end - gpu_intra_start;
-        total_ms += gpu_inter_ms + gpu_intra_ms;
+            intra_ms = intraAlignGPU(algorithm, query_seq, large_seqs, gpu_scores, num_small_seqs);
+        total_kernel_ms += inter_ms + intra_ms;
 
         checkResults(parasail_scores, gpu_scores, "GPU");
     }
 
-    return total_ms / num_repeats;
+    return std::chrono::duration<double, std::milli>{total_kernel_ms / num_repeats};
 }
 
+// This function displays the latency and GCUPS
 void outputBenchmarks(std::chrono::duration<double, std::milli> total_ms, double total_cell_updates)
 {
     double gcups = total_cell_updates / (total_ms.count() * 1e6);
-    printf("%.1f %.1f\n", total_ms.count(), gcups);
+    printf("%.1f %.2f\n", total_ms.count(), gcups);
 }
 
 // This program calculates the alignment scores for a query sequence against a database of target sequences using multiple different
@@ -207,7 +202,7 @@ int main(int argc, char **argv)
     catch (const std::invalid_argument &e)
     {
         std::cerr << "Error: Invalid number format. " << e.what() << "\n";
-        std::cerr << "Usage: ./bin/benchmark <algorithm> <num_seqs> <threshold>\n";
+        std::cerr << "Usage: ./bin/benchmark <algorithm> <num_seqs> <threshold> <query_path> <database_path>\n";
         return 1;
     }
     catch (const std::out_of_range &e)
@@ -227,8 +222,8 @@ int main(int argc, char **argv)
 
     std::vector<int> parasail_scores(sorted_db.size());
     auto parasail_ms = runParasail(algorithm, query_path, sorted_db, parasail_scores);
-    // auto cpu_ms = runCPU(algorithm, sorted_db, parasail_scores);
-    // auto naive_gpu_ms = runNaiveGPU(algorithm, sorted_db, parasail_scores);
+    // auto cpu_ms = runCPU(algorithm, query_path, sorted_db, parasail_scores);
+    //  auto naive_gpu_ms = runNaiveGPU(algorithm, query_path, sorted_db, parasail_scores);
     auto gpu_ms = runGPU(algorithm, query_path, sorted_db, parasail_scores, threshold);
 
     size_t total_db_residues = 0;
@@ -242,6 +237,7 @@ int main(int argc, char **argv)
 
     outputBenchmarks(parasail_ms, total_cell_updates);
     // outputBenchmarks(naive_gpu_ms, total_cell_updates);
+    // outputBenchmarks(cpu_ms, total_cell_updates);
     outputBenchmarks(gpu_ms, total_cell_updates);
 
     return 0;

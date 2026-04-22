@@ -2,7 +2,7 @@
 
 #include <vector>
 
-int intraAlignGPU(
+float intraAlignGPU(
     int algorithm,
     const std::vector<unsigned char> &query_seq,
     const std::vector<std::vector<unsigned char>> &massive_sequences,

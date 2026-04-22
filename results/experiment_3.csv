@@ -1,23 +1,21 @@
-Implementation,Algorithm,Query Length,Latency (ms),GCUPS
-Parasail,SW,128,9291.6,2.90
-GPU Inter,SW,128,4566.3,5.80
-Parasail,SW,256,13126.5,4.10
-GPU Inter,SW,256,9022.7,5.90
-Parasail,SW,352,15698.4,4.70
-GPU Inter,SW,352,12347.2,5.90
-Parasail,SW,512,19778.1,5.40
-GPU Inter,SW,512,17941.0,5.90
-Parasail,SW,1024,33591.9,6.40
-GPU Inter,SW,1024,35719.8,6.00
-Parasail,SW,1536,47132.2,6.80
-GPU Inter,SW,1536,53610.0,6.00
-Parasail,SW,2048,61063.0,7.00
-GPU Inter,SW,2048,71351.8,6.00
-Parasail,SW,2560,74449.3,7.20
-GPU Inter,SW,2560,89284.1,6.00
-Parasail,SW,3072,88697.5,7.20
-GPU Inter,SW,3072,107138.0,6.00
-Parasail,SW,3584,102700.4,7.30
-GPU Inter,SW,3584,124632.0,6.00
-Parasail,SW,4096,116549.9,7.30
-GPU Inter,SW,4096,142871.6,6.00
+Algorithm,Query Length,Implementation,Latency (ms),GCUPS
+SW,64,Parasail,10234.70,1.300
+SW,64,Optimised GPU Inter,1483.60,8.990
+SW,128,Parasail,10918.20,2.440
+SW,128,Optimised GPU Inter,2965.90,9.000
+SW,192,Parasail,11849.30,3.380
+SW,192,Optimised GPU Inter,4442.90,9.010
+SW,256,Parasail,12922.40,4.130
+SW,256,Optimised GPU Inter,5904.00,9.040
+SW,384,Parasail,15058.00,5.320
+SW,384,Optimised GPU Inter,8857.00,9.040
+SW,512,Parasail,17245.30,6.190
+SW,512,Optimised GPU Inter,11785.50,9.060
+SW,768,Parasail,21637.10,7.400
+SW,768,Optimised GPU Inter,17710.00,9.040
+SW,1024,Parasail,26102.70,8.180
+SW,1024,Optimised GPU Inter,23639.90,9.030
+SW,2048,Parasail,44949.60,9.500
+SW,2048,Optimised GPU Inter,47354.10,9.020
+SW,4096,Parasail,81131.60,10.530
+SW,4096,Optimised GPU Inter,94820.10,9.010

@@ -1,7 +1,7 @@
 Implementation,Algorithm,Latency (ms),GCUPS,Speedup vs CPU
-Sequential CPU,NW,148651.4,0.00,1.00
-Parasail,NW,2000.0,2.30,74.33
-GPU Inter,NW,556.5,8.20,267.12
-Sequential CPU,SW,185718.4,0.00,1.00
-Parasail,SW,848.0,5.40,219.01
-GPU Inter,SW,557.9,8.20,332.89
+Sequential CPU,NW,25387.1,0.33,1.00
+Parasail,NW,2968.6,2.84,8.55
+GPU Inter,NW,2091.6,4.03,12.14
+Sequential CPU,SW,30119.2,0.28,1.00
+Parasail,SW,1456.0,5.80,20.69
+GPU Inter,SW,2105.7,4.01,14.30

@@ -933,31 +933,31 @@ _deps/parasail-build/CMakeFiles/ssw.dir/clean:
 # Target rules for target _deps/parasail-build/CMakeFiles/parasail.dir
 
 # All Build rule for target.
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_core.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_trace.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec_table.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec_rowcol.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_table.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_rowcol.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_altivec_trace.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_table.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_rowcol.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2_trace.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all
-_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_core.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_table.dir/all
 _deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_novec_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse2.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_sse41_trace.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_table.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_avx2_rowcol.dir/all
+_deps/parasail-build/CMakeFiles/parasail.dir/all: _deps/parasail-build/CMakeFiles/parasail_neon_trace.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail.dir/build.make _deps/parasail-build/CMakeFiles/parasail.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/parasail-build/CMakeFiles/parasail.dir/build.make _deps/parasail-build/CMakeFiles/parasail.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alex/Code/protein-align/bin/CMakeFiles --progress-num=1 "Built target parasail"

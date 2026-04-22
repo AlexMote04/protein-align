@@ -1,0 +1,41 @@
+Algorithm,Query Length,Implementation,Latency (ms),GCUPS,Speedup vs Parasail
+NW,64,Parasail (CPU),16103.10,0.830,N/A
+NW,64,GPU Hybrid (Optimised),1240.70,10.750,N/A
+NW,128,Parasail (CPU),18658.30,1.430,N/A
+NW,128,GPU Hybrid (Optimised),2221.00,12.020,N/A
+NW,192,Parasail (CPU),21416.20,1.870,N/A
+NW,192,GPU Hybrid (Optimised),3198.50,12.510,N/A
+NW,256,Parasail (CPU),24328.50,2.190,N/A
+NW,256,GPU Hybrid (Optimised),4174.30,12.790,N/A
+NW,384,Parasail (CPU),29974.60,2.670,N/A
+NW,384,GPU Hybrid (Optimised),6134.10,13.050,N/A
+NW,512,Parasail (CPU),35522.40,3.000,N/A
+NW,512,GPU Hybrid (Optimised),8093.80,13.190,N/A
+NW,768,Parasail (CPU),47135.00,3.400,N/A
+NW,768,GPU Hybrid (Optimised),12036.90,13.300,N/A
+NW,1024,Parasail (CPU),58585.70,3.640,N/A
+NW,1024,GPU Hybrid (Optimised),16003.20,13.340,N/A
+NW,2048,Parasail (CPU),106394.80,4.010,N/A
+NW,2048,GPU Hybrid (Optimised),31859.80,13.400,N/A
+NW,4096,Parasail (CPU),202125.90,4.220,N/A
+NW,4096,GPU Hybrid (Optimised),63678.80,13.410,N/A
+SW,64,Parasail (CPU),10136.20,1.320,N/A
+SW,64,GPU Hybrid (Optimised),1214.00,10.990,N/A
+SW,128,Parasail (CPU),10893.50,2.450,N/A
+SW,128,GPU Hybrid (Optimised),2192.90,12.170,N/A
+SW,192,Parasail (CPU),11822.60,3.390,N/A
+SW,192,GPU Hybrid (Optimised),3172.00,12.620,N/A
+SW,256,Parasail (CPU),12778.00,4.180,N/A
+SW,256,GPU Hybrid (Optimised),4153.80,12.850,N/A
+SW,384,Parasail (CPU),14981.20,5.340,N/A
+SW,384,GPU Hybrid (Optimised),6110.00,13.100,N/A
+SW,512,Parasail (CPU),17242.10,6.190,N/A
+SW,512,GPU Hybrid (Optimised),8077.80,13.210,N/A
+SW,768,Parasail (CPU),21654.10,7.390,N/A
+SW,768,GPU Hybrid (Optimised),12042.50,13.300,N/A
+SW,1024,Parasail (CPU),26062.60,8.190,N/A
+SW,1024,GPU Hybrid (Optimised),15965.00,13.370,N/A
+SW,2048,Parasail (CPU),44204.30,9.660,N/A
+SW,2048,GPU Hybrid (Optimised),31843.40,13.410,N/A
+SW,4096,Parasail (CPU),81178.80,10.520,N/A
+SW,4096,GPU Hybrid (Optimised),63681.10,13.410,N/A

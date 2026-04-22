@@ -8,6 +8,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CUDA_STANDARD 17) 
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
+set(CMAKE_CUDA_ARCHITECTURES 86)
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release) # Ensures -O3 is applied by default
+endif()
+
+add_compile_options(
+    "$<$<COMPILE_LANGUAGE:CXX,C>:-O3;-march=native>" # Host: High opt + tune for i7-8700
+    "$<$<COMPILE_LANGUAGE:CUDA>:--use_fast_math;-Xptxas=-v>" # Device: Fast math + verbose PTX
+)
+
 set(CMAKE_CUDA_RUNTIME_LIBRARY Static)
 set(CMAKE_CUDA_ARCHITECTURES native)
 

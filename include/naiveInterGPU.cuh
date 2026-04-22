@@ -2,7 +2,7 @@
 
 #include <vector>
 
-int naiveInterGPU(int algorithm,
+float naiveInterGPU(int algorithm,
                   std::vector<int> &scores,
                   const std::vector<unsigned char> &query_seq,
                   const std::vector<unsigned char> &db_residues,

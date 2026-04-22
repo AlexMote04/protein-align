@@ -390,7 +390,7 @@ align_massive_wavefront_tile(
     }
 }
 
-int intraAlignGPU(
+float intraAlignGPU(
     int algorithm,
     const std::vector<unsigned char> &query_seq,
     const std::vector<std::vector<unsigned char>> &large_seqs,
@@ -440,7 +440,13 @@ int intraAlignGPU(
     int *h_pinned_sw = nullptr;
     int *h_pinned_overflow = nullptr;
 
-    int return_code = 0;
+    cudaEvent_t ev_start[MAX_STREAMS] = {};
+    cudaEvent_t ev_stop[MAX_STREAMS] = {};
+    bool ev_created[MAX_STREAMS] = {};
+    bool needs_timing[MAX_STREAMS] = {};
+    cudaEvent_t ev_fb_start = nullptr, ev_fb_stop = nullptr;
+    float kernel_ms = 0.0f;
+    float return_ms = -1.0f;
 
     // Shared read-only device data
     CUDA_CHECK(cudaMalloc((void **)&d_query, query_len * sizeof(unsigned char)));
@@ -467,6 +473,9 @@ int intraAlignGPU(
         CUDA_CHECK(cudaMalloc((void **)&d_max_score[s], sizeof(int)));
         CUDA_CHECK(cudaMalloc((void **)&d_overflow_flag[s], sizeof(int)));
         CUDA_CHECK(cudaMallocHost((void **)&h_pinned_target[s], max_target_len * sizeof(unsigned char)));
+        CUDA_CHECK(cudaEventCreate(&ev_start[s]));
+        CUDA_CHECK(cudaEventCreate(&ev_stop[s]));
+        ev_created[s] = true;
     }
 
     // Dispatch int16 kernels, rotating through streams to overlap H2D, compute, and D2H
@@ -477,6 +486,14 @@ int intraAlignGPU(
         const int target_len = target_seq.size();
 
         CUDA_CHECK(cudaStreamSynchronize(streams[s]));
+
+        if (needs_timing[s])
+        {
+            float ms = 0.0f;
+            CUDA_CHECK(cudaEventElapsedTime(&ms, ev_start[s], ev_stop[s]));
+            kernel_ms += ms;
+            needs_timing[s] = false;
+        }
 
         std::memcpy(h_pinned_target[s], target_seq.data(), target_len);
 
@@ -490,6 +507,8 @@ int intraAlignGPU(
         int num_blocks_y = (target_len + TILE_SIZE - 1) / TILE_SIZE;
         int total_macro_diagonals = num_blocks_x + num_blocks_y - 1;
 
+        CUDA_CHECK(cudaEventRecord(ev_start[s], streams[s]));
+
         for (int step = 0; step < total_macro_diagonals; step++)
         {
             int min_x = max(0, step - num_blocks_y + 1);
@@ -502,6 +521,9 @@ int intraAlignGPU(
                 step, num_blocks_x, num_blocks_y, algorithm,
                 d_max_score[s], d_overflow_flag[s]);
         }
+
+        CUDA_CHECK(cudaEventRecord(ev_stop[s], streams[s]));
+        needs_timing[s] = true;
 
         if (algorithm == 0)
         {
@@ -519,7 +541,16 @@ int intraAlignGPU(
 
     // Drain all streams before reading the pinned result/flag buffers
     for (int s = 0; s < num_streams; s++)
+    {
         CUDA_CHECK(cudaStreamSynchronize(streams[s]));
+        if (needs_timing[s])
+        {
+            float ms = 0.0f;
+            CUDA_CHECK(cudaEventElapsedTime(&ms, ev_start[s], ev_stop[s]));
+            kernel_ms += ms;
+            needs_timing[s] = false;
+        }
+    }
 
     // Write int16 results — overflowed ones will be overwritten below
     for (size_t i = 0; i < num_large; i++)
@@ -553,6 +584,9 @@ int intraAlignGPU(
             CUDA_CHECK(cudaMalloc((void **)&d_max_score32, sizeof(int)));
             CUDA_CHECK(cudaMalloc((void **)&d_target_fb, max_target_len * sizeof(unsigned char)));
 
+            CUDA_CHECK(cudaEventCreate(&ev_fb_start));
+            CUDA_CHECK(cudaEventCreate(&ev_fb_stop));
+
             for (size_t i = 0; i < num_large; i++)
             {
                 if (!h_pinned_overflow[i])
@@ -570,6 +604,7 @@ int intraAlignGPU(
                 int num_blocks_y = (target_len + TILE_SIZE - 1) / TILE_SIZE;
                 int total_macro_diagonals = num_blocks_x + num_blocks_y - 1;
 
+                CUDA_CHECK(cudaEventRecord(ev_fb_start));
                 for (int step = 0; step < total_macro_diagonals; step++)
                 {
                     int min_x = max(0, step - num_blocks_y + 1);
@@ -583,6 +618,13 @@ int intraAlignGPU(
                 }
 
                 CUDA_CHECK(cudaGetLastError());
+                CUDA_CHECK(cudaEventRecord(ev_fb_stop));
+                CUDA_CHECK(cudaDeviceSynchronize());
+                {
+                    float ms = 0.0f;
+                    CUDA_CHECK(cudaEventElapsedTime(&ms, ev_fb_start, ev_fb_stop));
+                    kernel_ms += ms;
+                }
 
                 if (algorithm == 0)
                 {
@@ -602,15 +644,22 @@ int intraAlignGPU(
         }
     }
 
-    goto cleanup_success;
+    return_ms = kernel_ms;
+    goto cleanup;
 
 cleanup:
-    return_code = -1;
-
-cleanup_success:
+    if (ev_fb_start)
+        cudaEventDestroy(ev_fb_start);
+    if (ev_fb_stop)
+        cudaEventDestroy(ev_fb_stop);
     cudaFree(d_query);
     for (int s = 0; s < MAX_STREAMS; s++)
     {
+        if (ev_created[s])
+        {
+            cudaEventDestroy(ev_start[s]);
+            cudaEventDestroy(ev_stop[s]);
+        }
         cudaFree(d_target[s]);
         cudaFree(d_row_H[s]);
         cudaFree(d_row_F[s]);
@@ -638,5 +687,5 @@ cleanup_success:
     if (h_pinned_overflow)
         cudaFreeHost(h_pinned_overflow);
 
-    return return_code;
+    return return_ms;
 }

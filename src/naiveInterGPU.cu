@@ -123,7 +123,7 @@ __global__ void align_sw(int *scores, const unsigned char *query_seq, const unsi
     }
 }
 
-int naiveInterGPU(int algorithm,
+float naiveInterGPU(int algorithm,
                   std::vector<int> &scores,
                   const std::vector<unsigned char> &query_seq,
                   const std::vector<unsigned char> &db_residues,
@@ -166,7 +166,9 @@ int naiveInterGPU(int algorithm,
     int32_t *d_H{}, *d_E{}, *d_F{};
     unsigned char *d_query_seq{}, *d_db_residues{};
     int *d_scores{}, *d_db_offsets{};
-    int return_code = 0;
+    cudaEvent_t ev_start = nullptr, ev_stop = nullptr;
+    float kernel_ms = 0.0f;
+    float return_ms = -1.0f;
 
     CUDA_CHECK(cudaMemcpyToSymbol(cuda_blosum62, blosum62, sizeof(int8_t) * 24 * 24));
 
@@ -183,6 +185,9 @@ int naiveInterGPU(int algorithm,
 
     CUDA_CHECK(cudaMalloc((void **)&d_scores, max_batch_alignments * sizeof(int)));
     CUDA_CHECK(cudaMalloc((void **)&d_db_offsets, (max_batch_alignments + 1) * sizeof(int)));
+
+    CUDA_CHECK(cudaEventCreate(&ev_start));
+    CUDA_CHECK(cudaEventCreate(&ev_stop));
 
     // Process batches
     batch_start = 0;
@@ -215,6 +220,7 @@ int naiveInterGPU(int algorithm,
         const int THREADS = 64;
         const int BLOCKS = (batch_num_alignments + THREADS - 1) / THREADS;
 
+        CUDA_CHECK(cudaEventRecord(ev_start));
         if (algorithm == 0)
         {
             align_nw<<<BLOCKS, THREADS>>>(d_scores, d_query_seq, d_db_residues + batch_first_residue, d_db_offsets,
@@ -225,21 +231,28 @@ int naiveInterGPU(int algorithm,
             align_sw<<<BLOCKS, THREADS>>>(d_scores, d_query_seq, d_db_residues + batch_first_residue, d_db_offsets,
                                           d_H, d_E, d_F, NUM_ROWS, batch_cols, batch_num_alignments);
         }
-
         CUDA_CHECK(cudaGetLastError());
+        CUDA_CHECK(cudaEventRecord(ev_stop));
         CUDA_CHECK(cudaDeviceSynchronize());
+        {
+            float ms = 0.0f;
+            CUDA_CHECK(cudaEventElapsedTime(&ms, ev_start, ev_stop));
+            kernel_ms += ms;
+        }
 
         CUDA_CHECK(cudaMemcpy(scores.data() + batch_start, d_scores, batch_num_alignments * sizeof(int), cudaMemcpyDeviceToHost));
 
         batch_start = batch_end;
     }
 
+    return_ms = kernel_ms;
     goto cleanup_success;
 
 cleanup:
-    return_code = -1;
 
 cleanup_success:
+    if (ev_start) cudaEventDestroy(ev_start);
+    if (ev_stop) cudaEventDestroy(ev_stop);
     if (d_H)
         cudaFree(d_H);
     if (d_E)
@@ -255,5 +268,5 @@ cleanup_success:
     if (d_db_offsets)
         cudaFree(d_db_offsets);
 
-    return return_code;
+    return return_ms;
 }

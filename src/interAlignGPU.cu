@@ -29,7 +29,7 @@ __global__ void align_nw_i16(
     const int *__restrict__ db_offsets,
     const int *__restrict__ batch_res_offsets,
     const int *__restrict__ batch_H_offsets,
-    int16_t *__restrict__ H, int16_t *__restrict__ F,
+    short2 *__restrict__ HF,
     int8_t *__restrict__ blosum62,
     int *__restrict__ overflow_flags,
     const int NUM_ROWS,
@@ -55,21 +55,18 @@ __global__ void align_nw_i16(
     int batch_res_len = (batch_res_offsets[batch_idx + 1] - batch_res_start) / 32;
     int H_stride = (batch_res_len + 1) * 32;
 
-    int16_t *H_batch = H + batch_H_start;
-    int16_t *F_batch = F + batch_H_start;
+    short2 *HF_batch = HF + batch_H_start;
 
     int overflow = 0;
 
-    H_batch[lane] = 0;
-    F_batch[lane] = NEG_INF_16;
+    HF_batch[lane] = make_short2(0, NEG_INF_16);
 
     for (int j = 1; j <= batch_res_len; j++)
     {
         int init_val = -OPEN - (j - 1) * EXTEND;
         if (init_val <= -OVERFLOW_THRESHOLD_16)
             overflow = 1;
-        H_batch[j * 32 + lane] = (int16_t)init_val;
-        F_batch[j * 32 + lane] = NEG_INF_16;
+        HF_batch[j * 32 + lane] = make_short2((int16_t)init_val, NEG_INF_16);
     }
 
     // Do arithmetic in int32 to avoid mid-computation wrap; flag and cast to
@@ -88,9 +85,9 @@ __global__ void align_nw_i16(
 
         int h_left = h_left_init;
         int e_left = NEG_INF_16;
-        int h_diag = H_batch[prev_row * H_stride + lane];
+        int h_diag = HF_batch[prev_row * H_stride + lane].x;
 
-        H_batch[curr_row * H_stride + lane] = (int16_t)h_left;
+        HF_batch[curr_row * H_stride + lane] = make_short2((int16_t)h_left, NEG_INF_16);
 
         unsigned char query_char = cuda_query_seq[i - 1];
 
@@ -99,8 +96,9 @@ __global__ void align_nw_i16(
             int index_curr = curr_row * H_stride + j * 32 + lane;
             int index_prev = prev_row * H_stride + j * 32 + lane;
 
-            int h_up = H_batch[index_prev];
-            int f_up = F_batch[index_prev];
+            short2 prev = HF_batch[index_prev];
+            int h_up = prev.x;
+            int f_up = prev.y;
 
             int e_curr = max(h_left - OPEN, e_left - EXTEND);
             int f_curr = max(h_up - OPEN, f_up - EXTEND);
@@ -115,8 +113,7 @@ __global__ void align_nw_i16(
             if (h_curr >= OVERFLOW_THRESHOLD_16 || h_curr <= -OVERFLOW_THRESHOLD_16)
                 overflow = 1;
 
-            H_batch[index_curr] = (int16_t)h_curr;
-            F_batch[index_curr] = (int16_t)f_curr;
+            HF_batch[index_curr] = make_short2((int16_t)h_curr, (int16_t)f_curr);
 
             h_left = h_curr;
             e_left = e_curr;
@@ -139,7 +136,7 @@ __global__ void align_sw_i16(
     const int *__restrict__ db_offsets,
     const int *__restrict__ batch_res_offsets,
     const int *__restrict__ batch_H_offsets,
-    int16_t *__restrict__ H, int16_t *__restrict__ F,
+    short2 *__restrict__ HF,
     int8_t *__restrict__ blosum62,
     int *__restrict__ overflow_flags,
     const int NUM_ROWS,
@@ -165,28 +162,24 @@ __global__ void align_sw_i16(
     int batch_res_len = (batch_res_offsets[batch_idx + 1] - batch_res_start) / 32;
     int H_stride = (batch_res_len + 1) * 32;
 
-    int16_t *H_batch = H + batch_H_start;
-    int16_t *F_batch = F + batch_H_start;
+    short2 *HF_batch = HF + batch_H_start;
 
     int max_score = 0;
     int overflow = 0;
 
     for (int j = 0; j <= batch_res_len; j++)
-    {
-        H_batch[j * 32 + lane] = 0;
-        F_batch[j * 32 + lane] = NEG_INF_16;
-    }
+        HF_batch[j * 32 + lane] = make_short2(0, NEG_INF_16);
 
     for (int i = 1; i < NUM_ROWS; i++)
     {
         int curr_row = i % 2;
         int prev_row = 1 - curr_row;
 
-        H_batch[curr_row * H_stride + lane] = 0;
+        HF_batch[curr_row * H_stride + lane] = make_short2(0, NEG_INF_16);
 
         int h_left = 0;
         int e_left = NEG_INF_16;
-        int h_diag = H_batch[prev_row * H_stride + lane];
+        int h_diag = HF_batch[prev_row * H_stride + lane].x;
 
         unsigned char query_char = cuda_query_seq[i - 1];
 
@@ -195,8 +188,9 @@ __global__ void align_sw_i16(
             int index_curr = curr_row * H_stride + j * 32 + lane;
             int index_prev = prev_row * H_stride + j * 32 + lane;
 
-            int h_up = H_batch[index_prev];
-            int f_up = F_batch[index_prev];
+            short2 prev = HF_batch[index_prev];
+            int h_up = prev.x;
+            int f_up = prev.y;
 
             int e_curr = max(h_left - OPEN, e_left - EXTEND);
             int f_curr = max(h_up - OPEN, f_up - EXTEND);
@@ -214,8 +208,7 @@ __global__ void align_sw_i16(
 
             max_score = h_curr > max_score ? h_curr : max_score;
 
-            H_batch[index_curr] = (int16_t)h_curr;
-            F_batch[index_curr] = (int16_t)f_curr;
+            HF_batch[index_curr] = make_short2((int16_t)h_curr, (int16_t)f_curr);
 
             h_left = h_curr;
             e_left = e_curr;
@@ -238,7 +231,7 @@ __global__ void align_nw(
     const int *__restrict__ db_offsets,
     const int *__restrict__ batch_res_offsets,
     const int *__restrict__ batch_H_offsets,
-    int32_t *__restrict__ H, int32_t *__restrict__ F,
+    int2 *__restrict__ HF,
     int8_t *__restrict__ blosum62,
     const int *__restrict__ batch_mask,
     const int NUM_ROWS,
@@ -268,17 +261,12 @@ __global__ void align_nw(
     int batch_res_len = (batch_res_offsets[batch_idx + 1] - batch_res_start) / 32;
     int H_stride = (batch_res_len + 1) * 32;
 
-    int32_t *H_batch = H + batch_H_start;
-    int32_t *F_batch = F + batch_H_start;
+    int2 *HF_batch = HF + batch_H_start;
 
-    H_batch[lane] = 0;
-    F_batch[lane] = NEG_INF_32;
+    HF_batch[lane] = make_int2(0, NEG_INF_32);
 
     for (int j = 1; j <= batch_res_len; j++)
-    {
-        H_batch[j * 32 + lane] = -OPEN - (j - 1) * EXTEND;
-        F_batch[j * 32 + lane] = NEG_INF_32;
-    }
+        HF_batch[j * 32 + lane] = make_int2(-OPEN - (j - 1) * EXTEND, NEG_INF_32);
 
     int32_t h_curr = 0;
 
@@ -289,9 +277,9 @@ __global__ void align_nw(
 
         int32_t h_left = -OPEN - (i - 1) * EXTEND;
         int32_t e_left = NEG_INF_32;
-        int32_t h_diag = H_batch[prev_row * H_stride + lane];
+        int32_t h_diag = HF_batch[prev_row * H_stride + lane].x;
 
-        H_batch[curr_row * H_stride + lane] = h_left;
+        HF_batch[curr_row * H_stride + lane] = make_int2(h_left, NEG_INF_32);
 
         unsigned char query_char = cuda_query_seq[i - 1];
 
@@ -300,8 +288,9 @@ __global__ void align_nw(
             int index_curr = curr_row * H_stride + j * 32 + lane;
             int index_prev = prev_row * H_stride + j * 32 + lane;
 
-            int32_t h_up = H_batch[index_prev];
-            int32_t f_up = F_batch[index_prev];
+            int2 prev = HF_batch[index_prev];
+            int32_t h_up = prev.x;
+            int32_t f_up = prev.y;
 
             int32_t e_curr = max(h_left - OPEN, e_left - EXTEND);
             int32_t f_curr = max(h_up - OPEN, f_up - EXTEND);
@@ -314,8 +303,7 @@ __global__ void align_nw(
             val = max(e_curr, val);
             h_curr = max(f_curr, val);
 
-            H_batch[index_curr] = h_curr;
-            F_batch[index_curr] = f_curr;
+            HF_batch[index_curr] = make_int2(h_curr, f_curr);
 
             h_left = h_curr;
             e_left = e_curr;
@@ -332,7 +320,7 @@ __global__ void align_sw(
     const int *__restrict__ db_offsets,
     const int *__restrict__ batch_res_offsets,
     const int *__restrict__ batch_H_offsets,
-    int32_t *__restrict__ H, int32_t *__restrict__ F,
+    int2 *__restrict__ HF,
     int8_t *__restrict__ blosum62,
     const int *__restrict__ batch_mask,
     const int NUM_ROWS,
@@ -362,27 +350,23 @@ __global__ void align_sw(
     int batch_res_len = (batch_res_offsets[batch_idx + 1] - batch_res_start) / 32;
     int H_stride = (batch_res_len + 1) * 32;
 
-    int32_t *H_batch = H + batch_H_start;
-    int32_t *F_batch = F + batch_H_start;
+    int2 *HF_batch = HF + batch_H_start;
 
     int32_t max_score = 0;
 
     for (int j = 0; j <= batch_res_len; j++)
-    {
-        H_batch[j * 32 + lane] = 0;
-        F_batch[j * 32 + lane] = NEG_INF_32;
-    }
+        HF_batch[j * 32 + lane] = make_int2(0, NEG_INF_32);
 
     for (int i = 1; i < NUM_ROWS; i++)
     {
         int curr_row = i % 2;
         int prev_row = 1 - curr_row;
 
-        H_batch[curr_row * H_stride + lane] = 0;
+        HF_batch[curr_row * H_stride + lane] = make_int2(0, NEG_INF_32);
 
         int32_t h_left = 0;
         int32_t e_left = NEG_INF_32;
-        int32_t h_diag = H_batch[prev_row * H_stride + lane];
+        int32_t h_diag = HF_batch[prev_row * H_stride + lane].x;
 
         unsigned char query_char = cuda_query_seq[i - 1];
 
@@ -391,8 +375,9 @@ __global__ void align_sw(
             int index_curr = curr_row * H_stride + j * 32 + lane;
             int index_prev = prev_row * H_stride + j * 32 + lane;
 
-            int32_t h_up = H_batch[index_prev];
-            int32_t f_up = F_batch[index_prev];
+            int2 prev = HF_batch[index_prev];
+            int32_t h_up = prev.x;
+            int32_t f_up = prev.y;
 
             int32_t e_curr = max(h_left - OPEN, e_left - EXTEND);
             int32_t f_curr = max(h_up - OPEN, f_up - EXTEND);
@@ -408,8 +393,7 @@ __global__ void align_sw(
 
             max_score = max(h_curr, max_score);
 
-            H_batch[index_curr] = h_curr;
-            F_batch[index_curr] = f_curr;
+            HF_batch[index_curr] = make_int2(h_curr, f_curr);
 
             h_left = h_curr;
             e_left = e_curr;
@@ -420,7 +404,7 @@ __global__ void align_sw(
     scores[gindex] = max_score;
 }
 
-int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vector<unsigned char> &query_seq, const std::vector<unsigned char> &db_residues, const std::vector<int> &db_offsets)
+float interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vector<unsigned char> &query_seq, const std::vector<unsigned char> &db_residues, const std::vector<int> &db_offsets)
 {
     const int NUM_ALIGNMENTS = db_offsets.size() - 1;
     const int NUM_ROWS = query_seq.size() + 1;
@@ -428,21 +412,25 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     // Calculate SoA Batch Offsets
     int num_batches = (NUM_ALIGNMENTS + 31) / 32;
     std::vector<int> batch_res_offsets(num_batches + 1, 0);
+
+    // H and F will be packed together for efficient memory transactions
     std::vector<int> batch_H_offsets(num_batches + 1, 0);
 
     for (int b = 0; b < num_batches; ++b)
     {
+        // Find maximum sequence length within batch
         int max_len = 0;
         for (int t = 0; t < 32; ++t)
         {
             int seq_idx = b * 32 + t;
-            if (seq_idx < NUM_ALIGNMENTS)
+            if (seq_idx < NUM_ALIGNMENTS) // Check because final batch be smaller than 32
             {
                 int len = db_offsets[seq_idx + 1] - db_offsets[seq_idx];
                 if (len > max_len)
                     max_len = len;
             }
         }
+        // Total space for each batch is 32 * max_len
         batch_res_offsets[b + 1] = batch_res_offsets[b] + (max_len * 32);
         batch_H_offsets[b + 1] = batch_H_offsets[b] + 2 * (max_len + 1) * 32;
     }
@@ -451,8 +439,9 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     int *d_scores{}, *d_db_offsets{}, *d_batch_res_offsets{}, *d_batch_H_offsets{};
     int *d_overflow_flags{}, *d_batch_mask{};
     unsigned char *d_db_residues{};
-    int16_t *d_H16{}, *d_F16{};
-    int32_t *d_H32{}, *d_F32{};
+    // Use short2 and int2 to pack both numbers into 4/8 byte objects respectively
+    short2 *d_HF16{};
+    int2 *d_HF32{};
     int8_t *d_blosum62{};
 
     const int scores_bytes = sizeof(int) * NUM_ALIGNMENTS;
@@ -460,15 +449,19 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     const int batch_res_bytes = sizeof(int) * batch_res_offsets.size();
     const int batch_H_bytes = sizeof(int) * batch_H_offsets.size();
 
-    const int db_residues_bytes = sizeof(unsigned char) * batch_res_offsets.back();
+    const int db_residues_bytes = sizeof(char) * batch_res_offsets.back();
     const size_t matrix_cells = batch_H_offsets.back();
-    const size_t matrix_bytes_16 = sizeof(int16_t) * matrix_cells;
-    const size_t matrix_bytes_32 = sizeof(int32_t) * matrix_cells;
+    const size_t matrix_bytes_16 = sizeof(short2) * matrix_cells;
+    const size_t matrix_bytes_32 = sizeof(int2) * matrix_cells;
 
-    const int THREADS = 64;
+    const int THREADS = 128;
     const int BLOCKS = (NUM_ALIGNMENTS + THREADS - 1) / THREADS;
 
-    int return_code = 0;
+    // Use CUDA Events to accurately track kernel-only computation time
+    cudaEvent_t ev_start{}, ev_stop{};
+
+    float kernel_ms = 0.0f;
+    float return_ms = -1.0f;
 
     CUDA_CHECK(cudaMemcpyToSymbol(cuda_query_seq, query_seq.data(), sizeof(unsigned char) * query_seq.size()));
 
@@ -477,8 +470,7 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     CUDA_CHECK(cudaMalloc((void **)&d_batch_res_offsets, batch_res_bytes));
     CUDA_CHECK(cudaMalloc((void **)&d_batch_H_offsets, batch_H_bytes));
     CUDA_CHECK(cudaMalloc((void **)&d_db_residues, db_residues_bytes));
-    CUDA_CHECK(cudaMalloc((void **)&d_H16, matrix_bytes_16));
-    CUDA_CHECK(cudaMalloc((void **)&d_F16, matrix_bytes_16));
+    CUDA_CHECK(cudaMalloc((void **)&d_HF16, matrix_bytes_16));
     CUDA_CHECK(cudaMalloc((void **)&d_overflow_flags, sizeof(int) * NUM_ALIGNMENTS));
     CUDA_CHECK(cudaMalloc((void **)&d_blosum62, 24 * 24));
 
@@ -490,13 +482,27 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
 
     CUDA_CHECK(cudaMemset(d_overflow_flags, 0, sizeof(int) * NUM_ALIGNMENTS));
 
-    if (algorithm == 0)
-        align_nw_i16<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_H16, d_F16, d_blosum62, d_overflow_flags, NUM_ROWS, NUM_ALIGNMENTS);
-    else
-        align_sw_i16<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_H16, d_F16, d_blosum62, d_overflow_flags, NUM_ROWS, NUM_ALIGNMENTS);
+    CUDA_CHECK(cudaEventCreate(&ev_start));
+    CUDA_CHECK(cudaEventCreate(&ev_stop));
 
+    // Start the clock
+    CUDA_CHECK(cudaEventRecord(ev_start));
+
+    if (algorithm == 0)
+        align_nw_i16<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_HF16, d_blosum62, d_overflow_flags, NUM_ROWS, NUM_ALIGNMENTS);
+    else
+        align_sw_i16<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_HF16, d_blosum62, d_overflow_flags, NUM_ROWS, NUM_ALIGNMENTS);
+
+    // Pause the clock
+    CUDA_CHECK(cudaEventRecord(ev_stop));
     CUDA_CHECK(cudaGetLastError());
     CUDA_CHECK(cudaDeviceSynchronize());
+
+    {
+        float ms = 0.0f;
+        CUDA_CHECK(cudaEventElapsedTime(&ms, ev_start, ev_stop));
+        kernel_ms += ms;
+    }
 
     // Pull flags back and build a per-batch mask. A batch of 32 lanes shares
     // its SoA layout, so if any alignment in it overflowed we re-run the
@@ -506,12 +512,10 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
         std::vector<int> overflow_flags(NUM_ALIGNMENTS);
         CUDA_CHECK(cudaMemcpy(overflow_flags.data(), d_overflow_flags, sizeof(int) * NUM_ALIGNMENTS, cudaMemcpyDeviceToHost));
 
-        // int16 H/F buffers are dead once the kernel returns; free now to cap
-        // peak memory before allocating int32 buffers for the fallback.
-        cudaFree(d_H16);
-        cudaFree(d_F16);
-        d_H16 = nullptr;
-        d_F16 = nullptr;
+        // int16 HF buffer is dead once the kernel returns; free now to cap
+        // peak memory before allocating int32 buffer for the fallback.
+        cudaFree(d_HF16);
+        d_HF16 = nullptr;
 
         std::vector<int> batch_mask(num_batches, 0);
         int num_overflow_batches = 0;
@@ -520,26 +524,35 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
             if (overflow_flags[g])
             {
                 int b = g / 32;
-                if (batch_mask[b] == 0)
-                    num_overflow_batches++;
+                if (batch_mask[b] != 0)
+                    continue; // Already been set
+                num_overflow_batches++;
                 batch_mask[b] = 1;
             }
         }
 
+        // Check if overflow occured
         if (num_overflow_batches > 0)
         {
-            CUDA_CHECK(cudaMalloc((void **)&d_H32, matrix_bytes_32));
-            CUDA_CHECK(cudaMalloc((void **)&d_F32, matrix_bytes_32));
+            CUDA_CHECK(cudaMalloc((void **)&d_HF32, matrix_bytes_32));
             CUDA_CHECK(cudaMalloc((void **)&d_batch_mask, sizeof(int) * num_batches));
             CUDA_CHECK(cudaMemcpy(d_batch_mask, batch_mask.data(), sizeof(int) * num_batches, cudaMemcpyHostToDevice));
 
+            CUDA_CHECK(cudaEventRecord(ev_start));
+
             if (algorithm == 0)
-                align_nw<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_H32, d_F32, d_blosum62, d_batch_mask, NUM_ROWS, NUM_ALIGNMENTS);
+                align_nw<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_HF32, d_blosum62, d_batch_mask, NUM_ROWS, NUM_ALIGNMENTS);
             else
-                align_sw<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_H32, d_F32, d_blosum62, d_batch_mask, NUM_ROWS, NUM_ALIGNMENTS);
+                align_sw<<<BLOCKS, THREADS>>>(d_scores, d_db_residues, d_db_offsets, d_batch_res_offsets, d_batch_H_offsets, d_HF32, d_blosum62, d_batch_mask, NUM_ROWS, NUM_ALIGNMENTS);
 
             CUDA_CHECK(cudaGetLastError());
+            CUDA_CHECK(cudaEventRecord(ev_stop));
             CUDA_CHECK(cudaDeviceSynchronize());
+            {
+                float ms = 0.0f;
+                CUDA_CHECK(cudaEventElapsedTime(&ms, ev_start, ev_stop));
+                kernel_ms += ms;
+            }
         }
 
         CUDA_CHECK(cudaMemcpy(scores.data(), d_scores, scores_bytes, cudaMemcpyDeviceToHost));
@@ -548,21 +561,23 @@ int interAlignGPU(const int algorithm, std::vector<int> &scores, const std::vect
     goto cleanup_success;
 
 cleanup:
-    return_code = -1;
 
 cleanup_success:
+    if (ev_start)
+        cudaEventDestroy(ev_start);
+    if (ev_stop)
+        cudaEventDestroy(ev_stop);
     cudaFree(d_scores);
     cudaFree(d_db_offsets);
     cudaFree(d_batch_res_offsets);
     cudaFree(d_batch_H_offsets);
     cudaFree(d_db_residues);
-    cudaFree(d_H16);
-    cudaFree(d_F16);
-    cudaFree(d_H32);
-    cudaFree(d_F32);
+    cudaFree(d_HF16);
+    cudaFree(d_HF32);
     cudaFree(d_overflow_flags);
     cudaFree(d_batch_mask);
     cudaFree(d_blosum62);
 
-    return return_code;
+    return_ms = kernel_ms;
+    return return_ms;
 }

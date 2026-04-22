@@ -5,9 +5,10 @@ from pathlib import Path
 
 # CPU Baseline Sanity Check
 
-# Benchmark.cpp
-# Run parasail, cpu, gpu
-# Print results
+# Outputs:
+# parasail latency, parasail GCUPS
+# cpu latency, cpu GCUPS
+# gpu latency, gpu GCUPS
 
 PROJECT_ROOT = Path(__file__).parent.parent
 BENCHMARK = PROJECT_ROOT / "bin" / "benchmark"
@@ -17,9 +18,19 @@ ALGORITHMS = ["nw", "sw"]
 LABELS = {"cpu": "Sequential CPU", "parasail": "Parasail", "gpu": "GPU Inter"}
 ROW_ORDER = ["cpu", "parasail", "gpu"]
 
+DATABASE_PATH = PROJECT_ROOT / "data" / "input" / "sprot_50k_subset.fasta"
+QUERY_PATH = PROJECT_ROOT / "data" / "input" / "query_464.fasta"
+
 
 def run_benchmark(algo: str) -> dict[str, dict[str, float]]:
-    cmd = [str(BENCHMARK), algo, str(NUM_SEQS), str(THRESHOLD)]
+    cmd = [
+        str(BENCHMARK),
+        algo,
+        str(NUM_SEQS),
+        str(THRESHOLD),
+        str(QUERY_PATH),
+        str(DATABASE_PATH),
+    ]
     try:
         proc = subprocess.run(
             cmd, capture_output=True, text=True, check=True, cwd=PROJECT_ROOT
