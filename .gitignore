@@ -1,3 +1,16 @@
+# Build output
+bin/
+build/
+
+# Python
+.venv/
+__pycache__/
+
+# Input data (download / generate locally, see README)
+data/input/
 *.fasta
 *.bin
-/bin/
+
+# Editor / OS
+.vscode/
+.DS_Store
